@@ -12,7 +12,7 @@ const customJestConfig = {
 	// if using TypeScript with a baseUrl set to the root directory then you need the below for alias' to work
 	moduleDirectories: ["node_modules", "<rootDir>/"],
 	testEnvironment: "jest-environment-jsdom",
-	clearMocks: true,
+	preset: "ts-jest",
 	collectCoverage: true,
 	collectCoverageFrom: [
 		"**/*.{js,jsx,ts,tsx}",
@@ -23,11 +23,11 @@ const customJestConfig = {
 		"!<rootDir>/*.config.js",
 		"!<rootDir>/coverage/**",
 	],
-	coverageThreshold: {
-		global: {
-			lines: 90,
-		},
-	},
+	// coverageThreshold: {
+	// 	global: {
+	// 		lines: 90,
+	// 	},
+	// },
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
