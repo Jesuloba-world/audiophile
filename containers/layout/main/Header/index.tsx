@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Container, Inner, MiddleLinks, IconLinks } from "./header.style";
-import { Logo, Link } from "components";
-import { midlinks } from "./header.data";
+import { Logo, Link, IconButton } from "components";
+import { midlinks, iconButtons } from "./header.data";
 
 export const Header: FC = () => {
 	return (
@@ -13,7 +13,11 @@ export const Header: FC = () => {
 						<Link key={index} name={el.name} href={el.href} />
 					))}
 				</MiddleLinks>
-				<IconLinks></IconLinks>
+				<IconLinks>
+					{iconButtons.map((el, index) => (
+						<IconButton key={index} name={el.name} Icon={el.icon} />
+					))}
+				</IconLinks>
 			</Inner>
 		</Container>
 	);

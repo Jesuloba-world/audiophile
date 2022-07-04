@@ -1,9 +1,13 @@
 import { hrefType } from "types";
+import Cart from "assets/shared/desktop/icon-cart.svg";
+import { AiOutlineUser } from "react-icons/ai";
 
-export const midlinks: {
+interface linkType {
 	name: string;
 	href: hrefType;
-}[] = [
+}
+
+export const midlinks: linkType[] = [
 	{
 		name: "home",
 		href: "/",
@@ -20,4 +24,9 @@ export const midlinks: {
 		name: "earphones",
 		href: "/earphones",
 	},
+];
+
+export const iconButtons = [
+	{ name: "cart", icon: Cart },
+	{ name: "user", icon: AiOutlineUser },
 ];

@@ -20,4 +20,4 @@ export const MiddleLinks = styled.div`
 	gap: 34px;
 `;
 
-export const IconLinks = styled.div``;
+export const IconLinks = styled(MiddleLinks)``;
