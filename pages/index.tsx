@@ -1,11 +1,17 @@
-import type { NextPage } from "next";
+import type { NextPageWithLayout } from "types/next";
+import { ReactElement } from "react";
+import { MainLayout } from "containers/layout/main";
 
-const Home: NextPage = () => {
+const Home: NextPageWithLayout = () => {
 	return (
 		<div>
 			<h1>This is the Audiophile</h1>
 		</div>
 	);
+};
+
+Home.getLayout = (page: ReactElement) => {
+	return <MainLayout>{page}</MainLayout>;
 };
 
 export default Home;

@@ -1,12 +1,15 @@
 import "../styles/globals.css";
-import type { AppProps } from "next/app";
+import type { AppPropsWithLayout } from "../types/next";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../styled.config";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+	// Use the layout defined at the page level, if available
+	const getLayout = Component.getLayout || ((page) => page);
+
 	return (
 		<ThemeProvider theme={theme}>
-			<Component {...pageProps} />
+			{getLayout(<Component {...pageProps} />, pageProps)}
 		</ThemeProvider>
 	);
 }
