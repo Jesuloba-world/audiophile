@@ -12,4 +12,12 @@ export const Inner = styled.div`
 	border-bottom: 1px solid ${({ theme }) => theme.white};
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 `;
+
+export const MiddleLinks = styled.div`
+	display: flex;
+	gap: 34px;
+`;
+
+export const IconLinks = styled.div``;
