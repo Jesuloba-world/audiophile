@@ -21,13 +21,16 @@ const customJestConfig = {
 		"!<rootDir>/out/**",
 		"!<rootDir>/.next/**",
 		"!<rootDir>/*.config.js",
+		"!<rootDir>/*.config.ts",
 		"!<rootDir>/coverage/**",
+		"!<rootDir>/pages/_document.tsx",
+		"!<rootDir>/pages/api/**",
 	],
-	// coverageThreshold: {
-	// 	global: {
-	// 		lines: 90,
-	// 	},
-	// },
+	coverageThreshold: {
+		global: {
+			lines: 90,
+		},
+	},
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
