@@ -1,12 +1,14 @@
 import { MainLayout } from "./index";
 import "@testing-library/jest-dom";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 describe("Layout component", () => {
-	it.only("Renders layout component", () => {
+	it("Renders layout component", () => {
 		render(<MainLayout>Test</MainLayout>);
-
-		screen.getByRole("heading", { name: /header/i });
 		screen.getByText(/test/i);
+	});
+	it("Renders Header", () => {
+		render(<MainLayout>Test</MainLayout>);
+		screen.getByText(/home/i);
 	});
 });
