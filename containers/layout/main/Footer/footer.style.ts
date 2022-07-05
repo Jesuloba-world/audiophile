@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
 export const Container = styled.footer`
-	padding-block: 75px 48px;
 	color: ${({ theme }) => theme.white};
 	background-color: ${({ theme }) => theme.black};
 `;
 
 export const Inner = styled.div`
+	padding-block: 75px 48px;
 	max-width: 1110px;
 	margin: 0 auto;
+	position: relative;
 `;
 
 export const Top = styled.div`
@@ -29,4 +30,24 @@ export const Note = styled.p`
 	mix-blend-mode: normal;
 	opacity: 0.5;
 	width: 540px;
+`;
+
+export const Socials = styled.div`
+	align-items: flex-end;
+	justify-content: flex-end;
+	display: flex;
+	gap: 16px;
+`;
+
+export const Copyright = styled(Note)`
+	font-weight: 700;
+`;
+
+export const Yellow = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: ${({ theme }) => theme.sienna};
+	height: 4px;
+	width: 101px;
 `;
