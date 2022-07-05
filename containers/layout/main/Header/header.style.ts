@@ -15,9 +15,7 @@ export const Inner = styled.div`
 	justify-content: space-between;
 `;
 
-export const MiddleLinks = styled.div`
+export const IconLinks = styled.div`
 	display: flex;
 	gap: 34px;
 `;
-
-export const IconLinks = styled(MiddleLinks)``;

@@ -1,18 +1,15 @@
 import { FC } from "react";
-import { Container, Inner, MiddleLinks, IconLinks } from "./header.style";
-import { Logo, Link, IconButton } from "components";
-import { midlinks, iconButtons } from "./header.data";
+import { Container, Inner, IconLinks } from "./header.style";
+import { Logo, IconButton } from "components";
+import { iconButtons } from "../data";
+import { MidLinks } from "../MidLinks";
 
 export const Header: FC = () => {
 	return (
 		<Container>
 			<Inner>
 				<Logo />
-				<MiddleLinks>
-					{midlinks.map((el, index) => (
-						<Link key={index} name={el.name} href={el.href} />
-					))}
-				</MiddleLinks>
+				<MidLinks />
 				<IconLinks>
 					{iconButtons.map((el, index) => (
 						<IconButton key={index} name={el.name} Icon={el.icon} />

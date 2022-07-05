@@ -1,6 +1,7 @@
 import { FC, ReactNode } from "react";
 import Head from "next/head";
 import { Header } from "./Header";
+import { Footer } from "./Footer";
 
 interface layoutProps {
 	children: ReactNode;
@@ -14,6 +15,6 @@ export const MainLayout: FC<layoutProps> = ({ children, title }) => (
 		</Head>
 		<Header />
 		{children}
-		<h1>Footer</h1>
+		<Footer />
 	</>
 );

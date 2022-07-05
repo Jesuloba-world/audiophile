@@ -25,6 +25,11 @@ describe("Layout component", () => {
 
 	it("Renders Header", () => {
 		render(<MainLayout>Test</MainLayout>);
-		screen.getByText(/home/i);
+		screen.getByRole("banner");
+	});
+
+	it("Renders Footer", () => {
+		render(<MainLayout>Test</MainLayout>);
+		screen.getByRole("contentinfo");
 	});
 });
