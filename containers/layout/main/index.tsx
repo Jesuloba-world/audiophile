@@ -7,17 +7,17 @@ import { Copy } from "./Copy";
 interface layoutProps {
 	children: ReactNode;
 	title?: string;
-	space?: boolean;
+	home?: boolean;
 }
 
-export const MainLayout: FC<layoutProps> = ({ children, title, space }) => (
+export const MainLayout: FC<layoutProps> = ({ children, title, home }) => (
 	<>
 		<Head>
 			<title>{title ? title : "Audiophile"}</title>
 		</Head>
-		<Header />
+		<Header home={home} />
 		{children}
-		<Copy space={space} />
+		<Copy home={home} />
 		<Footer />
 	</>
 );

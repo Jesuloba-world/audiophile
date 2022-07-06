@@ -10,12 +10,12 @@ import BestGear from "assets/shared/desktop/image-best-gear.jpg";
 import Image from "next/image";
 
 interface copyProps {
-	space?: boolean;
+	home?: boolean;
 }
 
-export const Copy: FC<copyProps> = ({ space }) => {
+export const Copy: FC<copyProps> = ({ home }) => {
 	return (
-		<Container space={space}>
+		<Container home={home}>
 			<TextContainer>
 				<Title>
 					Bringing you the <span>best</span> audio gear

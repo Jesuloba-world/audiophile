@@ -5,18 +5,18 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div>
-        <h1>
-          This is the Audiophile
-        </h1>
+      <div
+        class="sc-bjUoiL ezaPHm"
+      >
+        Hero
       </div>
     </div>
   </body>,
   "container": <div>
-    <div>
-      <h1>
-        This is the Audiophile
-      </h1>
+    <div
+      class="sc-bjUoiL ezaPHm"
+    >
+      Hero
     </div>
   </div>,
   "debug": [Function],
@@ -82,7 +82,7 @@ Object {
         class="sc-bczRLJ eNhvzx"
       >
         <div
-          class="sc-gsnTZi dBmskk"
+          class="sc-gsnTZi gWBMgh"
         >
           <a
             href="/"
@@ -162,10 +162,10 @@ Object {
           </div>
         </div>
       </header>
-      <div>
-        <h1>
-          This is the Audiophile
-        </h1>
+      <div
+        class="sc-bjUoiL ezaPHm"
+      >
+        Hero
       </div>
       <div
         class="sc-breuTD dIHqRC"
@@ -343,7 +343,7 @@ Object {
       class="sc-bczRLJ eNhvzx"
     >
       <div
-        class="sc-gsnTZi dBmskk"
+        class="sc-gsnTZi gWBMgh"
       >
         <a
           href="/"
@@ -423,10 +423,10 @@ Object {
         </div>
       </div>
     </header>
-    <div>
-      <h1>
-        This is the Audiophile
-      </h1>
+    <div
+      class="sc-bjUoiL ezaPHm"
+    >
+      Hero
     </div>
     <div
       class="sc-breuTD dIHqRC"

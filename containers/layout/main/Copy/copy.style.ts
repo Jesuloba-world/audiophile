@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const Container = styled.div<{ space?: boolean }>`
+export const Container = styled.div<{ home?: boolean }>`
 	max-width: 1110px;
 	margin: 0 auto;
 	height: 588px;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	margin-block: ${({ space }) => (space ? "200px" : "160px")};
+	margin-block: ${({ home }) => (home ? "200px" : "160px")};
 `;
 
 export const TextContainer = styled.div`

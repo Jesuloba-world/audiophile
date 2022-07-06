@@ -4,9 +4,13 @@ import { Logo, IconButton } from "components";
 import { iconButtons } from "../data";
 import { MidLinks } from "../MidLinks";
 
-export const Header: FC = () => {
+interface headerProps {
+	home?: boolean;
+}
+
+export const Header: FC<headerProps> = ({ home }) => {
 	return (
-		<Container>
+		<Container home={home}>
 			<Inner>
 				<Logo />
 				<MidLinks />
