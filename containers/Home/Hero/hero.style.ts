@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 export const Container = styled.section<{ image: any }>`
 	height: calc(100vh - 96px);
-	/* background-color: ${({ theme }) => theme.smoky}; */
+	background-color: ${({ theme }) => theme.smoky};
 	background-image: url(${({ image }) => image});
 	background-position: center;
+	background-size: contain;
 `;
 
 export const Inner = styled.div`
