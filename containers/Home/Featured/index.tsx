@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Container } from "./featured.style";
 import { featuredProducts } from "./data";
-import { FeaturedLarge } from "./Variants";
+import { FeaturedLarge, FeaturedNormal, FeaturedBroken } from "./Variants";
 
 export const Featured: FC = () => {
 	return (
@@ -13,11 +13,22 @@ export const Featured: FC = () => {
 							<FeaturedLarge
 								image={el.image}
 								name={el.name}
-								content={el.content}
+								content={el.content!}
 								slug={el.slug}
 								key={index}
 							/>
 						);
+					case "normal":
+						return (
+							<FeaturedNormal
+								key={index}
+								image={el.image}
+								name={el.name}
+								slug={el.slug}
+							/>
+						);
+					case "broken":
+						return <FeaturedBroken key={index} />;
 				}
 			})}
 		</Container>
