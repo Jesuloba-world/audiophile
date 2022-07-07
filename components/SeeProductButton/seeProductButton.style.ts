@@ -3,10 +3,9 @@ import styled from "styled-components";
 export type colorType = "black" | "sienna" | undefined;
 
 const interpretColor = (color: colorType, theme: any) => {
-	if (color) {
-		switch (color) {
-			case "black":
-				return `
+	switch (color) {
+		case "black":
+			return `
                     color: ${theme.white};
                     background-color: ${theme.black};
 
@@ -15,8 +14,8 @@ const interpretColor = (color: colorType, theme: any) => {
 					}
                 `;
 
-			case "sienna":
-				return `
+		case "sienna":
+			return `
                     color: ${theme.white};
                     background-color: ${theme.sienna};
 
@@ -24,18 +23,18 @@ const interpretColor = (color: colorType, theme: any) => {
 						background-color: ${theme.light_salmon};
 					}
                 `;
-		}
-	} else {
-		return `
-            color: ${theme.black};
-            background-color: transparent;
-            border: 1px solid ${theme.black};
 
-			&:hover {
-				background-color: ${theme.black};
-				color: ${theme.white};
-			}
-        `;
+		default:
+			return `
+				color: ${theme.black};
+				background-color: transparent;
+				border: 1px solid ${theme.black};
+
+				&:hover {
+					background-color: ${theme.black};
+					color: ${theme.white};
+				}
+        	`;
 	}
 };
 
