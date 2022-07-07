@@ -6,7 +6,7 @@ const Home: NextPageWithLayout = () => {
 	return (
 		<>
 			<Hero />
-			<Category />
+			<Category home />
 		</>
 	);
 };

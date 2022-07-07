@@ -11,9 +11,13 @@ import { categories } from "./data";
 import Image from "next/image";
 import { ArrowRight } from "containers/icons";
 
-export const Category: FC = () => {
+interface categoryProps {
+	home: boolean | undefined;
+}
+
+export const Category: FC<categoryProps> = ({ home }) => {
 	return (
-		<Container>
+		<Container home={home}>
 			{categories.map((el, index) => {
 				return (
 					<OneCategory key={index}>

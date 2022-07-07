@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-export const Container = styled.section`
+export const Container = styled.section<{ home: boolean | undefined }>`
 	max-width: 1110px;
 	margin: 0 auto;
-	margin-block: 120px 168px;
+	margin-block: ${({ home }) => (home ? `120px 168px` : `160px`)};
+
 	height: 284px;
 
 	display: grid;

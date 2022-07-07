@@ -3,6 +3,7 @@ import Head from "next/head";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Copy } from "./Copy";
+import { Category } from "containers";
 
 interface layoutProps {
 	children: ReactNode;
@@ -17,6 +18,7 @@ export const MainLayout: FC<layoutProps> = ({ children, title, home }) => (
 		</Head>
 		<Header home={home} />
 		{children}
+		{!home ? <Category home={home} /> : null}
 		<Copy home={home} />
 		<Footer />
 	</>
