@@ -5,7 +5,8 @@ export const Container = styled.section<{ image: any }>`
 	background-color: ${({ theme }) => theme.smoky};
 	background-image: url(${({ image }) => image});
 	background-position: center;
-	background-size: contain;
+	background-size: cover;
+	background-repeat: no-repeat;
 
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;

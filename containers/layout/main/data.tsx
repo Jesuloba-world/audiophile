@@ -1,6 +1,11 @@
 import { hrefType, httplinkType } from "types";
 import { AiOutlineUser } from "react-icons/ai";
-import { Cart, IconFacebook, IconInstagram, IconTwitter } from "./icons";
+import {
+	Cart,
+	IconFacebook,
+	IconInstagram,
+	IconTwitter,
+} from "containers/icons";
 
 interface linkType {
 	name: string;
