@@ -6,6 +6,9 @@ export const Container = styled.section<{ image: any }>`
 	background-image: url(${({ image }) => image});
 	background-position: center;
 	background-size: contain;
+
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 `;
 
 export const Inner = styled.div`
