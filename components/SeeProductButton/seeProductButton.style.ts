@@ -9,12 +9,20 @@ const interpretColor = (color: colorType, theme: any) => {
 				return `
                     color: ${theme.white};
                     background-color: ${theme.black};
+
+					&:hover {
+						background-color: ${theme.grey};
+					}
                 `;
 
 			case "sienna":
 				return `
                     color: ${theme.white};
                     background-color: ${theme.sienna};
+
+					&:hover {
+						background-color: ${theme.light_salmon};
+					}
                 `;
 		}
 	} else {
@@ -22,6 +30,11 @@ const interpretColor = (color: colorType, theme: any) => {
             color: ${theme.black};
             background-color: transparent;
             border: 1px solid ${theme.black};
+
+			&:hover {
+				background-color: ${theme.black};
+				color: ${theme.white};
+			}
         `;
 	}
 };
@@ -31,6 +44,7 @@ export const Container = styled.a<{ color: colorType }>`
 		width: 160px;
 		height: 48px;
 		${({ color, theme }) => interpretColor(color, theme)};
+		transition: all 0.2s;
 
 		p {
 			font-weight: 700;

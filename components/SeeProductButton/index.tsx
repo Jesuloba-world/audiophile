@@ -5,7 +5,7 @@ import { hrefType } from "types";
 
 interface seeProductButtonprops {
 	to: hrefType;
-	color: colorType;
+	color?: colorType;
 }
 
 export const SeeProductButton: FC<seeProductButtonprops> = ({ to, color }) => {
