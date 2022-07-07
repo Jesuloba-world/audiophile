@@ -16,7 +16,7 @@ export const FeaturedNormal: FC<props> = ({ image, name, slug }) => {
 			<Mask>
 				<TextContainer>
 					<h4>{name}</h4>
-					<SeeProductButton to={`/products/${slug}`} />
+					<SeeProductButton to={`/product/${slug}`} />
 				</TextContainer>
 			</Mask>
 		</Container>

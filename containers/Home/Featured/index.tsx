@@ -28,7 +28,14 @@ export const Featured: FC = () => {
 							/>
 						);
 					case "broken":
-						return <FeaturedBroken key={index} />;
+						return (
+							<FeaturedBroken
+								key={index}
+								image={el.image}
+								name={el.name}
+								slug={el.slug}
+							/>
+						);
 				}
 			})}
 		</Container>
