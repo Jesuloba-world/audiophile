@@ -1,3 +1,3 @@
 export { MainLayout } from "./layout";
-export { Hero } from "./Home";
+export { Hero, Featured } from "./Home";
 export { Category } from "./Category";

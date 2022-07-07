@@ -1,12 +1,13 @@
 import type { NextPageWithLayout } from "types/next";
 import { ReactElement } from "react";
-import { MainLayout, Hero, Category } from "containers";
+import { MainLayout, Hero, Category, Featured } from "containers";
 
 const Home: NextPageWithLayout = () => {
 	return (
 		<>
 			<Hero />
 			<Category home />
+			<Featured />
 		</>
 	);
 };
