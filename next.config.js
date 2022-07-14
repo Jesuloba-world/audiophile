@@ -9,6 +9,12 @@ const nextConfig = {
 		return config;
 	},
 	reactStrictMode: true,
+	compiler: {
+		styledComponents: true,
+	},
+	images: {
+		domains: ["localhost"],
+	},
 };
 
 module.exports = nextConfig;

@@ -7,25 +7,30 @@ import {
 	LinkText,
 	Imager,
 } from "./category.style";
-import { categories } from "./data";
+// import { categories } from "./data";
 import Image from "next/image";
 import { ArrowRight } from "containers/icons";
+import { CategoryType } from "src/graphql/generated";
 
 interface categoryProps {
 	home: boolean | undefined;
+	categories: CategoryType[];
 }
 
-export const Category: FC<categoryProps> = ({ home }) => {
+export const Category: FC<categoryProps> = ({ home, categories }) => {
 	return (
 		<Container home={home}>
-			{categories.map((el, index) => {
+			{categories.map((el) => {
 				return (
-					<OneCategory key={index}>
+					<OneCategory key={el.id}>
 						<GreyInside href={`/category/${el.slug}`}>
 							<Imager>
 								<Image
-									src={el.image}
-									alt={el.name.toLowerCase()}
+									src={el.image?.image!}
+									alt={el.image?.altText!}
+									height={150}
+									width={150}
+									objectFit="contain"
 								/>
 							</Imager>
 							<TextContainer>

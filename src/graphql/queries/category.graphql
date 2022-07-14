@@ -1,0 +1,17 @@
+query getAllCategorySlugs {
+	allCategories {
+		slug
+	}
+}
+
+query getCategories {
+	allCategories {
+		id
+		name
+		slug
+		image {
+			altText
+			image
+		}
+	}
+}

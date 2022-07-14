@@ -1,6 +1,8 @@
 import "../styles/globals.css";
 import type { AppPropsWithLayout } from "../types/next";
 import { ThemeProvider } from "styled-components";
+import { ApolloProvider } from "@apollo/client";
+import { Client } from "src/apollo";
 import { theme } from "../styled.config";
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
@@ -8,9 +10,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout = Component.getLayout || ((page) => page);
 
 	return (
-		<ThemeProvider theme={theme}>
-			{getLayout(<Component {...pageProps} />, pageProps)}
-		</ThemeProvider>
+		<ApolloProvider client={Client}>
+			<ThemeProvider theme={theme}>
+				{getLayout(<Component {...pageProps} />, pageProps)}
+			</ThemeProvider>
+		</ApolloProvider>
 	);
 }
 
