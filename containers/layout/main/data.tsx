@@ -24,15 +24,15 @@ export const midlinks: linkType[] = [
 	},
 	{
 		name: "headphones",
-		href: "/headphones",
+		href: "/category/headphones",
 	},
 	{
 		name: "speakers",
-		href: "/speakers",
+		href: "/category/speakers",
 	},
 	{
 		name: "earphones",
-		href: "/earphones",
+		href: "/category/earphones",
 	},
 ];
 

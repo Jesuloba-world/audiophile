@@ -1,6 +1,6 @@
 import type { NextPageWithLayout } from "types/next";
 import { ReactElement } from "react";
-import { MainLayout, Hero, Category, Featured } from "containers";
+import { MainLayout, Hero, CategoryPick, Featured } from "containers";
 import { GetCategoriesDocument, CategoryType } from "src/graphql/generated";
 import { Client } from "src/apollo";
 
@@ -12,7 +12,7 @@ const Home: NextPageWithLayout<homeProps> = ({ categories }) => {
 	return (
 		<>
 			<Hero />
-			<Category home categories={categories} />
+			<CategoryPick home categories={categories} />
 			<Featured />
 		</>
 	);

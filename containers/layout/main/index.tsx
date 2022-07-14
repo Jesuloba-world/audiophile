@@ -3,7 +3,7 @@ import Head from "next/head";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Copy } from "./Copy";
-import { Category } from "containers";
+import { CategoryPick } from "containers";
 import { CategoryType } from "src/graphql/generated";
 
 interface layoutProps {
@@ -25,7 +25,7 @@ export const MainLayout: FC<layoutProps> = ({
 		</Head>
 		<Header home={home} />
 		{children}
-		{!home ? <Category home={home} categories={categories} /> : null}
+		{!home ? <CategoryPick home={home} categories={categories} /> : null}
 		<Copy home={home} />
 		<Footer />
 	</>

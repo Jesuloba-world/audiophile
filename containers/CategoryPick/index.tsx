@@ -17,7 +17,7 @@ interface categoryProps {
 	categories: CategoryType[];
 }
 
-export const Category: FC<categoryProps> = ({ home, categories }) => {
+export const CategoryPick: FC<categoryProps> = ({ home, categories }) => {
 	return (
 		<Container home={home}>
 			{categories.map((el) => {
