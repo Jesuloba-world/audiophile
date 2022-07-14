@@ -15,3 +15,23 @@ query getCategories {
 		}
 	}
 }
+
+query getSpecificCategory($slug: String!) {
+	categoryBySlug(slug: $slug) {
+		name
+		slug
+		products {
+			id
+			name
+			slug
+			new
+			image {
+				desktop
+				mobile
+				tablet
+				altText
+			}
+			description
+		}
+	}
+}

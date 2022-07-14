@@ -5,15 +5,23 @@ import {
 	GetCategoriesDocument,
 	CategoryType,
 	GetAllCategorySlugsDocument,
+	GetSpecificCategoryDocument,
 } from "src/graphql/generated";
 import { Client } from "src/apollo";
+import { CategoryHero } from "containers";
+import { GetStaticProps } from "next";
 
 interface categoryProps {
 	categories: CategoryType[];
+	detail: CategoryType;
 }
 
-const Category: NextPageWithLayout<categoryProps> = () => {
-	return <h1>This is a category</h1>;
+const Category: NextPageWithLayout<categoryProps> = ({ detail }) => {
+	return (
+		<>
+			<CategoryHero title={`${detail.name}`} />
+		</>
+	);
 };
 
 Category.getLayout = (page: ReactElement, { categories }) => {
@@ -41,14 +49,22 @@ export async function getStaticPaths() {
 	};
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { data } = await Client.query({
 		query: GetCategoriesDocument,
+	});
+
+	const categoryInfo = await Client.query({
+		query: GetSpecificCategoryDocument,
+		variables: {
+			slug: `${params?.slug}`,
+		},
 	});
 
 	return {
 		props: {
 			categories: data.allCategories,
+			detail: categoryInfo.data.categoryBySlug,
 		},
 	};
-}
+};

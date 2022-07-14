@@ -43,6 +43,7 @@ export type CategoryType = {
   image?: Maybe<CategoryImageType>;
   /** Required and unique */
   name?: Maybe<Scalars['String']>;
+  orderNumber?: Maybe<Scalars['Int']>;
   products: Array<ProductType>;
   slug?: Maybe<Scalars['String']>;
 };
@@ -676,6 +677,14 @@ export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetCategoriesQuery = { __typename?: 'Query', allCategories?: Array<{ __typename?: 'CategoryType', id: any, name?: string | null, slug?: string | null, image?: { __typename?: 'CategoryImageType', altText?: string | null, image: string } | null } | null> | null };
 
+export type GetSpecificCategoryQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type GetSpecificCategoryQuery = { __typename?: 'Query', categoryBySlug?: { __typename?: 'CategoryType', name?: string | null, slug?: string | null, products: Array<{ __typename?: 'ProductType', id: any, name?: string | null, slug?: string | null, new: boolean, description?: string | null, image?: { __typename?: 'ProductImageType', desktop: string, mobile: string, tablet: string, altText?: string | null } | null }> } | null };
+
 
 export const GetAllCategorySlugsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllCategorySlugs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<GetAllCategorySlugsQuery, GetAllCategorySlugsQueryVariables>;
 export const GetCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"altText"}},{"kind":"Field","name":{"kind":"Name","value":"image"}}]}}]}}]}}]} as unknown as DocumentNode<GetCategoriesQuery, GetCategoriesQueryVariables>;
+export const GetSpecificCategoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSpecificCategory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categoryBySlug"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"products"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"new"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"desktop"}},{"kind":"Field","name":{"kind":"Name","value":"mobile"}},{"kind":"Field","name":{"kind":"Name","value":"tablet"}},{"kind":"Field","name":{"kind":"Name","value":"altText"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<GetSpecificCategoryQuery, GetSpecificCategoryQueryVariables>;

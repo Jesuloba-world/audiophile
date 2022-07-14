@@ -1,0 +1,1 @@
+export { CategoryHero } from "./Hero";
