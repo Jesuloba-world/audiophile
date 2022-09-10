@@ -8,7 +8,7 @@ import {
 	GetSpecificCategoryDocument,
 } from "src/graphql/generated";
 import { Client } from "src/apollo";
-import { CategoryHero } from "containers";
+import { CategoryHero, CategoryProduct } from "containers";
 import { GetStaticProps } from "next";
 
 interface categoryProps {
@@ -17,9 +17,11 @@ interface categoryProps {
 }
 
 const Category: NextPageWithLayout<categoryProps> = ({ detail }) => {
+	console.log(detail);
 	return (
 		<>
 			<CategoryHero title={`${detail.name}`} />
+			<CategoryProduct />
 		</>
 	);
 };

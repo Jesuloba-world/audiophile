@@ -7,7 +7,6 @@ import {
 	LinkText,
 	Imager,
 } from "./category.style";
-// import { categories } from "./data";
 import Image from "next/image";
 import { ArrowRight } from "containers/icons";
 import { CategoryType } from "src/graphql/generated";
