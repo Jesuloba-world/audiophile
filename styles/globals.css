@@ -24,6 +24,7 @@ h5,
 h6 {
 	font-weight: 700;
 	text-transform: uppercase;
+	font-family: "Manrope";
 }
 
 h1 {
@@ -60,6 +61,13 @@ h6 {
 	font-size: 18px;
 	line-height: 25px;
 	letter-spacing: 1.3px;
+}
+
+p {
+	font-weight: 500;
+	font-size: 15px;
+	line-height: 25px;
+	font-family: "Manrope";
 }
 
 * {

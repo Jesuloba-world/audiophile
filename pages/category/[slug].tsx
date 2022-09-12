@@ -10,6 +10,7 @@ import {
 import { Client } from "src/apollo";
 import { CategoryHero, CategoryProduct } from "containers";
 import { GetStaticProps } from "next";
+import { defaultMaxListeners } from "events";
 
 interface categoryProps {
 	categories: CategoryType[];
@@ -17,11 +18,10 @@ interface categoryProps {
 }
 
 const Category: NextPageWithLayout<categoryProps> = ({ detail }) => {
-	console.log(detail);
 	return (
 		<>
 			<CategoryHero title={`${detail.name}`} />
-			<CategoryProduct />
+			<CategoryProduct products={detail.products} />
 		</>
 	);
 };
