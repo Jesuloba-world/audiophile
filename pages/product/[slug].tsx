@@ -4,39 +4,34 @@ import { MainLayout } from "containers";
 import {
 	GetCategoriesDocument,
 	CategoryType,
-	GetAllCategorySlugsDocument,
-	GetSpecificCategoryDocument,
+	ProductType,
+	GetAllProductSlugsDocument,
+	GetSpecificProductDocument,
 } from "src/graphql/generated";
 import { Client } from "src/apollo";
-import { CategoryHero, CategoryProduct } from "containers";
 import { GetStaticProps } from "next";
 
 interface categoryProps {
 	categories: CategoryType[];
-	detail: CategoryType;
+	detail: ProductType;
 }
 
-const Category: NextPageWithLayout<categoryProps> = ({ detail }) => {
-	return (
-		<>
-			<CategoryHero title={`${detail.name}`} />
-			<CategoryProduct products={detail.products} />
-		</>
-	);
+const Product: NextPageWithLayout<categoryProps> = ({ detail }) => {
+	return <></>;
 };
 
-Category.getLayout = (page: ReactElement, { categories }) => {
+Product.getLayout = (page: ReactElement, { categories }) => {
 	return <MainLayout categories={categories}>{page}</MainLayout>;
 };
 
-export default Category;
+export default Product;
 
 export async function getStaticPaths() {
 	const { data } = await Client.query({
-		query: GetAllCategorySlugsDocument,
+		query: GetAllProductSlugsDocument,
 	});
 
-	const paths = data.allCategories?.map((el) => {
+	const paths = data.allProducts?.map((el) => {
 		return {
 			params: {
 				slug: el?.slug,
@@ -55,8 +50,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		query: GetCategoriesDocument,
 	});
 
-	const categoryInfo = await Client.query({
-		query: GetSpecificCategoryDocument,
+	const productInfo = await Client.query({
+		query: GetSpecificProductDocument,
 		variables: {
 			slug: `${params?.slug}`,
 		},
@@ -65,7 +60,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	return {
 		props: {
 			categories: data.allCategories,
-			detail: categoryInfo.data.categoryBySlug,
+			detail: productInfo.data.productBySlug,
 		},
 	};
 };

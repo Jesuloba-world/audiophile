@@ -8,7 +8,10 @@ interface props {
 }
 
 export const CategoryProduct: FC<props> = ({ products }) => {
-	console.log(products);
+	const sortedArray = [...products].sort((x, y) => {
+		return x === y ? 0 : x ? -1 : 1;
+	});
+	products = sortedArray;
 	return (
 		<Container>
 			{products.map((product, index) => (

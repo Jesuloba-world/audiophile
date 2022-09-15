@@ -6,6 +6,7 @@ import {
 	Name,
 	Description,
 	GridFrame,
+	Overline,
 } from "./productcard.style";
 import { Maybe, ProductImageType } from "src/graphql/generated";
 import Image from "next/image";
@@ -40,6 +41,7 @@ export const ProductCard: FC<props> = ({
 			</ImageContainer>
 			<GridFrame reverse={reverse}>
 				<TextContainer>
+					{isNew ? <Overline>NEW PRODUCT</Overline> : null}
 					<Name>{name}</Name>
 					<Description>{description}</Description>
 					<SeeProductButton

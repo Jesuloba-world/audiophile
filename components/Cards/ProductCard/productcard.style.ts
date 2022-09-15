@@ -50,3 +50,15 @@ export const Description = styled.p`
 	opacity: 0.5;
 	margin-bottom: 40px;
 `;
+
+export const Overline = styled.p`
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 19px;
+	letter-spacing: 10px;
+	text-transform: uppercase;
+
+	color: #d87d4a;
+	margin-bottom: 16px;
+`;

@@ -1,0 +1,13 @@
+query getAllProductSlugs {
+	allProducts {
+		slug
+	}
+}
+
+query getSpecificProduct($slug: String!) {
+	productBySlug(slug: $slug) {
+		id
+		name
+		slug
+	}
+}
