@@ -1,6 +1,6 @@
 import type { NextPageWithLayout } from "types/next";
 import { ReactElement } from "react";
-import { MainLayout } from "containers";
+import { MainLayout, ProductPageWrapper } from "containers";
 import {
 	GetCategoriesDocument,
 	CategoryType,
@@ -17,7 +17,11 @@ interface categoryProps {
 }
 
 const Product: NextPageWithLayout<categoryProps> = ({ detail }) => {
-	return <></>;
+	return (
+		<ProductPageWrapper>
+			{/* <h1>The product page</h1> */}
+		</ProductPageWrapper>
+	);
 };
 
 Product.getLayout = (page: ReactElement, { categories }) => {
