@@ -1,6 +1,6 @@
 import type { NextPageWithLayout } from "types/next";
 import { ReactElement } from "react";
-import { MainLayout, ProductPageWrapper } from "containers";
+import { MainLayout, ProductPageWrapper, ProductHero } from "containers";
 import {
 	GetCategoriesDocument,
 	CategoryType,
@@ -19,7 +19,13 @@ interface categoryProps {
 const Product: NextPageWithLayout<categoryProps> = ({ detail }) => {
 	return (
 		<ProductPageWrapper>
-			{/* <h1>The product page</h1> */}
+			<ProductHero
+				image={detail.image}
+				name={detail.name}
+				description={detail.description}
+				isNew={detail.new}
+				price={detail.price}
+			/>
 		</ProductPageWrapper>
 	);
 };

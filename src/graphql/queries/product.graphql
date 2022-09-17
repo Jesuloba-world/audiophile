@@ -9,5 +9,14 @@ query getSpecificProduct($slug: String!) {
 		id
 		name
 		slug
+		new
+		price
+		description
+		image {
+			desktop
+			altText
+			tablet
+			mobile
+		}
 	}
 }
