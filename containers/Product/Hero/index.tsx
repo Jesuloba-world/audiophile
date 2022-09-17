@@ -28,6 +28,11 @@ export const ProductHero: FC<props> = ({
 	description,
 	name,
 }) => {
+	// TODO: complete the add to cart function
+	const addToCart = () => {
+		console.log(`add ${name} to cart`);
+	};
+
 	return (
 		<Container>
 			<Image
@@ -43,7 +48,7 @@ export const ProductHero: FC<props> = ({
 				<Price>{numeral(price).format("$0,0")}</Price>
 				<ButtonContainer>
 					<NumberController />
-					<GenButton>Add to cart</GenButton>
+					<GenButton action={addToCart}>Add to cart</GenButton>
 				</ButtonContainer>
 			</TextContainer>
 		</Container>

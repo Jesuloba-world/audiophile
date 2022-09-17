@@ -39,4 +39,8 @@ export const Overline = styled.p`
 
 export const Price = styled.h6``;
 
-export const ButtonContainer = styled.div``;
+export const ButtonContainer = styled.div`
+	margin-top: 47px;
+	display: flex;
+	gap: 16px;
+`;
