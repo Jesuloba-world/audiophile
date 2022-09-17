@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import {
 	Container,
 	TextContainer,
@@ -28,9 +28,19 @@ export const ProductHero: FC<props> = ({
 	description,
 	name,
 }) => {
+	const [numForCart, setNumForCart] = useState(1);
+
 	// TODO: complete the add to cart function
 	const addToCart = () => {
 		console.log(`add ${name} to cart`);
+	};
+
+	const increment = () => {
+		setNumForCart((prev) => prev + 1);
+	};
+
+	const decrement = () => {
+		setNumForCart((prev) => (prev > 1 ? prev - 1 : 1));
 	};
 
 	return (
@@ -47,7 +57,11 @@ export const ProductHero: FC<props> = ({
 				<Description>{description}</Description>
 				<Price>{numeral(price).format("$0,0")}</Price>
 				<ButtonContainer>
-					<NumberController />
+					<NumberController
+						number={numForCart}
+						increment={increment}
+						decrement={decrement}
+					/>
 					<GenButton action={addToCart}>Add to cart</GenButton>
 				</ButtonContainer>
 			</TextContainer>

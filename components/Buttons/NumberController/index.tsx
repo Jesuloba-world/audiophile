@@ -1,8 +1,22 @@
 import { FC } from "react";
-import { Container } from "./controller.style";
+import { Container, ControlButton, Number } from "./controller.style";
 
-interface props {}
+interface props {
+	number: number;
+	increment: () => void;
+	decrement: () => void;
+}
 
-export const NumberController: FC<props> = () => {
-	return <Container></Container>;
+export const NumberController: FC<props> = ({
+	number,
+	decrement,
+	increment,
+}) => {
+	return (
+		<Container>
+			<ControlButton onClick={decrement}>{"-"}</ControlButton>
+			<Number>{number}</Number>
+			<ControlButton onClick={increment}>{"+"}</ControlButton>
+		</Container>
+	);
 };
