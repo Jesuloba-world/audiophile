@@ -5,6 +5,7 @@ import {
 	ProductPageWrapper,
 	ProductHero,
 	ProductFeatures,
+	ProductGallery,
 } from "containers";
 import {
 	GetCategoriesDocument,
@@ -25,8 +26,8 @@ const Product: NextPageWithLayout<categoryProps> = ({ detail }) => {
 	return (
 		<ProductPageWrapper>
 			<ProductHero
-				image={detail.image}
 				name={detail.name}
+				image={detail.image}
 				description={detail.description}
 				isNew={detail.new}
 				price={detail.price}
@@ -34,6 +35,11 @@ const Product: NextPageWithLayout<categoryProps> = ({ detail }) => {
 			<ProductFeatures
 				feature={detail.features}
 				includes={detail.includes}
+			/>
+			<ProductGallery
+				first={detail.gallery?.first}
+				second={detail.gallery?.second}
+				third={detail.gallery?.third}
 			/>
 		</ProductPageWrapper>
 	);
