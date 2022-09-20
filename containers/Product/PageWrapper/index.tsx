@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-import { Container } from "./pageWrapper.style";
+import { Container, Layout } from "./pageWrapper.style";
 import { GoBack } from "components";
 
 interface props {
@@ -10,7 +10,7 @@ export const ProductPageWrapper: FC<props> = ({ children }) => {
 	return (
 		<Container>
 			<GoBack />
-			{children}
+			<Layout>{children}</Layout>
 		</Container>
 	);
 };

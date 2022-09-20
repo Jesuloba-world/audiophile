@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-	margin-top: 160px;
 	height: 592px;
 	display: grid;
-	grid-template-columns: 41.2% calc(100% - 41.2%);
+	grid-template-columns: 1fr 1.42fr;
 	grid-template-rows: 1fr 1fr;
 	gap: 30px;
 `;

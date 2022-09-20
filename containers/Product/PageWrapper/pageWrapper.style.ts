@@ -5,3 +5,10 @@ export const Container = styled.main`
 	margin-inline: auto;
 	padding-top: 79px;
 `;
+
+export const Layout = styled.div`
+	margin-top: 56px;
+	display: flex;
+	flex-direction: column;
+	gap: 160px;
+`;

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-	margin-top: 56px;
 	display: flex;
 	gap: 30px;
 	justify-content: space-between;
