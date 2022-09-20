@@ -12,11 +12,37 @@ query getSpecificProduct($slug: String!) {
 		new
 		price
 		description
+		features
+		includes {
+			id
+			item
+			quantity
+		}
 		image {
 			desktop
 			altText
 			tablet
 			mobile
+		}
+		gallery {
+			first {
+				desktop
+				tablet
+				mobile
+				altText
+			}
+			second {
+				desktop
+				tablet
+				mobile
+				altText
+			}
+			third {
+				desktop
+				tablet
+				mobile
+				altText
+			}
 		}
 	}
 }

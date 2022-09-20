@@ -1,6 +1,11 @@
 import type { NextPageWithLayout } from "types/next";
 import { ReactElement } from "react";
-import { MainLayout, ProductPageWrapper, ProductHero } from "containers";
+import {
+	MainLayout,
+	ProductPageWrapper,
+	ProductHero,
+	ProductFeatures,
+} from "containers";
 import {
 	GetCategoriesDocument,
 	CategoryType,
@@ -25,6 +30,10 @@ const Product: NextPageWithLayout<categoryProps> = ({ detail }) => {
 				description={detail.description}
 				isNew={detail.new}
 				price={detail.price}
+			/>
+			<ProductFeatures
+				feature={detail.features}
+				includes={detail.includes}
 			/>
 		</ProductPageWrapper>
 	);
