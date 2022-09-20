@@ -34,7 +34,7 @@ export const ProductRecommendation: FC<props> = ({ others }) => {
 						<TextAndButton>
 							<Text>{el.name}</Text>
 							<SeeProductButton
-								to={`/product/${el.slug}`}
+								slug={el.slug as string}
 								color={"sienna"}
 							/>
 						</TextAndButton>

@@ -18,7 +18,7 @@ export const FeaturedLarge: FC<props> = ({ image, name, content, slug }) => {
 				<TextContainer>
 					<Title>{name}</Title>
 					<SubTitle>{content}</SubTitle>
-					<SeeProductButton to={`/product/${slug}`} color="black" />
+					<SeeProductButton slug={slug} color="black" />
 				</TextContainer>
 			</Mask>
 		</Container>

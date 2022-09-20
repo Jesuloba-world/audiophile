@@ -44,10 +44,7 @@ export const ProductCard: FC<props> = ({
 					{isNew ? <Overline>NEW PRODUCT</Overline> : null}
 					<Name>{name}</Name>
 					<Description>{description}</Description>
-					<SeeProductButton
-						to={`/product/${slug}`}
-						color={"sienna"}
-					/>
+					<SeeProductButton slug={slug as string} color={"sienna"} />
 				</TextContainer>
 			</GridFrame>
 		</Container>

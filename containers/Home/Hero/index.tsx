@@ -24,7 +24,7 @@ export const Hero: FC = () => {
 						Experience natural, lifelike audio and exceptional build
 						quality made for the passionate music enthusiast.
 					</SubTitle>
-					<SeeProductButton to={`/product/${slug}`} color="sienna" />
+					<SeeProductButton slug={slug} color="sienna" />
 				</TextContainer>
 			</Inner>
 		</Container>
