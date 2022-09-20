@@ -44,5 +44,16 @@ query getSpecificProduct($slug: String!) {
 				altText
 			}
 		}
+		others {
+			id
+			name
+			slug
+			image {
+				desktop
+				tablet
+				mobile
+				altText
+			}
+		}
 	}
 }

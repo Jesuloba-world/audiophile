@@ -6,6 +6,7 @@ import {
 	ProductHero,
 	ProductFeatures,
 	ProductGallery,
+	ProductRecommendation,
 } from "containers";
 import {
 	GetCategoriesDocument,
@@ -41,6 +42,7 @@ const Product: NextPageWithLayout<categoryProps> = ({ detail }) => {
 				second={detail.gallery?.second}
 				third={detail.gallery?.third}
 			/>
+			<ProductRecommendation others={detail.others} />
 		</ProductPageWrapper>
 	);
 };
