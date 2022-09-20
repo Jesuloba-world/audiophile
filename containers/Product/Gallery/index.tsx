@@ -17,6 +17,7 @@ export const ProductGallery: FC<props> = ({ first, second, third }) => {
 					src={first?.desktop as string}
 					alt={first?.altText as string}
 					layout="fill"
+					objectFit="contain"
 				/>
 			</First>
 			<Second>
@@ -24,6 +25,7 @@ export const ProductGallery: FC<props> = ({ first, second, third }) => {
 					src={second?.desktop as string}
 					alt={second?.altText as string}
 					layout="fill"
+					objectFit="contain"
 				/>
 			</Second>
 			<Third>
@@ -31,6 +33,7 @@ export const ProductGallery: FC<props> = ({ first, second, third }) => {
 					src={third?.desktop as string}
 					alt={third?.altText as string}
 					layout="fill"
+					objectFit="contain"
 				/>
 			</Third>
 		</Container>
