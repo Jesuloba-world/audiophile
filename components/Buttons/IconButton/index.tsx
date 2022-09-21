@@ -1,26 +1,44 @@
 import { FC, ReactNode, useEffect, useState } from "react";
-import { Container, ModalContainer, OverLord } from "./button.style";
+import { Container, ModalContainer, OverLord, BackDrop } from "./button.style";
 
 interface iconButtonProps {
 	name: string;
 	Icon: any;
 	modal: ReactNode;
+	containerHeight?: number;
+	whichIsActive: "cart" | "user" | undefined;
+	setActive: (name: "cart" | "user" | undefined) => void;
 }
 
-export const IconButton: FC<iconButtonProps> = ({ Icon, modal, name }) => {
+export const IconButton: FC<iconButtonProps> = ({
+	Icon,
+	modal,
+	name,
+	containerHeight,
+	whichIsActive,
+	setActive,
+}) => {
 	// TODO: create the hidden parts and differentiate cart from user
-	const [showModal, setShowModal] = useState(false);
-
-	useEffect(() => {
-		console.log(name, showModal);
-	}, [name, showModal]);
+	const isActive = whichIsActive === name;
 
 	return (
 		<OverLord>
-			<Container onClick={() => setShowModal((prev) => !prev)}>
+			<Container
+				onClick={() =>
+					setActive(isActive ? undefined : (name as "cart" | "user"))
+				}
+			>
 				<Icon />
 			</Container>
-			{showModal ? <ModalContainer>{modal}</ModalContainer> : null}
+			{isActive ? (
+				<>
+					<BackDrop
+						containerHeight={containerHeight ? containerHeight : 0}
+						onClick={() => setActive(undefined)}
+					/>
+					<ModalContainer>{modal}</ModalContainer>
+				</>
+			) : null}
 		</OverLord>
 	);
 };

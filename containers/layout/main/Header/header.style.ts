@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
-export const Container = styled.header<{ home?: boolean }>`
+export const Container = styled.header<{
+	home?: boolean;
+	ref: any;
+}>`
 	background-color: ${({ theme, home }) =>
 		home ? theme.smoky : theme.black};
 	height: 96px;
+	position: relative;
+	z-index: 10;
 `;
 
 export const Inner = styled.div`
@@ -30,4 +35,5 @@ export const Inner = styled.div`
 export const IconLinks = styled.div`
 	display: flex;
 	gap: 34px;
+	align-items: center;
 `;
