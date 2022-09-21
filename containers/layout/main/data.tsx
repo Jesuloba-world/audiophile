@@ -37,8 +37,24 @@ export const midlinks: linkType[] = [
 ];
 
 export const iconButtons = [
-	{ name: "cart", icon: Cart },
-	{ name: "user", icon: AiOutlineUser },
+	{
+		name: "cart",
+		icon: Cart,
+		modal: (
+			<div>
+				<h1>Cart</h1>
+			</div>
+		),
+	},
+	{
+		name: "user",
+		icon: AiOutlineUser,
+		modal: (
+			<div>
+				<h1>User</h1>
+			</div>
+		),
+	},
 ];
 
 export const footerNote =

@@ -40,12 +40,12 @@ export const TextContainer = styled.div`
 `;
 
 export const Name = styled.h2`
-	color: #000000;
+	color: ${({ theme }) => theme.black};
 	margin-bottom: 32px;
 `;
 
 export const Description = styled.p`
-	color: #000000;
+	color: ${({ theme }) => theme.black};
 	mix-blend-mode: normal;
 	opacity: 0.5;
 	margin-bottom: 40px;
@@ -59,6 +59,6 @@ export const Overline = styled.p`
 	letter-spacing: 10px;
 	text-transform: uppercase;
 
-	color: #d87d4a;
+	color: ${({ theme }) => theme.sienna};
 	margin-bottom: 16px;
 `;

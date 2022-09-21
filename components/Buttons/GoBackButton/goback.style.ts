@@ -9,13 +9,13 @@ export const Container = styled.button`
 	font-size: 15px;
 	line-height: 25px;
 
-	color: #000000;
+	color: ${({ theme }) => theme.black};
 
 	mix-blend-mode: normal;
 	opacity: 0.5;
 
 	&:hover,
 	&:active {
-		color: #d87d4a;
+		color: ${({ theme }) => theme.sienna};
 	}
 `;

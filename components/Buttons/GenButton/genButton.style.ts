@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.button`
 	height: 48px;
 	width: 160px;
-	background: #d87d4a;
+	background: ${({ theme }) => theme.sienna};
 	text-transform: uppercase;
 
 	font-family: "Manrope";
@@ -12,10 +12,10 @@ export const Container = styled.button`
 	line-height: 18px;
 	letter-spacing: 1px;
 
-	color: #ffffff;
+	color: ${({ theme }) => theme.white};
 
 	&:hover {
-		background: #fbaf85;
+		background: ${({ theme }) => theme.light_salmon};
 	}
 
 	&:focus {

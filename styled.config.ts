@@ -1,5 +1,12 @@
 interface Theme {
-	[key: string]: string;
+	black: string;
+	smoky: string;
+	grey: string;
+	sienna: string;
+	light_salmon: string;
+	cultured: string;
+	grey_white: string;
+	white: string;
 }
 
 export const theme: Theme = {

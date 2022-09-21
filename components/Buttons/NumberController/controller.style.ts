@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 	height: 48px;
-	background: #f1f1f1;
+	background: ${({ theme }) => theme.cultured};
 	display: flex;
 	align-items: center;
 	gap: 20px;
@@ -17,7 +17,7 @@ export const ControlButton = styled.button`
 	letter-spacing: 1px;
 	text-transform: uppercase;
 
-	color: #000000;
+	color: ${({ theme }) => theme.black};
 
 	mix-blend-mode: normal;
 	opacity: 0.25;
@@ -26,7 +26,7 @@ export const ControlButton = styled.button`
 	width: 16px;
 
 	&:hover {
-		color: #d87d4a;
+		color: ${({ theme }) => theme.sienna};
 	}
 `;
 
@@ -38,5 +38,5 @@ export const Number = styled.span`
 	letter-spacing: 1px;
 	text-transform: uppercase;
 
-	color: #000000;
+	color: ${({ theme }) => theme.black};
 `;

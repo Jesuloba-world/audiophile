@@ -16,7 +16,12 @@ export const Header: FC<headerProps> = ({ home }) => {
 				<MidLinks />
 				<IconLinks>
 					{iconButtons.map((el, index) => (
-						<IconButton key={index} name={el.name} Icon={el.icon} />
+						<IconButton
+							key={index}
+							name={el.name}
+							Icon={el.icon}
+							modal={el.modal}
+						/>
 					))}
 				</IconLinks>
 			</Inner>

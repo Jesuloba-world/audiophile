@@ -41,5 +41,5 @@ export const Included = styled.div`
 
 export const Quantity = styled.p`
 	font-weight: 700;
-	color: #d87d4a;
+	color: ${({ theme }) => theme.sienna};
 `;
