@@ -5,6 +5,7 @@ import { Footer } from "./Footer";
 import { Copy } from "./Copy";
 import { CategoryPick } from "containers";
 import { CategoryType } from "src/graphql/generated";
+import { BackdropProvider } from "hooks";
 
 interface layoutProps {
 	children: ReactNode;
@@ -18,15 +19,21 @@ export const MainLayout: FC<layoutProps> = ({
 	title,
 	home,
 	categories,
-}) => (
-	<>
-		<Head>
-			<title>{title ? title : "Audiophile"}</title>
-		</Head>
-		<Header home={home} />
-		{children}
-		{!home ? <CategoryPick home={home} categories={categories} /> : null}
-		<Copy home={home} />
-		<Footer />
-	</>
-);
+}) => {
+	return (
+		<>
+			<Head>
+				<title>{title ? title : "Audiophile"}</title>
+			</Head>
+			<BackdropProvider>
+				<Header home={home} />
+				{children}
+				{!home ? (
+					<CategoryPick home={home} categories={categories} />
+				) : null}
+				<Copy home={home} />
+				<Footer />
+			</BackdropProvider>
+		</>
+	);
+};

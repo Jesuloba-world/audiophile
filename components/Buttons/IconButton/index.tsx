@@ -1,5 +1,6 @@
 import { FC, ReactNode, useEffect, useState } from "react";
-import { Container, ModalContainer, OverLord, BackDrop } from "./button.style";
+import { Container, ModalContainer, OverLord } from "./button.style";
+import { useBackdrop } from "hooks";
 
 interface iconButtonProps {
 	name: string;
@@ -14,31 +15,29 @@ export const IconButton: FC<iconButtonProps> = ({
 	Icon,
 	modal,
 	name,
-	containerHeight,
 	whichIsActive,
 	setActive,
 }) => {
-	// TODO: create the hidden parts and differentiate cart from user
 	const isActive = whichIsActive === name;
+	const { setBackdrop, showBackdrop } = useBackdrop();
+
+	useEffect(() => {
+		if (!showBackdrop) {
+			setActive(undefined);
+		}
+	}, [showBackdrop, setActive]);
 
 	return (
 		<OverLord>
 			<Container
-				onClick={() =>
-					setActive(isActive ? undefined : (name as "cart" | "user"))
-				}
+				onClick={() => {
+					setActive(isActive ? undefined : (name as "cart" | "user"));
+					setBackdrop(!isActive);
+				}}
 			>
 				<Icon />
 			</Container>
-			{isActive ? (
-				<>
-					<BackDrop
-						containerHeight={containerHeight ? containerHeight : 0}
-						onClick={() => setActive(undefined)}
-					/>
-					<ModalContainer>{modal}</ModalContainer>
-				</>
-			) : null}
+			{isActive ? <ModalContainer>{modal}</ModalContainer> : null}
 		</OverLord>
 	);
 };
