@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.header<{
 	home?: boolean;
-	ref: any;
 }>`
 	background-color: ${({ theme, home }) =>
 		home ? theme.smoky : theme.black};

@@ -1,7 +1,7 @@
 import { FC, useRef, useState } from "react";
 import { Container, Inner, IconLinks } from "./header.style";
 import { Logo, IconButton } from "components";
-import { iconButtons } from "../data";
+import { iconButtons } from "./data";
 import { MidLinks } from "../MidLinks";
 
 interface headerProps {
@@ -17,10 +17,8 @@ export const Header: FC<headerProps> = ({ home }) => {
 		setWhichIsActive(name);
 	};
 
-	const containerRef = useRef<HTMLElement>();
-
 	return (
-		<Container ref={containerRef} home={home}>
+		<Container home={home}>
 			<Inner>
 				<Logo />
 				<MidLinks />
@@ -30,8 +28,7 @@ export const Header: FC<headerProps> = ({ home }) => {
 							key={index}
 							name={el.name}
 							Icon={el.icon}
-							modal={el.modal}
-							containerHeight={containerRef.current?.offsetHeight}
+							Modal={el.modal}
 							whichIsActive={whichIsActive}
 							setActive={setActive}
 						/>

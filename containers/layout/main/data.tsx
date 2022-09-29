@@ -1,11 +1,5 @@
 import { hrefType, httplinkType } from "types";
-import { AiOutlineUser } from "react-icons/ai";
-import {
-	Cart,
-	IconFacebook,
-	IconInstagram,
-	IconTwitter,
-} from "containers/icons";
+import { IconFacebook, IconInstagram, IconTwitter } from "containers/icons";
 
 interface linkType {
 	name: string;
@@ -33,27 +27,6 @@ export const midlinks: linkType[] = [
 	{
 		name: "earphones",
 		href: "/category/earphones",
-	},
-];
-
-export const iconButtons = [
-	{
-		name: "cart",
-		icon: Cart,
-		modal: (
-			<div>
-				<h1>Cart</h1>
-			</div>
-		),
-	},
-	{
-		name: "user",
-		icon: AiOutlineUser,
-		modal: (
-			<div>
-				<h1>User</h1>
-			</div>
-		),
 	},
 ];
 

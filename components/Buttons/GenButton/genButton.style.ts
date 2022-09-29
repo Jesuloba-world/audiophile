@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const Container = styled.button`
+export const Container = styled.button<{ full?: boolean }>`
 	height: 48px;
-	width: 160px;
+	width: ${({ full }) => (full ? `100%` : `160px`)};
 	background: ${({ theme }) => theme.sienna};
 	text-transform: uppercase;
 

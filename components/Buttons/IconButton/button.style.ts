@@ -19,6 +19,7 @@ export const ModalContainer = styled.div`
 	min-height: 30px;
 	border-radius: 8px;
 	color: ${({ theme }) => theme.black};
+	padding: 31px 31px 31px 33px;
 
 	position: absolute;
 	top: 97px;

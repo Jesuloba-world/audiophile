@@ -5,15 +5,14 @@ import { useBackdrop } from "hooks";
 interface iconButtonProps {
 	name: string;
 	Icon: any;
-	modal: ReactNode;
-	containerHeight?: number;
+	Modal: () => JSX.Element;
 	whichIsActive: "cart" | "user" | undefined;
 	setActive: (name: "cart" | "user" | undefined) => void;
 }
 
 export const IconButton: FC<iconButtonProps> = ({
 	Icon,
-	modal,
+	Modal,
 	name,
 	whichIsActive,
 	setActive,
@@ -37,7 +36,11 @@ export const IconButton: FC<iconButtonProps> = ({
 			>
 				<Icon />
 			</Container>
-			{isActive ? <ModalContainer>{modal}</ModalContainer> : null}
+			{isActive ? (
+				<ModalContainer>
+					<Modal />
+				</ModalContainer>
+			) : null}
 		</OverLord>
 	);
 };
