@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { Container, ModalContainer, OverLord } from "./button.style";
 import { useBackdrop, useLogin } from "hooks";
 
@@ -19,12 +19,17 @@ export const IconButton: FC<iconButtonProps> = ({
 }) => {
 	const isActive = whichIsActive === name;
 	const { setBackdrop, showBackdrop } = useBackdrop();
+	const { showLogin } = useLogin();
 
 	useEffect(() => {
 		if (!showBackdrop) {
 			setActive(undefined);
 		}
 	}, [showBackdrop, setActive]);
+
+	if (showLogin) {
+		setActive(undefined);
+	}
 
 	return (
 		<OverLord>

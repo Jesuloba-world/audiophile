@@ -5,7 +5,7 @@ import { Footer } from "./Footer";
 import { Copy } from "./Copy";
 import { CategoryPick } from "containers";
 import { CategoryType } from "src/graphql/generated";
-import { BackdropProvider, LoginProvider } from "hooks";
+import { BackdropProvider, LoginProvider } from "providers";
 
 interface layoutProps {
 	children: ReactNode;

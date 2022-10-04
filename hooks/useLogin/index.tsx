@@ -8,31 +8,10 @@ type LoginHookType = () => {
 	setLogin: (bool: boolean) => void;
 };
 
-const initialState = {
-	showLogin: false,
-	setLogin: (_: boolean) => {},
-};
-
-const LoginContext = createContext(initialState);
-
-export const LoginProvider: FC<{ children: ReactNode }> = ({ children }) => {
-	const showLogin = useSelector((state: RootState) => state.layout.showLogin);
-
-	const dispatch = useDispatch();
-
-	const setLogin = (bool: boolean) => {
-		dispatch(setShowLogin(bool));
-	};
-
-	return (
-		<LoginContext.Provider value={{ showLogin, setLogin }}>
-			{children}
-		</LoginContext.Provider>
-	);
-};
-
 export const useLogin: LoginHookType = () => {
-	const { setLogin, showLogin } = useContext(LoginContext);
+	const showLogin = useSelector((state: RootState) => state.layout.showLogin);
+	const dispatch = useDispatch();
+	const setLogin = (bool: boolean) => dispatch(setShowLogin(bool));
 
 	return { setLogin, showLogin };
 };
