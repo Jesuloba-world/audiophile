@@ -1,6 +1,8 @@
-import { ReactNode, useState, createContext, useContext, FC } from "react";
+import { ReactNode, createContext, useContext, FC } from "react";
 import { BackDrop } from "./styles";
-import { useLogin } from "hooks";
+import { setShowBackdrop } from "store/slice/layoutSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "store";
 
 type backdropHookType = () => {
 	showBackdrop: boolean;
@@ -15,20 +17,20 @@ const initialState = {
 export const backdropContext = createContext(initialState);
 
 export const BackdropProvider: FC<{ children: ReactNode }> = ({ children }) => {
-	const [showBackdrop, setShowBackdrop] = useState(false);
+	const showBackdrop = useSelector(
+		(state: RootState) => state.layout.showBackdrop
+	);
+	const showLogin = useSelector((state: RootState) => state.layout.showLogin);
+	const dispatch = useDispatch();
 
-	const setBackdrop = (bool: boolean) => setShowBackdrop(bool);
-
-	const { showLogin } = useLogin();
-
-	console.log(showLogin);
+	const setBackdrop = (bool: boolean) => dispatch(setShowBackdrop(bool));
 
 	return (
 		<backdropContext.Provider value={{ showBackdrop, setBackdrop }}>
 			{showBackdrop ? (
 				<BackDrop
 					isLogin={showLogin}
-					onClick={() => setShowBackdrop(false)}
+					onClick={() => setBackdrop(false)}
 				/>
 			) : null}
 			{children}

@@ -1,10 +1,7 @@
-import React, {
-	ReactNode,
-	createContext,
-	useContext,
-	useState,
-	FC,
-} from "react";
+import React, { ReactNode, createContext, useContext, FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "store";
+import { setShowLogin } from "store/slice/layoutSlice";
 
 type LoginHookType = () => {
 	showLogin: boolean;
@@ -19,10 +16,12 @@ const initialState = {
 const LoginContext = createContext(initialState);
 
 export const LoginProvider: FC<{ children: ReactNode }> = ({ children }) => {
-	const [showLogin, setShowLogin] = useState(false);
+	const showLogin = useSelector((state: RootState) => state.layout.showLogin);
+
+	const dispatch = useDispatch();
 
 	const setLogin = (bool: boolean) => {
-		setShowLogin(bool);
+		dispatch(setShowLogin(bool));
 	};
 
 	return (
