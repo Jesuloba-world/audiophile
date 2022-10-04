@@ -5,7 +5,7 @@ import { Footer } from "./Footer";
 import { Copy } from "./Copy";
 import { CategoryPick } from "containers";
 import { CategoryType } from "src/graphql/generated";
-import { BackdropProvider } from "hooks";
+import { BackdropProvider, LoginProvider } from "hooks";
 
 interface layoutProps {
 	children: ReactNode;
@@ -20,20 +20,24 @@ export const MainLayout: FC<layoutProps> = ({
 	home,
 	categories,
 }) => {
+	//TODO: use Redux to replace the Providers
+
 	return (
 		<>
 			<Head>
 				<title>{title ? title : "Audiophile"}</title>
 			</Head>
-			<BackdropProvider>
-				<Header home={home} />
-				{children}
-				{!home ? (
-					<CategoryPick home={home} categories={categories} />
-				) : null}
-				<Copy home={home} />
-				<Footer />
-			</BackdropProvider>
+			<LoginProvider>
+				<BackdropProvider>
+					<Header home={home} />
+					{children}
+					{!home ? (
+						<CategoryPick home={home} categories={categories} />
+					) : null}
+					<Copy home={home} />
+					<Footer />
+				</BackdropProvider>
+			</LoginProvider>
 		</>
 	);
 };

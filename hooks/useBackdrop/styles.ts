@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BackDrop = styled.div<{
-	// containerHeight: number
+	isLogin: boolean;
 }>`
 	position: fixed;
 	bottom: 0;
@@ -11,5 +11,5 @@ export const BackDrop = styled.div<{
 	background: #000000;
 	mix-blend-mode: normal;
 	opacity: 0.4;
-	z-index: 2;
+	z-index: ${({ isLogin }) => (isLogin ? 12 : 2)};
 `;

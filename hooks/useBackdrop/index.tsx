@@ -1,5 +1,6 @@
 import { ReactNode, useState, createContext, useContext, FC } from "react";
 import { BackDrop } from "./styles";
+import { useLogin } from "hooks";
 
 type backdropHookType = () => {
 	showBackdrop: boolean;
@@ -18,10 +19,17 @@ export const BackdropProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
 	const setBackdrop = (bool: boolean) => setShowBackdrop(bool);
 
+	const { showLogin } = useLogin();
+
+	console.log(showLogin);
+
 	return (
 		<backdropContext.Provider value={{ showBackdrop, setBackdrop }}>
 			{showBackdrop ? (
-				<BackDrop onClick={() => setShowBackdrop(false)} />
+				<BackDrop
+					isLogin={showLogin}
+					onClick={() => setShowBackdrop(false)}
+				/>
 			) : null}
 			{children}
 		</backdropContext.Provider>
