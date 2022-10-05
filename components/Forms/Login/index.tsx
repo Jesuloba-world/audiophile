@@ -1,7 +1,15 @@
 import { FC, useState } from "react";
-import { Container, Form } from "./styles";
+import {
+	Container,
+	Form,
+	Bottom,
+	CheckboxWrapper,
+	ForgetText,
+	Heading,
+	SwitchButton,
+} from "./styles";
 import { loginFormElements, signupFormElements } from "./constant";
-import { Input, GenButton } from "components";
+import { GenButton, AuthInput } from "components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "./schema";
@@ -25,12 +33,17 @@ export const LoginForm: FC<props> = () => {
 		console.log(data);
 	};
 
+	const switchlogin = () => {
+		setIsLogin((prev) => !prev);
+	};
+
 	return (
 		<Container>
+			<Heading>Login to your account</Heading>
 			{/* {errorMessage && <ErrorBox error={errorMessage} />} */}
 			<Form onSubmit={handleSubmit(handleLogin)}>
 				{loginFormElements.map((element, index) => (
-					<Input
+					<AuthInput
 						{...element}
 						key={index}
 						register={register}
@@ -38,61 +51,31 @@ export const LoginForm: FC<props> = () => {
 					/>
 				))}
 
-				<div className="flex justify-between items-center">
-					<div className="flex gap-1 items-center cursor-pointer">
+				<Bottom>
+					<CheckboxWrapper>
 						<input
 							type="checkbox"
 							id="remember"
-							className="cursor-pointer"
 							{...register("remember")}
 						/>
-						<label
-							htmlFor="remember"
-							className="text-sm font-medium cursor-pointer"
-						>
-							Remember me
+						<label htmlFor="remember">
+							<p>Remember me</p>
 						</label>
-					</div>
+					</CheckboxWrapper>
 
 					<Link href={"/forget-password"}>
-						<a className="text-blue-500 hover:text-blue-700 active:text-blue-700">
-							<p className="text-sm font-semibold">
-								Forgot password?
-							</p>
+						<a>
+							<ForgetText>Forgot password?</ForgetText>
 						</a>
 					</Link>
-				</div>
+				</Bottom>
 
-				<GenButton fullwidth>LOGIN</GenButton>
-
-				{/*
-					<AuthButton loading={loading} isLogin />
-				
-				{isLogin ? (
-					<p>
-						Don&#39;t have an account?{" "}
-						<Link href={"/signup"}>
-							<a className="text-blue-500 hover:text-blue-700 active:text-blue-700">
-								<span className="text-sm font-semibold">
-									Sign Up Instead
-								</span>
-							</a>
-						</Link>
-					</p>
-				) : (
-					<p>
-						Already have an account?{" "}
-						<Link href={"/login"}>
-							<a className="text-blue-500 hover:text-blue-700 active:text-blue-700">
-								<span className="text-sm font-semibold">
-									Log in Instead
-								</span>
-							</a>
-						</Link>
-					</p>
-				)}
-			 */}
+				<GenButton fullwidth>LOGIN {/*Loading here*/}</GenButton>
 			</Form>
+
+			<SwitchButton onClick={switchlogin}>
+				<p>create an account instead</p>
+			</SwitchButton>
 		</Container>
 	);
 };

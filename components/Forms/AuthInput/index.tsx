@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Container, FormInput } from "./styles";
 
 interface props {
 	label: string;
@@ -9,7 +10,7 @@ interface props {
 	error: any;
 }
 
-export const Input: FC<props> = ({
+export const AuthInput: FC<props> = ({
 	label,
 	id,
 	register,
@@ -18,18 +19,18 @@ export const Input: FC<props> = ({
 	...restProps
 }) => {
 	return (
-		<div className="flex flex-col gap-1">
-			<label className="text-sm font-medium" htmlFor={id}>
-				{label}
+		<Container>
+			<label htmlFor={id}>
+				<p>{label}</p>
 			</label>
-			<input
-				className="border border-gray-500/40 border-solid rounded shadow h-8 text-sm px-2"
+			<FormInput
+				className="shadow h-8"
 				id={id}
 				{...restProps}
 				{...register(name)}
 			/>
 			{/* Error */}
 			{error && <p className="text-red-500 text-xs">{error.message}</p>}
-		</div>
+		</Container>
 	);
 };

@@ -1,2 +1,2 @@
 export { LoginForm } from "./Login";
-export { Input } from "./Input";
+export { AuthInput } from "./AuthInput";
