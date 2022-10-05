@@ -41,6 +41,7 @@ export const IconButton: FC<iconButtonProps> = ({
 			>
 				<Icon />
 			</Container>
+			{/* TODO: could use some animation */}
 			{isActive ? (
 				<ModalContainer>
 					<Modal />

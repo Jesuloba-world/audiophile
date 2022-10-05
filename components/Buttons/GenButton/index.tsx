@@ -3,7 +3,7 @@ import { Container } from "./genButton.style";
 
 interface props {
 	children: string;
-	action: () => void;
+	action?: () => void;
 	fullwidth?: boolean;
 }
 
