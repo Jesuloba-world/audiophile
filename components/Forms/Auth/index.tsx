@@ -17,7 +17,7 @@ import Link from "next/link";
 
 interface props {}
 
-export const LoginForm: FC<props> = () => {
+export const AuthForm: FC<props> = () => {
 	const [isLogin, setIsLogin] = useState(true);
 
 	const {

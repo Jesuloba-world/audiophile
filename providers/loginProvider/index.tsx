@@ -1,13 +1,13 @@
 import { FC, ReactNode } from "react";
 import { useLogin } from "hooks";
-import { LoginForm } from "components";
+import { AuthForm } from "components";
 
 export const LoginProvider: FC<{ children: ReactNode }> = ({ children }) => {
-	const { setLogin, showLogin } = useLogin();
+	const { showLogin } = useLogin();
 
 	return (
 		<>
-			{showLogin ? <LoginForm /> : null}
+			{showLogin ? <AuthForm /> : null}
 			{children}
 		</>
 	);

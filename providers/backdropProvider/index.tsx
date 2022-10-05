@@ -13,10 +13,7 @@ export const BackdropProvider: FC<{ children: ReactNode }> = ({ children }) => {
 				<BackDrop
 					isLogin={showLogin}
 					onClick={() => {
-						if (showLogin) {
-							setLogin(false);
-							setBackdrop(false);
-						} else {
+						if (!showLogin) {
 							setBackdrop(false);
 						}
 					}}
