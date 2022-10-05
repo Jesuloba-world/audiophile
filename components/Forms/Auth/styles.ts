@@ -50,10 +50,18 @@ export const Heading = styled.h3`
 	}
 `;
 
-export const Bottom = styled.div`
+export const Bottom = styled.div<{ stack?: boolean }>`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+
+	${({ stack }) =>
+		stack
+			? `
+		flex-direction: column;
+		align-items: flex-start;
+	`
+			: null}
 `;
 
 export const CheckboxWrapper = styled.div`
@@ -104,4 +112,10 @@ export const SvgContainer = styled.button`
 	&:hover svg {
 		fill: ${({ theme }) => theme.sienna};
 	}
+`;
+
+export const ErrorText = styled.p`
+	color: #ef4444;
+	font-size: 12px;
+	line-height: 16px;
 `;

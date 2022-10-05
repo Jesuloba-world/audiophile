@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { Container, Heading, SwitchButton, SvgContainer } from "./styles";
 import Close from "assets/shared/ios-close.svg";
 import { useLogin, useBackdrop } from "hooks";
-import { LoginForm } from "./forms";
+import { LoginForm, RegisterForm } from "./forms";
 
 interface props {}
 
@@ -30,7 +30,8 @@ export const AuthForm: FC<props> = () => {
 				{isLogin ? "Login to your account" : "Create your account"}
 			</Heading>
 			{/* {errorMessage && <ErrorBox error={errorMessage} />} */}
-			<LoginForm />
+
+			{isLogin ? <LoginForm /> : <RegisterForm />}
 
 			<SwitchButton onClick={switchlogin}>
 				<p>
