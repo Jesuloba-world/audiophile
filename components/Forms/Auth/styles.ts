@@ -16,7 +16,7 @@ export const Container = styled.div`
 	overflow: hidden;
 
 	padding-inline: 20px;
-	padding-block: 24px;
+	padding-block: 24px 24px;
 
 	display: flex;
 	flex-direction: column;
@@ -35,6 +35,7 @@ export const Form = styled.form`
 export const Heading = styled.h3`
 	text-transform: capitalize;
 	text-align: center;
+	width: 384px;
 
 	display: flex;
 	flex-direction: column;
@@ -69,9 +70,38 @@ export const CheckboxWrapper = styled.div`
 
 export const ForgetText = styled.p`
 	font-weight: 600;
+	&:hover {
+		color: ${({ theme }) => theme.grey};
+	}
 `;
 
 export const SwitchButton = styled.button`
 	border-bottom: 1px solid ${({ theme }) => theme.black};
 	padding-inline: 8px;
+
+	&:hover {
+		color: ${({ theme }) => theme.grey};
+		border-bottom: 1px solid ${({ theme }) => theme.grey};
+	}
+`;
+
+export const SvgContainer = styled.button`
+	position: absolute;
+	top: 0;
+	right: 0px;
+	padding-right: 6px;
+	padding-top: 6px;
+
+	height: 40px;
+	width: 40px;
+	cursor: pointer;
+
+	svg {
+		height: 100%;
+		width: 100%;
+	}
+
+	&:hover svg {
+		fill: ${({ theme }) => theme.sienna};
+	}
 `;

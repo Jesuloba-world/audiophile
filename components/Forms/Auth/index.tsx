@@ -7,6 +7,7 @@ import {
 	ForgetText,
 	Heading,
 	SwitchButton,
+	SvgContainer,
 } from "./styles";
 import { loginFormElements, signupFormElements } from "./constant";
 import { GenButton, AuthInput } from "components";
@@ -14,6 +15,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "./schema";
 import Link from "next/link";
+import Close from "assets/shared/ios-close.svg";
+import { useLogin, useBackdrop } from "hooks";
 
 interface props {}
 
@@ -37,9 +40,22 @@ export const AuthForm: FC<props> = () => {
 		setIsLogin((prev) => !prev);
 	};
 
+	const { setLogin } = useLogin();
+	const { setBackdrop } = useBackdrop();
+
 	return (
 		<Container>
-			<Heading>Login to your account</Heading>
+			<SvgContainer
+				onClick={() => {
+					setLogin(false);
+					setBackdrop(false);
+				}}
+			>
+				<Close />
+			</SvgContainer>
+			<Heading>
+				{isLogin ? "Login to your account" : "Create your account"}
+			</Heading>
 			{/* {errorMessage && <ErrorBox error={errorMessage} />} */}
 			<Form onSubmit={handleSubmit(handleLogin)}>
 				{loginFormElements.map((element, index) => (
