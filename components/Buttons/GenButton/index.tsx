@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { Container } from "./genButton.style";
 
 interface props {
-	children: string;
+	children: ReactNode;
 	action?: () => void;
 	fullwidth?: boolean;
 }

@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { Form, Bottom, ErrorText } from "../styles";
+import { Form, Bottom, ErrorText, CheckboxWrapper } from "../styles";
 import { signupFormElements } from "../constant";
-import { AuthInput, GenButton } from "components";
+import { AuthInput, GenButton, Spinner } from "components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../schema";
@@ -72,26 +72,20 @@ export const RegisterForm: FC<props> = ({ setError }) => {
 			))}
 
 			<Bottom stack>
-				<div className="flex gap-1 items-center cursor-pointer">
-					<input
-						type="checkbox"
-						id="agree"
-						className="cursor-pointer"
-						{...register("agree")}
-					/>
-					<label
-						htmlFor="agree"
-						className="text-sm font-medium cursor-pointer"
-					>
-						I agree with terms and conditions
+				<CheckboxWrapper>
+					<input type="checkbox" id="agree" {...register("agree")} />
+					<label htmlFor="agree">
+						<p>I agree with terms and conditions</p>
 					</label>
-				</div>
+				</CheckboxWrapper>
 				{errors["agree"] && (
 					<ErrorText>{errors["agree"].message as string}</ErrorText>
 				)}
 			</Bottom>
 
-			<GenButton fullwidth>Create account {/*Loading here*/}</GenButton>
+			<GenButton fullwidth>
+				Create account {loading ? <Spinner /> : null}
+			</GenButton>
 		</Form>
 	);
 };

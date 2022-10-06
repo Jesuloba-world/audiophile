@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { Form, Bottom, CheckboxWrapper, ForgetText } from "../styles";
+import { Form, Bottom, ForgetText } from "../styles";
 import { loginFormElements } from "../constant";
-import { AuthInput, GenButton } from "components";
+import { AuthInput, GenButton, Spinner } from "components";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,12 +10,12 @@ import { useMutation } from "@apollo/client";
 import { LoginDocument, MutationLoginArgs } from "src/graphql/generated";
 import { useActions } from "./actions";
 
-interface paramType extends MutationLoginArgs {
-	remember: boolean;
-}
 interface props {
 	setError: (err: string) => void;
 }
+
+//TODO: Add a toast to mark completion
+//TODO: create the refresh and revoke token function
 
 export const LoginForm: FC<props> = ({ setError }) => {
 	const { removeForm, checkIsEmail } = useActions({});
@@ -59,25 +59,18 @@ export const LoginForm: FC<props> = ({ setError }) => {
 		const id: string = data.id;
 		const isEmail = checkIsEmail(id);
 
-		let param: paramType;
+		let param: MutationLoginArgs;
 
 		if (isEmail) {
 			param = {
 				email: id,
 				password: data.password,
-				remember: data.remember,
 			};
 		} else {
 			param = {
 				username: id,
 				password: data.password,
-				remember: data.remember,
 			};
-		}
-
-		// set remember to localStorage
-		if (data.remember) {
-			localStorage.setItem("remember", "true");
 		}
 
 		Login({
@@ -97,17 +90,6 @@ export const LoginForm: FC<props> = ({ setError }) => {
 			))}
 
 			<Bottom>
-				<CheckboxWrapper>
-					<input
-						type="checkbox"
-						id="remember"
-						{...register("remember")}
-					/>
-					<label htmlFor="remember">
-						<p>Remember me</p>
-					</label>
-				</CheckboxWrapper>
-
 				<Link href={"/forget-password"}>
 					<a>
 						<ForgetText>Forgot password?</ForgetText>
@@ -115,7 +97,9 @@ export const LoginForm: FC<props> = ({ setError }) => {
 				</Link>
 			</Bottom>
 
-			<GenButton fullwidth>LOGIN {/*Loading here*/}</GenButton>
+			<GenButton fullwidth>
+				LOGIN {loading ? <Spinner /> : null}
+			</GenButton>
 		</Form>
 	);
 };

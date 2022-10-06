@@ -21,4 +21,9 @@ export const Container = styled.button<{ full?: boolean }>`
 	&:focus {
 		outline: none;
 	}
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
 `;

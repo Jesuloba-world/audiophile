@@ -74,6 +74,10 @@ export const CheckboxWrapper = styled.div`
 	p {
 		cursor: pointer;
 	}
+
+	p {
+		font-size: 14px;
+	}
 `;
 
 export const ForgetText = styled.p`

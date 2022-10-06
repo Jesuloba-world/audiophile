@@ -5,3 +5,4 @@ export * from "./Cards";
 export * from "./Buttons";
 export * from "./Modal";
 export * from "./Forms";
+export { Spinner } from "./Spinner";

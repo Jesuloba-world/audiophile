@@ -3,7 +3,6 @@ import * as yup from "yup";
 export const loginSchema = yup.object().shape({
 	id: yup.string().required("Enter a valid username or email address"),
 	password: yup.string().required(),
-	remember: yup.bool(),
 });
 
 export const signUpSchema = yup.object().shape({
