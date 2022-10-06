@@ -34,11 +34,7 @@ export const AuthForm: FC<props> = () => {
 			{isLogin ? <LoginForm /> : <RegisterForm />}
 
 			<SwitchButton onClick={switchlogin}>
-				<p>
-					{isLogin
-						? "create an account instead"
-						: "login to your account"}
-				</p>
+				<p>{isLogin ? "create an account instead" : "login instead"}</p>
 			</SwitchButton>
 		</Container>
 	);
