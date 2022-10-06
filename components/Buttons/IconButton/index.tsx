@@ -1,6 +1,6 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, createContext } from "react";
 import { Container, ModalContainer, OverLord } from "./button.style";
-import { useBackdrop, useLogin } from "hooks";
+import { useBackdrop } from "hooks";
 
 interface iconButtonProps {
 	name: string;
@@ -9,6 +9,10 @@ interface iconButtonProps {
 	whichIsActive: "cart" | "user" | undefined;
 	setActive: (name: "cart" | "user" | undefined) => void;
 }
+
+export const ModalContext = createContext<{ removeModal: () => void }>({
+	removeModal: () => {},
+});
 
 export const IconButton: FC<iconButtonProps> = ({
 	Icon,
@@ -19,7 +23,6 @@ export const IconButton: FC<iconButtonProps> = ({
 }) => {
 	const isActive = whichIsActive === name;
 	const { setBackdrop, showBackdrop } = useBackdrop();
-	const { showLogin } = useLogin();
 
 	useEffect(() => {
 		if (!showBackdrop) {
@@ -27,9 +30,9 @@ export const IconButton: FC<iconButtonProps> = ({
 		}
 	}, [showBackdrop, setActive]);
 
-	if (showLogin) {
+	const removeModal = () => {
 		setActive(undefined);
-	}
+	};
 
 	return (
 		<OverLord>
@@ -43,9 +46,11 @@ export const IconButton: FC<iconButtonProps> = ({
 			</Container>
 			{/* TODO: could use some animation */}
 			{isActive ? (
-				<ModalContainer>
-					<Modal />
-				</ModalContainer>
+				<ModalContext.Provider value={{ removeModal }}>
+					<ModalContainer>
+						<Modal />
+					</ModalContainer>
+				</ModalContext.Provider>
 			) : null}
 		</OverLord>
 	);
