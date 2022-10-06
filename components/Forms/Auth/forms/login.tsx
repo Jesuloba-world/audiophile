@@ -21,11 +21,11 @@ export const LoginForm: FC<props> = ({ setError }) => {
 	const { removeForm, checkIsEmail } = useActions({});
 
 	const [Login, { loading }] = useMutation(LoginDocument, {
-		errorPolicy: "none",
 		onCompleted(data) {
 			if (data.login?.errors) {
 				// handle escaped errors
 				const errors = data.login?.errors;
+				console.log(errors);
 				setError(errors[Object.keys(errors)[0]][0].message);
 				return;
 			}

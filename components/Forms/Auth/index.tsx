@@ -3,6 +3,7 @@ import { Container, Heading, SwitchButton, SvgContainer } from "./styles";
 import Close from "assets/shared/ios-close.svg";
 import { useLogin, useBackdrop } from "hooks";
 import { LoginForm, RegisterForm } from "./forms";
+import { ErrorBox } from "components";
 
 interface props {}
 
@@ -34,7 +35,7 @@ export const AuthForm: FC<props> = () => {
 			<Heading>
 				{isLogin ? "Login to your account" : "Create your account"}
 			</Heading>
-			{/* {errorMessage && <ErrorBox error={errorMessage} />} */}
+			{errorMessage && <ErrorBox error={errorMessage} />}
 
 			{isLogin ? (
 				<LoginForm setError={setError} />

@@ -17,7 +17,6 @@ export const RegisterForm: FC<props> = ({ setError }) => {
 	const { removeForm } = useActions({});
 
 	const [Register, { loading }] = useMutation(RegisterDocument, {
-		errorPolicy: "none",
 		onCompleted(data) {
 			if (data.register?.errors) {
 				// handle escaped errors
