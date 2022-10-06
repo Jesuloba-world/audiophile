@@ -8,9 +8,14 @@ interface props {}
 
 export const AuthForm: FC<props> = () => {
 	const [isLogin, setIsLogin] = useState(true);
+	const [errorMessage, setErrorMessage] = useState("");
 
 	const switchlogin = () => {
 		setIsLogin((prev) => !prev);
+	};
+
+	const setError = (err: string) => {
+		setErrorMessage(err);
 	};
 
 	const { setLogin } = useLogin();
@@ -31,7 +36,11 @@ export const AuthForm: FC<props> = () => {
 			</Heading>
 			{/* {errorMessage && <ErrorBox error={errorMessage} />} */}
 
-			{isLogin ? <LoginForm /> : <RegisterForm />}
+			{isLogin ? (
+				<LoginForm setError={setError} />
+			) : (
+				<RegisterForm setError={setError} />
+			)}
 
 			<SwitchButton onClick={switchlogin}>
 				<p>{isLogin ? "create an account instead" : "login instead"}</p>

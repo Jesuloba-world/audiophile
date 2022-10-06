@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Form, Bottom, CheckboxWrapper, ForgetText } from "../styles";
 import { loginFormElements } from "../constant";
 import { AuthInput, GenButton } from "components";
@@ -5,8 +6,44 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../schema";
+import { useMutation } from "@apollo/client";
+import { LoginDocument, MutationLoginArgs } from "src/graphql/generated";
+import { useActions } from "./actions";
 
-export const LoginForm = () => {
+interface paramType extends MutationLoginArgs {
+	remember: boolean;
+}
+interface props {
+	setError: (err: string) => void;
+}
+
+export const LoginForm: FC<props> = ({ setError }) => {
+	const { removeForm, checkIsEmail } = useActions({});
+
+	const [Login, { loading }] = useMutation(LoginDocument, {
+		errorPolicy: "none",
+		onCompleted(data) {
+			if (data.login?.errors) {
+				// handle escaped errors
+				const errors = data.login?.errors;
+				setError(errors[Object.keys(errors)[0]][0].message);
+				return;
+			}
+			setError("");
+			console.log(data);
+			reset();
+			// router.push("/overview");
+			removeForm();
+		},
+		onError(error) {
+			if (error.networkError) {
+				setError("Network Error!!");
+			}
+			console.log(error.message);
+			console.log(error.graphQLErrors);
+		},
+	});
+
 	const {
 		handleSubmit,
 		register,
@@ -18,6 +55,34 @@ export const LoginForm = () => {
 
 	const handleLogin = (data: any) => {
 		console.log(data);
+
+		const id: string = data.id;
+		const isEmail = checkIsEmail(id);
+
+		let param: paramType;
+
+		if (isEmail) {
+			param = {
+				email: id,
+				password: data.password,
+				remember: data.remember,
+			};
+		} else {
+			param = {
+				username: id,
+				password: data.password,
+				remember: data.remember,
+			};
+		}
+
+		// set remember to localStorage
+		if (data.remember) {
+			localStorage.setItem("remember", "true");
+		}
+
+		Login({
+			variables: param,
+		});
 	};
 
 	return (

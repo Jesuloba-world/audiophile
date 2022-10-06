@@ -43,7 +43,6 @@ export type CategoryType = {
   image?: Maybe<CategoryImageType>;
   /** Required and unique */
   name?: Maybe<Scalars['String']>;
-  orderNumber?: Maybe<Scalars['Int']>;
   products: Array<ProductType>;
   slug?: Maybe<Scalars['String']>;
 };
@@ -137,18 +136,6 @@ export type Mutation = {
    * Also, if user has not been verified yet, verify it.
    */
   passwordReset?: Maybe<PasswordReset>;
-  /**
-   * Set user password - for passwordless registration
-   *
-   * Receive the token that was sent by email.
-   *
-   * If token and new passwords are valid, set
-   * user password and in case of using refresh
-   * tokens, revoke all of them.
-   *
-   * Also, if user has not been verified yet, verify it.
-   */
-  passwordSet?: Maybe<PasswordSet>;
   /** Same as `grapgql_jwt` implementation, with standard output. */
   refreshToken?: Maybe<RefreshToken>;
   /**
@@ -172,12 +159,6 @@ export type Mutation = {
    * If allowed to not verified users login, return token.
    */
   register?: Maybe<Register>;
-  /**
-   * Remove user secondary email.
-   *
-   * Require password confirmation.
-   */
-  removeSecondaryEmail?: Maybe<RemoveSecondaryEmail>;
   /**
    * Sends activation email.
    *
@@ -204,18 +185,6 @@ export type Mutation = {
    */
   sendPasswordResetEmail?: Maybe<SendPasswordResetEmail>;
   /**
-   * Send activation to secondary email.
-   *
-   * User must be verified and confirm password.
-   */
-  sendSecondaryEmailActivation?: Maybe<SendSecondaryEmailActivation>;
-  /**
-   * Swap between primary and secondary emails.
-   *
-   * Require password confirmation.
-   */
-  swapEmails?: Maybe<SwapEmails>;
-  /**
    * Update user model fields, defined on settings.
    *
    * User must be verified.
@@ -229,21 +198,6 @@ export type Mutation = {
    * by making the `user.status.verified` field true.
    */
   verifyAccount?: Maybe<VerifyAccount>;
-  /**
-   * Verify user secondary email.
-   *
-   * Receive the token that was sent by email.
-   * User is already verified when using this mutation.
-   *
-   * If the token is valid, add the secondary email
-   * to `user.status.secondary_email` field.
-   *
-   * Note that until the secondary email is verified,
-   * it has not been saved anywhere beyond the token,
-   * so it can still be used to create a new account.
-   * After being verified, it will no longer be available.
-   */
-  verifySecondaryEmail?: Maybe<VerifySecondaryEmail>;
   /** Same as `grapgql_jwt` implementation, with standard output. */
   verifyToken?: Maybe<VerifyToken>;
 };
@@ -280,13 +234,6 @@ export type MutationPasswordResetArgs = {
 };
 
 
-export type MutationPasswordSetArgs = {
-  newPassword1: Scalars['String'];
-  newPassword2: Scalars['String'];
-  token: Scalars['String'];
-};
-
-
 export type MutationRefreshTokenArgs = {
   refreshToken: Scalars['String'];
 };
@@ -297,11 +244,6 @@ export type MutationRegisterArgs = {
   password1: Scalars['String'];
   password2: Scalars['String'];
   username: Scalars['String'];
-};
-
-
-export type MutationRemoveSecondaryEmailArgs = {
-  password: Scalars['String'];
 };
 
 
@@ -320,17 +262,6 @@ export type MutationSendPasswordResetEmailArgs = {
 };
 
 
-export type MutationSendSecondaryEmailActivationArgs = {
-  email: Scalars['String'];
-  password: Scalars['String'];
-};
-
-
-export type MutationSwapEmailsArgs = {
-  password: Scalars['String'];
-};
-
-
 export type MutationUpdateAccountArgs = {
   firstName?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
@@ -338,11 +269,6 @@ export type MutationUpdateAccountArgs = {
 
 
 export type MutationVerifyAccountArgs = {
-  token: Scalars['String'];
-};
-
-
-export type MutationVerifySecondaryEmailArgs = {
   token: Scalars['String'];
 };
 
@@ -406,23 +332,6 @@ export type PasswordChange = {
  */
 export type PasswordReset = {
   __typename?: 'PasswordReset';
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
-  success?: Maybe<Scalars['Boolean']>;
-};
-
-/**
- * Set user password - for passwordless registration
- *
- * Receive the token that was sent by email.
- *
- * If token and new passwords are valid, set
- * user password and in case of using refresh
- * tokens, revoke all of them.
- *
- * Also, if user has not been verified yet, verify it.
- */
-export type PasswordSet = {
-  __typename?: 'PasswordSet';
   errors?: Maybe<Scalars['ExpectedErrorType']>;
   success?: Maybe<Scalars['Boolean']>;
 };
@@ -521,17 +430,6 @@ export type Register = {
 };
 
 /**
- * Remove user secondary email.
- *
- * Require password confirmation.
- */
-export type RemoveSecondaryEmail = {
-  __typename?: 'RemoveSecondaryEmail';
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
-  success?: Maybe<Scalars['Boolean']>;
-};
-
-/**
  * Sends activation email.
  *
  * It is called resend because theoretically
@@ -568,28 +466,6 @@ export type RevokeToken = {
  */
 export type SendPasswordResetEmail = {
   __typename?: 'SendPasswordResetEmail';
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
-  success?: Maybe<Scalars['Boolean']>;
-};
-
-/**
- * Send activation to secondary email.
- *
- * User must be verified and confirm password.
- */
-export type SendSecondaryEmailActivation = {
-  __typename?: 'SendSecondaryEmailActivation';
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
-  success?: Maybe<Scalars['Boolean']>;
-};
-
-/**
- * Swap between primary and secondary emails.
- *
- * Require password confirmation.
- */
-export type SwapEmails = {
-  __typename?: 'SwapEmails';
   errors?: Maybe<Scalars['ExpectedErrorType']>;
   success?: Maybe<Scalars['Boolean']>;
 };
@@ -639,26 +515,6 @@ export type VerifyAccount = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
-/**
- * Verify user secondary email.
- *
- * Receive the token that was sent by email.
- * User is already verified when using this mutation.
- *
- * If the token is valid, add the secondary email
- * to `user.status.secondary_email` field.
- *
- * Note that until the secondary email is verified,
- * it has not been saved anywhere beyond the token,
- * so it can still be used to create a new account.
- * After being verified, it will no longer be available.
- */
-export type VerifySecondaryEmail = {
-  __typename?: 'VerifySecondaryEmail';
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
-  success?: Maybe<Scalars['Boolean']>;
-};
-
 /** Same as `grapgql_jwt` implementation, with standard output. */
 export type VerifyToken = {
   __typename?: 'VerifyToken';
@@ -666,6 +522,25 @@ export type VerifyToken = {
   payload?: Maybe<Scalars['GenericScalar']>;
   success?: Maybe<Scalars['Boolean']>;
 };
+
+export type RegisterMutationVariables = Exact<{
+  email: Scalars['String'];
+  username: Scalars['String'];
+  password1: Scalars['String'];
+  password2: Scalars['String'];
+}>;
+
+
+export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'Register', success?: boolean | null, refreshToken?: string | null, errors?: any | null } | null };
+
+export type LoginMutationVariables = Exact<{
+  email?: InputMaybe<Scalars['String']>;
+  username?: InputMaybe<Scalars['String']>;
+  password: Scalars['String'];
+}>;
+
+
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'ObtainJSONWebToken', success?: boolean | null, errors?: any | null, refreshToken?: string | null } | null };
 
 export type GetAllCategorySlugsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -697,6 +572,8 @@ export type GetSpecificProductQueryVariables = Exact<{
 export type GetSpecificProductQuery = { __typename?: 'Query', productBySlug?: { __typename?: 'ProductType', id: any, name?: string | null, slug?: string | null, new: boolean, price?: any | null, description?: string | null, features?: string | null, includes: Array<{ __typename?: 'IncludedType', id: any, item?: string | null, quantity: number }>, image?: { __typename?: 'ProductImageType', desktop: string, altText?: string | null, tablet: string, mobile: string } | null, gallery?: { __typename?: 'GalleryType', first?: { __typename?: 'ProductImageType', desktop: string, tablet: string, mobile: string, altText?: string | null } | null, second?: { __typename?: 'ProductImageType', desktop: string, tablet: string, mobile: string, altText?: string | null } | null, third?: { __typename?: 'ProductImageType', desktop: string, tablet: string, mobile: string, altText?: string | null } | null } | null, others: Array<{ __typename?: 'MiniProductType', id: any, name?: string | null, slug?: string | null, image?: { __typename?: 'ProductImageType', desktop: string, tablet: string, mobile: string, altText?: string | null } | null }> } | null };
 
 
+export const RegisterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Register"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password1"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"register"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"username"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}},{"kind":"Argument","name":{"kind":"Name","value":"password1"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password1"}}},{"kind":"Argument","name":{"kind":"Name","value":"password2"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password2"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"refreshToken"}},{"kind":"Field","name":{"kind":"Name","value":"errors"}}]}}]}}]} as unknown as DocumentNode<RegisterMutation, RegisterMutationVariables>;
+export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"username"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"errors"}},{"kind":"Field","name":{"kind":"Name","value":"refreshToken"}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
 export const GetAllCategorySlugsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllCategorySlugs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<GetAllCategorySlugsQuery, GetAllCategorySlugsQueryVariables>;
 export const GetCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"altText"}},{"kind":"Field","name":{"kind":"Name","value":"image"}}]}}]}}]}}]} as unknown as DocumentNode<GetCategoriesQuery, GetCategoriesQueryVariables>;
 export const GetSpecificCategoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSpecificCategory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categoryBySlug"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"products"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"new"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"desktop"}},{"kind":"Field","name":{"kind":"Name","value":"mobile"}},{"kind":"Field","name":{"kind":"Name","value":"tablet"}},{"kind":"Field","name":{"kind":"Name","value":"altText"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<GetSpecificCategoryQuery, GetSpecificCategoryQueryVariables>;
