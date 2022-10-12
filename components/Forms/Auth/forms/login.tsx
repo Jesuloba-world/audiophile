@@ -7,18 +7,23 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../schema";
 import { useMutation } from "@apollo/client";
-import { LoginDocument, MutationLoginArgs } from "src/graphql/generated";
+import {
+	LoginDocument,
+	MutationLoginArgs,
+	RefreshAndRevokeTokenDocument,
+} from "src/graphql/generated";
 import { useActions } from "./actions";
+import { useTheme } from "styled-components";
+import { Puff } from "react-loading-icons";
+import toast from "react-hot-toast";
 
 interface props {
 	setError: (err: string) => void;
 }
 
-//TODO: Add a toast to mark completion
-//TODO: create the refresh and revoke token function
-
 export const LoginForm: FC<props> = ({ setError }) => {
 	const { removeForm, checkIsEmail } = useActions({});
+	const theme: any = useTheme();
 
 	const [Login, { loading }] = useMutation(LoginDocument, {
 		onCompleted(data) {
@@ -31,9 +36,9 @@ export const LoginForm: FC<props> = ({ setError }) => {
 			}
 			setError("");
 			console.log(data);
-			reset();
-			// router.push("/overview");
-			removeForm();
+			RefreshAndRevoke({
+				variables: { refreshToken: data.login?.refreshToken as string },
+			});
 		},
 		onError(error) {
 			if (error.networkError) {
@@ -43,6 +48,24 @@ export const LoginForm: FC<props> = ({ setError }) => {
 			console.log(error.graphQLErrors);
 		},
 	});
+
+	const [RefreshAndRevoke, refreshState] = useMutation(
+		RefreshAndRevokeTokenDocument,
+		{
+			onCompleted(data) {
+				reset();
+				removeForm();
+				toast.success("Login successful");
+			},
+			onError(error) {
+				if (error.networkError) {
+					setError("Network Error!!");
+				}
+				console.log(error.message);
+				console.log(error.graphQLErrors);
+			},
+		}
+	);
 
 	const {
 		handleSubmit,
@@ -97,8 +120,12 @@ export const LoginForm: FC<props> = ({ setError }) => {
 				</Link>
 			</Bottom>
 
-			<GenButton fullwidth>
-				LOGIN {loading ? <Spinner /> : null}
+			<GenButton fullwidth disabled={loading || refreshState.loading}>
+				{loading || refreshState.loading ? (
+					<Puff stroke={theme.white} />
+				) : (
+					"LOGIN"
+				)}
 			</GenButton>
 		</Form>
 	);

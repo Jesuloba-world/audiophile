@@ -23,3 +23,14 @@ mutation Login($email: String, $username: String, $password: String!) {
 		refreshToken
 	}
 }
+
+mutation RefreshAndRevokeToken($refreshToken: String!) {
+	refreshToken(refreshToken: $refreshToken) {
+		success
+		errors
+	}
+	revokeToken(refreshToken: $refreshToken) {
+		success
+		errors
+	}
+}

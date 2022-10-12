@@ -6,6 +6,7 @@ import { Client } from "src/apollo";
 import { theme } from "../styled.config";
 import { Provider } from "react-redux";
 import { store } from "store";
+import { Toaster } from "react-hot-toast";
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 	// Use the layout defined at the page level, if available
@@ -15,6 +16,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 		<Provider store={store}>
 			<ApolloProvider client={Client}>
 				<ThemeProvider theme={theme}>
+					<Toaster />
 					{getLayout(<Component {...pageProps} />, pageProps)}
 				</ThemeProvider>
 			</ApolloProvider>

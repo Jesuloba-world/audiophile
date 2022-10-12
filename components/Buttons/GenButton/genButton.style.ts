@@ -22,6 +22,10 @@ export const Container = styled.button<{ full?: boolean }>`
 		outline: none;
 	}
 
+	&:disabled {
+		background: ${({ theme }) => theme.light_salmon};
+	}
+
 	display: flex;
 	align-items: center;
 	justify-content: center;

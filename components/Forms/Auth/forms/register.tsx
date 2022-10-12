@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useTheme } from "styled-components";
 import { Form, Bottom, ErrorText, CheckboxWrapper } from "../styles";
 import { signupFormElements } from "../constant";
 import { AuthInput, GenButton, Spinner } from "components";
@@ -6,8 +7,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../schema";
 import { useMutation } from "@apollo/client";
-import { RegisterDocument, MutationRegisterArgs } from "src/graphql/generated";
+import {
+	RegisterDocument,
+	MutationRegisterArgs,
+	RefreshAndRevokeTokenDocument,
+} from "src/graphql/generated";
 import { useActions } from "./actions";
+import { Puff } from "react-loading-icons";
+import toast from "react-hot-toast";
 
 interface props {
 	setError: (err: string) => void;
@@ -15,6 +22,7 @@ interface props {
 
 export const RegisterForm: FC<props> = ({ setError }) => {
 	const { removeForm } = useActions({});
+	const theme: any = useTheme();
 
 	const [Register, { loading }] = useMutation(RegisterDocument, {
 		onCompleted(data) {
@@ -25,9 +33,12 @@ export const RegisterForm: FC<props> = ({ setError }) => {
 				return;
 			}
 			setError("");
-			reset();
 			console.log(data);
-			removeForm();
+			RefreshAndRevoke({
+				variables: {
+					refreshToken: data.register?.refreshToken as string,
+				},
+			});
 		},
 		onError(error) {
 			if (error.networkError) {
@@ -37,6 +48,24 @@ export const RegisterForm: FC<props> = ({ setError }) => {
 			console.log(error.graphQLErrors);
 		},
 	});
+
+	const [RefreshAndRevoke, refreshState] = useMutation(
+		RefreshAndRevokeTokenDocument,
+		{
+			onCompleted(data) {
+				reset();
+				removeForm();
+				toast.success("Account created Successfully");
+			},
+			onError(error) {
+				if (error.networkError) {
+					setError("Network Error!!");
+				}
+				console.log(error.message);
+				console.log(error.graphQLErrors);
+			},
+		}
+	);
 
 	const {
 		handleSubmit,
@@ -83,8 +112,12 @@ export const RegisterForm: FC<props> = ({ setError }) => {
 				)}
 			</Bottom>
 
-			<GenButton fullwidth>
-				Create account {loading ? <Spinner /> : null}
+			<GenButton fullwidth disabled={loading || refreshState.loading}>
+				{loading || refreshState.loading ? (
+					<Puff stroke={theme.white} />
+				) : (
+					"Create account"
+				)}
 			</GenButton>
 		</Form>
 	);

@@ -16,7 +16,11 @@ export const FormInput = styled.input`
 	line-height: 19px;
 	letter-spacing: -0.25px;
 
-	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+	/* box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); */
+
+	&:focus-visible {
+		outline: 1px solid ${({ theme }) => theme.sienna};
+	}
 `;
 
 export const ErrorText = styled.p`
