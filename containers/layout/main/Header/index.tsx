@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import { FC, useState } from "react";
 import { Container, Inner, IconLinks } from "./header.style";
 import { Logo, IconButton } from "components";
 import { iconButtons } from "./data";

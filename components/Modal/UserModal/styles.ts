@@ -9,3 +9,8 @@ export const Container = styled.div`
 export const Text = styled.p`
 	font-style: italic;
 `;
+
+export const LoaderContainer = styled.div`
+	display: flex;
+	align-items: center;
+`;

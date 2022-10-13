@@ -3,9 +3,12 @@ import { ReactElement } from "react";
 import { MainLayout, Hero, CategoryPick, Featured } from "containers";
 import { GetCategoriesDocument, CategoryType } from "src/graphql/generated";
 import { Client } from "src/apollo";
+import { useMe } from "hooks";
+import { GetServerSidePropsContext } from "next";
 
 interface homeProps {
 	categories: CategoryType[];
+	refresh: string;
 }
 
 const Home: NextPageWithLayout<homeProps> = ({ categories }) => {
