@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Container, Text, LoaderContainer } from "./styles";
+import { Container, Text, LoaderContainer, Name } from "./styles";
 import { GenButton } from "components";
 import { useLogin } from "hooks";
 import { ModalContext } from "../../Buttons/IconButton";
@@ -20,7 +20,9 @@ export const UserModal = () => {
 					<Puff stroke={theme.sienna} />
 				</LoaderContainer>
 			) : loggedIn ? (
-				<Text>Hello, {me?.username}</Text>
+				<Text>
+					Hello, <Name>{me?.username}</Name>
+				</Text>
 			) : (
 				<Text>You&apos;re not logged in yet</Text>
 			)}

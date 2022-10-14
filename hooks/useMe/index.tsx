@@ -16,7 +16,7 @@ type useMeType = () => {
 };
 
 export const useMe: useMeType = () => {
-	const { data, loading } = useQuery(MeQueryDocument);
+	const { data, loading, refetch } = useQuery(MeQueryDocument);
 	const [refreshAndRevoke] = useMutation(RefreshAndRevokeTokenDocument);
 	const [gettingRefresh, setGettingRefresh] = useState(false);
 	const [error, setError] = useState("");
@@ -34,12 +34,13 @@ export const useMe: useMeType = () => {
 						refreshToken: refresh,
 					},
 				});
+				refetch();
 			})
 			.catch((err) => {
 				setError(err.message);
 				setLoggedIn(false);
 			});
-	}, [refreshAndRevoke]);
+	}, [refreshAndRevoke, refetch]);
 
 	useEffect(() => {
 		if (!data?.me) {

@@ -13,4 +13,12 @@ export const Text = styled.p`
 export const LoaderContainer = styled.div`
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding-block: 16px;
+`;
+
+export const Name = styled.span`
+	font-weight: 700;
+	font-style: normal;
 `;
