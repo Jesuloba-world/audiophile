@@ -13,10 +13,13 @@ type useMeType = () => {
 	loading: boolean;
 	error: string;
 	loggedIn: boolean;
+	logout: () => void;
 };
 
 export const useMe: useMeType = () => {
-	const { data, loading, refetch } = useQuery(MeQueryDocument);
+	const { data, loading, refetch, called } = useQuery(MeQueryDocument, {
+		fetchPolicy: "network-only",
+	});
 	const [refreshAndRevoke] = useMutation(RefreshAndRevokeTokenDocument);
 	const [gettingRefresh, setGettingRefresh] = useState(false);
 	const [error, setError] = useState("");
@@ -24,23 +27,36 @@ export const useMe: useMeType = () => {
 
 	const getRefresh = useCallback(async () => {
 		setGettingRefresh(true);
-		axios
-			.get("/getRefresh")
-			.then((data: any) => {
+		try {
+			const response = await axios.get("/getRefresh");
+			const refresh = response.data.refresh;
+			await refreshAndRevoke({
+				variables: {
+					refreshToken: refresh,
+				},
+			});
+			await refetch();
+
+			setGettingRefresh(false);
+		} catch {
+			(err: any) => {
+				setError(err.message);
+				setLoggedIn(false);
 				setGettingRefresh(false);
-				const refresh = data.data.refresh;
-				refreshAndRevoke({
-					variables: {
-						refreshToken: refresh,
-					},
-				});
-				refetch();
+			};
+		}
+	}, [refreshAndRevoke, refetch]);
+
+	const logout = async () => {
+		axios
+			.post("/logout")
+			.then((data: any) => {
+				console.log("Logged out");
 			})
 			.catch((err) => {
 				setError(err.message);
-				setLoggedIn(false);
 			});
-	}, [refreshAndRevoke, refetch]);
+	};
 
 	useEffect(() => {
 		if (!data?.me) {
@@ -55,5 +71,6 @@ export const useMe: useMeType = () => {
 		loading: loading || gettingRefresh,
 		error,
 		loggedIn,
+		logout,
 	};
 };

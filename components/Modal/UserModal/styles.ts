@@ -15,7 +15,6 @@ export const LoaderContainer = styled.div`
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	padding-block: 16px;
 `;
 
 export const Name = styled.span`
