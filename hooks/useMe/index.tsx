@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import {
 	MeQueryDocument,
-	MeQueryQuery,
 	RefreshAndRevokeTokenDocument,
 	UserNode,
 } from "src/graphql/generated";
@@ -17,7 +16,7 @@ type useMeType = () => {
 };
 
 export const useMe: useMeType = () => {
-	const { data, loading, refetch, called } = useQuery(MeQueryDocument, {
+	const { data, loading, refetch } = useQuery(MeQueryDocument, {
 		fetchPolicy: "network-only",
 	});
 	const [refreshAndRevoke] = useMutation(RefreshAndRevokeTokenDocument);
@@ -48,23 +47,25 @@ export const useMe: useMeType = () => {
 	}, [refreshAndRevoke, refetch]);
 
 	const logout = async () => {
-		axios
-			.post("/logout")
-			.then((data: any) => {
-				console.log("Logged out");
-			})
-			.catch((err) => {
+		try {
+			const response = await axios.post("/logout");
+			console.log("Logged out");
+		} catch {
+			(err: any) => {
 				setError(err.message);
-			});
+			};
+		}
 	};
 
 	useEffect(() => {
-		if (!data?.me) {
-			getRefresh();
-		} else {
-			setLoggedIn(true);
+		if (!loading) {
+			if (!data?.me) {
+				getRefresh();
+			} else {
+				setLoggedIn(true);
+			}
 		}
-	}, [data?.me, getRefresh]);
+	}, [data?.me, getRefresh, loading]);
 
 	return {
 		me: data?.me as UserNode,
