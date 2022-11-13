@@ -9,11 +9,19 @@ import {
 	ButtonContainer,
 } from "./hero.style";
 import Image from "next/image";
-import { Maybe, ProductImageType } from "src/graphql/generated";
+import {
+	Maybe,
+	ProductImageType,
+	AddToCartDocument,
+} from "src/graphql/generated";
 import numeral from "numeral";
 import { GenButton, NumberController } from "components";
+import { useMutation } from "@apollo/client";
+import { Puff } from "react-loading-icons";
+import { useTheme } from "styled-components";
 
 interface props {
+	productId: string;
 	image?: Maybe<ProductImageType>;
 	name?: Maybe<string>;
 	description?: Maybe<string>;
@@ -27,12 +35,19 @@ export const ProductHero: FC<props> = ({
 	price,
 	description,
 	name,
+	productId,
 }) => {
 	const [numForCart, setNumForCart] = useState(1);
+	const [AddToCart, { loading }] = useMutation(AddToCartDocument, {});
+	const theme: any = useTheme();
 
-	// TODO: complete the add to cart function
 	const addToCart = () => {
-		console.log(`add ${name} to cart`);
+		AddToCart({
+			variables: {
+				productId: productId,
+				quantity: numForCart,
+			},
+		});
 	};
 
 	const increment = () => {
@@ -62,7 +77,13 @@ export const ProductHero: FC<props> = ({
 						increment={increment}
 						decrement={decrement}
 					/>
-					<GenButton action={addToCart}>Add to cart</GenButton>
+					<GenButton disabled={loading} action={addToCart}>
+						{loading ? (
+							<Puff stroke={theme.white} />
+						) : (
+							"Add to cart"
+						)}
+					</GenButton>
 				</ButtonContainer>
 			</TextContainer>
 		</Container>

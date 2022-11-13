@@ -1,0 +1,9 @@
+query MyCart {
+	userCart {
+		id
+		product {
+			name
+		}
+		quantity
+	}
+}

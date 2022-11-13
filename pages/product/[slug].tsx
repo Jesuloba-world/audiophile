@@ -27,6 +27,7 @@ const Product: NextPageWithLayout<categoryProps> = ({ detail }) => {
 	return (
 		<ProductPageWrapper>
 			<ProductHero
+				productId={detail.id}
 				name={detail.name}
 				image={detail.image}
 				description={detail.description}
