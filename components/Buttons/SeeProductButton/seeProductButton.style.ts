@@ -38,7 +38,7 @@ const interpretColor = (color: colorType, theme: any) => {
 	}
 };
 
-export const Container = styled.a<{ color: colorType }>`
+export const Container = styled.div<{ color: colorType }>`
 	button {
 		width: 160px;
 		height: 48px;

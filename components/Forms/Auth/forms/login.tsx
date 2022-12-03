@@ -114,9 +114,7 @@ export const LoginForm: FC<props> = ({ setError }) => {
 
 			<Bottom>
 				<Link href={"/forget-password"}>
-					<a>
-						<ForgetText>Forgot password?</ForgetText>
-					</a>
+					<ForgetText>Forgot password?</ForgetText>
 				</Link>
 			</Bottom>
 

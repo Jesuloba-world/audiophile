@@ -3,6 +3,8 @@ import { ReactElement } from "react";
 import { MainLayout, Hero, CategoryPick, Featured } from "containers";
 import { GetCategoriesDocument, CategoryType } from "src/graphql/generated";
 import { Client } from "src/apollo";
+import urqlClient from "src/urql";
+import { getCategories } from "src/urql/queries/categories";
 import { useMe } from "hooks";
 import { GetServerSidePropsContext } from "next";
 
@@ -32,9 +34,7 @@ Home.getLayout = (page: ReactElement, { categories }) => {
 export default Home;
 
 export async function getStaticProps() {
-	const { data } = await Client.query({
-		query: GetCategoriesDocument,
-	});
+	const { data } = await urqlClient.query(getCategories, {}).toPromise();
 
 	return {
 		props: {

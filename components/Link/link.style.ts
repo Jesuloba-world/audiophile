@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.a`
+export const Container = styled.p`
 	color: ${({ theme }) => theme.white};
 	text-transform: uppercase;
 	font-weight: 700;

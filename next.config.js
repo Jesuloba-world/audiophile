@@ -13,7 +13,7 @@ const nextConfig = {
 		styledComponents: true,
 	},
 	images: {
-		domains: ["localhost"],
+		domains: ["localhost", "res.cloudinary.com"],
 	},
 };
 
