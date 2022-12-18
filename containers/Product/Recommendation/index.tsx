@@ -27,8 +27,7 @@ export const ProductRecommendation: FC<props> = ({ others }) => {
 							<Image
 								src={el.image?.desktop as string}
 								alt={el.image?.altText as string}
-								layout="fill"
-								objectFit="cover"
+								fill
 							/>
 						</ImageContainer>
 						<TextAndButton>

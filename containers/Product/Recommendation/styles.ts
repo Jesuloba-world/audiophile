@@ -27,6 +27,12 @@ export const ImageContainer = styled.div`
 	position: relative;
 	height: 318px;
 	width: 100%;
+
+	img {
+		object-fit: cover;
+		height: 100%;
+		width: 100%;
+	}
 `;
 
 export const TextAndButton = styled.div`

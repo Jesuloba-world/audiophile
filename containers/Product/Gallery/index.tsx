@@ -16,24 +16,21 @@ export const ProductGallery: FC<props> = ({ first, second, third }) => {
 				<Image
 					src={first?.desktop as string}
 					alt={first?.altText as string}
-					layout="fill"
-					objectFit="contain"
+					fill
 				/>
 			</First>
 			<Second>
 				<Image
 					src={second?.desktop as string}
 					alt={second?.altText as string}
-					layout="fill"
-					objectFit="contain"
+					fill
 				/>
 			</Second>
 			<Third>
 				<Image
 					src={third?.desktop as string}
 					alt={third?.altText as string}
-					layout="fill"
-					objectFit="contain"
+					fill
 				/>
 			</Third>
 		</Container>

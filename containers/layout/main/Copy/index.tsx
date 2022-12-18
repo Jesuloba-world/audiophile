@@ -31,7 +31,7 @@ export const Copy: FC<copyProps> = ({ home }) => {
 				</SubTitle>
 			</TextContainer>
 			<ImageContainer>
-				<Image src={BestGear} alt={"We have the Best Gear"} />
+				<Image src={BestGear} alt={"We have the Best Gear"} priority />
 			</ImageContainer>
 		</Container>
 	);

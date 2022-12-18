@@ -5,6 +5,11 @@ export const Container = styled.section`
 	gap: 30px;
 	justify-content: space-between;
 	align-items: center;
+
+	img {
+		width: 540px;
+		height: 560px;
+	}
 `;
 
 export const TextContainer = styled.div`
