@@ -8,7 +8,7 @@ export const getAllCategorySlugs = gql`
 	}
 `;
 
-export const getCategories = `
+export const getCategories = gql`
 	query {
 		allCategories {
 			id

@@ -1,7 +1,7 @@
 import { createClient } from "@urql/core";
 
 const urqlClient = createClient({
-	url: "http://127.0.0.1:8000/graphql/",
+	url: "https://audiophile-server-development.up.railway.app/graphql/",
 });
 
 export default urqlClient;
