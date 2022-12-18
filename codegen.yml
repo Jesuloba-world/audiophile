@@ -1,4 +1,4 @@
-schema: http://localhost:8000/graphql/
+schema: https://audiophile-server-development.up.railway.app/graphql/
 documents: "./src/**/*.graphql"
 generates:
     ./src/graphql/generated.ts:

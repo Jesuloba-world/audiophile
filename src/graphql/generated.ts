@@ -15,7 +15,6 @@ export type Scalars = {
   Decimal: any;
   ExpectedErrorType: any;
   GenericScalar: any;
-  UUID: any;
 };
 
 export type AddCartMutation = {
@@ -37,7 +36,7 @@ export type ArchiveAccount = {
 export type CartItemType = {
   __typename?: 'CartItemType';
   createdAt: Scalars['DateTime'];
-  id: Scalars['UUID'];
+  id: Scalars['ID'];
   product: ProductType;
   quantity: Scalars['Int'];
   updatedAt: Scalars['DateTime'];
@@ -47,18 +46,18 @@ export type CategoryImageType = {
   __typename?: 'CategoryImageType';
   altText?: Maybe<Scalars['String']>;
   categoryImage?: Maybe<CategoryType>;
-  id: Scalars['UUID'];
+  id: Scalars['ID'];
   image: Scalars['String'];
 };
 
 export type CategoryType = {
   __typename?: 'CategoryType';
-  id: Scalars['UUID'];
+  id: Scalars['ID'];
   image?: Maybe<CategoryImageType>;
   /** Required and unique */
   name?: Maybe<Scalars['String']>;
   products: Array<ProductType>;
-  slug?: Maybe<Scalars['String']>;
+  slug: Scalars['String'];
 };
 
 /**
@@ -78,7 +77,7 @@ export type DeleteAccount = {
 export type GalleryType = {
   __typename?: 'GalleryType';
   first?: Maybe<ProductImageType>;
-  id: Scalars['UUID'];
+  id: Scalars['ID'];
   product: ProductType;
   second?: Maybe<ProductImageType>;
   third?: Maybe<ProductImageType>;
@@ -86,7 +85,7 @@ export type GalleryType = {
 
 export type IncludedType = {
   __typename?: 'IncludedType';
-  id: Scalars['UUID'];
+  id: Scalars['ID'];
   item?: Maybe<Scalars['String']>;
   product?: Maybe<ProductType>;
   quantity: Scalars['Int'];
@@ -94,7 +93,7 @@ export type IncludedType = {
 
 export type MiniProductType = {
   __typename?: 'MiniProductType';
-  id: Scalars['UUID'];
+  id: Scalars['ID'];
   image?: Maybe<ProductImageType>;
   name?: Maybe<Scalars['String']>;
   others: Array<ProductType>;
@@ -362,7 +361,7 @@ export type ProductImageType = {
   altText?: Maybe<Scalars['String']>;
   desktop: Scalars['String'];
   first?: Maybe<GalleryType>;
-  id: Scalars['UUID'];
+  id: Scalars['ID'];
   images?: Maybe<ProductType>;
   miniImages?: Maybe<MiniProductType>;
   mobile: Scalars['String'];
@@ -378,7 +377,7 @@ export type ProductType = {
   description?: Maybe<Scalars['String']>;
   features?: Maybe<Scalars['String']>;
   gallery?: Maybe<GalleryType>;
-  id: Scalars['UUID'];
+  id: Scalars['ID'];
   image?: Maybe<ProductImageType>;
   includes: Array<IncludedType>;
   /** Required and unique */
@@ -585,24 +584,24 @@ export type AddToCartMutation = { __typename?: 'Mutation', addToCart?: { __typen
 export type MyCartQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MyCartQuery = { __typename?: 'Query', userCart?: Array<{ __typename?: 'CartItemType', id: any, quantity: number, product: { __typename?: 'ProductType', name?: string | null } } | null> | null };
+export type MyCartQuery = { __typename?: 'Query', userCart?: Array<{ __typename?: 'CartItemType', id: string, quantity: number, product: { __typename?: 'ProductType', name?: string | null } } | null> | null };
 
 export type GetAllCategorySlugsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllCategorySlugsQuery = { __typename?: 'Query', allCategories?: Array<{ __typename?: 'CategoryType', slug?: string | null } | null> | null };
+export type GetAllCategorySlugsQuery = { __typename?: 'Query', allCategories?: Array<{ __typename?: 'CategoryType', slug: string } | null> | null };
 
 export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCategoriesQuery = { __typename?: 'Query', allCategories?: Array<{ __typename?: 'CategoryType', id: any, name?: string | null, slug?: string | null, image?: { __typename?: 'CategoryImageType', altText?: string | null, image: string } | null } | null> | null };
+export type GetCategoriesQuery = { __typename?: 'Query', allCategories?: Array<{ __typename?: 'CategoryType', id: string, name?: string | null, slug: string, image?: { __typename?: 'CategoryImageType', altText?: string | null, image: string } | null } | null> | null };
 
 export type GetSpecificCategoryQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
 
-export type GetSpecificCategoryQuery = { __typename?: 'Query', categoryBySlug?: { __typename?: 'CategoryType', name?: string | null, slug?: string | null, products: Array<{ __typename?: 'ProductType', id: any, name?: string | null, slug?: string | null, new: boolean, description?: string | null, image?: { __typename?: 'ProductImageType', desktop: string, mobile: string, tablet: string, altText?: string | null } | null }> } | null };
+export type GetSpecificCategoryQuery = { __typename?: 'Query', categoryBySlug?: { __typename?: 'CategoryType', name?: string | null, slug: string, products: Array<{ __typename?: 'ProductType', id: string, name?: string | null, slug?: string | null, new: boolean, description?: string | null, image?: { __typename?: 'ProductImageType', desktop: string, mobile: string, tablet: string, altText?: string | null } | null }> } | null };
 
 export type MeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -619,7 +618,7 @@ export type GetSpecificProductQueryVariables = Exact<{
 }>;
 
 
-export type GetSpecificProductQuery = { __typename?: 'Query', productBySlug?: { __typename?: 'ProductType', id: any, name?: string | null, slug?: string | null, new: boolean, price?: any | null, description?: string | null, features?: string | null, includes: Array<{ __typename?: 'IncludedType', id: any, item?: string | null, quantity: number }>, image?: { __typename?: 'ProductImageType', desktop: string, altText?: string | null, tablet: string, mobile: string } | null, gallery?: { __typename?: 'GalleryType', first?: { __typename?: 'ProductImageType', desktop: string, tablet: string, mobile: string, altText?: string | null } | null, second?: { __typename?: 'ProductImageType', desktop: string, tablet: string, mobile: string, altText?: string | null } | null, third?: { __typename?: 'ProductImageType', desktop: string, tablet: string, mobile: string, altText?: string | null } | null } | null, others: Array<{ __typename?: 'MiniProductType', id: any, name?: string | null, slug?: string | null, image?: { __typename?: 'ProductImageType', desktop: string, tablet: string, mobile: string, altText?: string | null } | null }> } | null };
+export type GetSpecificProductQuery = { __typename?: 'Query', productBySlug?: { __typename?: 'ProductType', id: string, name?: string | null, slug?: string | null, new: boolean, price?: any | null, description?: string | null, features?: string | null, includes: Array<{ __typename?: 'IncludedType', id: string, item?: string | null, quantity: number }>, image?: { __typename?: 'ProductImageType', desktop: string, altText?: string | null, tablet: string, mobile: string } | null, gallery?: { __typename?: 'GalleryType', first?: { __typename?: 'ProductImageType', desktop: string, tablet: string, mobile: string, altText?: string | null } | null, second?: { __typename?: 'ProductImageType', desktop: string, tablet: string, mobile: string, altText?: string | null } | null, third?: { __typename?: 'ProductImageType', desktop: string, tablet: string, mobile: string, altText?: string | null } | null } | null, others: Array<{ __typename?: 'MiniProductType', id: string, name?: string | null, slug?: string | null, image?: { __typename?: 'ProductImageType', desktop: string, tablet: string, mobile: string, altText?: string | null } | null }> } | null };
 
 
 export const RegisterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Register"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password1"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"register"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"username"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}},{"kind":"Argument","name":{"kind":"Name","value":"password1"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password1"}}},{"kind":"Argument","name":{"kind":"Name","value":"password2"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password2"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"refreshToken"}},{"kind":"Field","name":{"kind":"Name","value":"errors"}}]}}]}}]} as unknown as DocumentNode<RegisterMutation, RegisterMutationVariables>;
