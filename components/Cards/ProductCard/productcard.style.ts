@@ -22,6 +22,11 @@ export const ImageContainer = styled.div<{ reverse: boolean }>`
 	display: flex;
 
 	${({ reverse }) => reverse && `justify-content: end`};
+
+	img {
+		height: auto;
+		width: auto;
+	}
 `;
 
 export const GridFrame = styled.div<{ reverse: boolean }>`

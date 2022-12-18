@@ -36,6 +36,11 @@ export const Imager = styled.div`
 	top: 0;
 	left: 50%;
 	transform: translate(-50%, -35%);
+
+	img {
+		width: auto;
+		height: auto;
+	}
 `;
 
 export const TextContainer = styled.div`

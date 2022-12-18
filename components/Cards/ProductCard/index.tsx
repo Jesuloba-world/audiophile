@@ -37,6 +37,7 @@ export const ProductCard: FC<props> = ({
 					alt={image?.altText as string}
 					height={560}
 					width={540}
+					priority
 				/>
 			</ImageContainer>
 			<GridFrame reverse={reverse}>

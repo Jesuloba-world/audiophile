@@ -29,7 +29,6 @@ export const CategoryPick: FC<categoryProps> = ({ home, categories }) => {
 									alt={el.image?.altText!}
 									height={150}
 									width={150}
-									objectFit="contain"
 								/>
 							</Imager>
 							<TextContainer>
