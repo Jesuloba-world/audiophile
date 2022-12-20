@@ -17,6 +17,9 @@ export const ProductGallery: FC<props> = ({ first, second, third }) => {
 					src={first?.desktop as string}
 					alt={first?.altText as string}
 					fill
+					sizes="(max-width: 768px) 100vw,
+								(max-width: 1200px) 50vw,
+								33vw"
 				/>
 			</First>
 			<Second>
@@ -24,6 +27,9 @@ export const ProductGallery: FC<props> = ({ first, second, third }) => {
 					src={second?.desktop as string}
 					alt={second?.altText as string}
 					fill
+					sizes="(max-width: 768px) 100vw,
+								(max-width: 1200px) 50vw,
+								33vw"
 				/>
 			</Second>
 			<Third>
@@ -31,6 +37,10 @@ export const ProductGallery: FC<props> = ({ first, second, third }) => {
 					src={third?.desktop as string}
 					alt={third?.altText as string}
 					fill
+					// priority={true}
+					sizes="(max-width: 768px) 100vw,
+								(max-width: 1200px) 50vw,
+								33vw"
 				/>
 			</Third>
 		</Container>
