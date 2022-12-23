@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-	height: 48px;
+export const Container = styled.div<{ small: boolean }>`
+	height: ${({ small }) => (small ? `32px` : `48px`)};
 	background: ${({ theme }) => theme.cultured};
 	display: flex;
 	align-items: center;
@@ -27,6 +27,7 @@ export const ControlButton = styled.button`
 
 	&:hover {
 		color: ${({ theme }) => theme.sienna};
+		opacity: 1;
 	}
 `;
 

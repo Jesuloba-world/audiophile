@@ -2,7 +2,12 @@ query MyCart {
 	userCart {
 		id
 		product {
-			name
+			shortName
+			image {
+				desktop
+				altText
+			}
+			price
 		}
 		quantity
 	}
