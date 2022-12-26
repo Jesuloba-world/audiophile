@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { useTheme } from "styled-components";
 import { CartItem } from "components/Cards";
 import numeral from "numeral";
+import { useSelector } from "react-redux";
 
 export const CartModal = () => {
 	const { loading, loggedIn } = useMe();
@@ -52,6 +53,14 @@ export const CartModal = () => {
 
 	const totalPrice = prices?.reduce((a, b) => a + b, 0);
 
+	const cartItemLoadingStates = useSelector(
+		(state: any) => state.cart.cartLoadingState
+	);
+
+	const cartUpdating = cartItemLoadingStates.some(
+		(item: any) => item.isLoading === true
+	);
+
 	return (
 		<Container>
 			<CartItemContainer>
@@ -83,7 +92,7 @@ export const CartModal = () => {
 				<Bottom>
 					<p>TOTAL</p>
 					<TotalPrice>
-						{cart.loading ? (
+						{cart.loading || cartUpdating ? (
 							<TailSpin stroke={theme.sienna} height={25} />
 						) : (
 							numeral(totalPrice).format("$0,0")
@@ -92,7 +101,7 @@ export const CartModal = () => {
 				</Bottom>
 			</CartItemContainer>
 			<GenButton
-				disabled={noItem}
+				disabled={noItem || cartUpdating}
 				fullwidth
 				action={() => console.log("This is the cart")}
 			>

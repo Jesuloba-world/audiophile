@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import {
 	Container,
 	TextAndImage,
@@ -13,6 +13,12 @@ import { NumberController } from "components";
 import { useMutation } from "@apollo/client";
 import { AddToCartDocument, MyCartDocument } from "src/graphql/generated";
 import { createTakeLatest } from "utils";
+import { useDispatch, useSelector } from "react-redux";
+import {
+	addCartItem,
+	removeCartItem,
+	setCartItem,
+} from "store/slice/cartSlice";
 
 interface cartItemsProps {
 	id?: string;
@@ -31,6 +37,8 @@ export const CartItem: FC<cartItemsProps> = ({
 	price,
 	quantity,
 }) => {
+	const dispatch = useDispatch();
+
 	const [modifyCart, { loading }] = useMutation(AddToCartDocument, {
 		onCompleted: (data) => {
 			setChangeNumber(0);
@@ -43,7 +51,17 @@ export const CartItem: FC<cartItemsProps> = ({
 	const takelatest = createTakeLatest();
 	const quan = quantity ? quantity : 0;
 
-	// console.log(changeNumber);
+	useEffect(() => {
+		dispatch(addCartItem(id as string));
+
+		return () => {
+			dispatch(removeCartItem(id as string));
+		};
+	}, [dispatch, id]);
+
+	useEffect(() => {
+		dispatch(setCartItem({ id: id as string, isLoading: loading }));
+	}, [dispatch, id, loading]);
 
 	const increment = () => {
 		setChangeNumber((prev) => {

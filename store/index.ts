@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import LayoutReducer from "./slice/layoutSlice";
+import cartReducer from "./slice/cartSlice";
 
 export const store = configureStore({
-	reducer: { layout: LayoutReducer },
+	reducer: { layout: LayoutReducer, cart: cartReducer },
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
