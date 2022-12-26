@@ -2,6 +2,7 @@ query MyCart {
 	userCart {
 		id
 		product {
+			id
 			shortName
 			image {
 				desktop
@@ -10,5 +11,6 @@ query MyCart {
 			price
 		}
 		quantity
+		createdAt
 	}
 }

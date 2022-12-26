@@ -22,15 +22,20 @@ export const CartModal = () => {
 	const { loading, loggedIn } = useMe();
 	const theme: any = useTheme();
 
-	const cart = useQuery(MyCartDocument, {
-		fetchPolicy: "network-only",
-	});
+	const cart = useQuery(MyCartDocument);
 
 	useEffect(() => {
 		!loading && loggedIn && cart.refetch();
 	}, [loading, loggedIn, cart]);
 
 	const usercart = cart.data?.userCart;
+
+	const sortedUserCart = usercart
+		?.slice()
+		.sort(
+			(A, B) =>
+				Number(new Date(A?.createdAt)) - Number(new Date(B?.createdAt))
+		);
 
 	const noItem = usercart?.length === 0;
 
@@ -62,9 +67,10 @@ export const CartModal = () => {
 					</LoaderContainer>
 				) : (
 					<UserCartContainer>
-						{usercart?.map((item) => (
+						{sortedUserCart?.map((item) => (
 							<CartItem
 								key={item?.id}
+								id={item?.product.id}
 								image={item?.product.image?.desktop}
 								altText={item?.product.image?.altText}
 								name={item?.product.shortName}

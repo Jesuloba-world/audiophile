@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import {
 	Container,
 	TextAndImage,
@@ -10,8 +10,12 @@ import {
 import Image from "next/image";
 import numeral from "numeral";
 import { NumberController } from "components";
+import { useMutation } from "@apollo/client";
+import { AddToCartDocument, MyCartDocument } from "src/graphql/generated";
+import { createTakeLatest } from "utils";
 
 interface cartItemsProps {
+	id?: string;
 	image?: string;
 	altText?: string | null;
 	name: string | null | undefined;
@@ -20,15 +24,62 @@ interface cartItemsProps {
 }
 
 export const CartItem: FC<cartItemsProps> = ({
+	id,
 	image,
 	altText,
 	name,
 	price,
 	quantity,
 }) => {
-	const increment = () => {};
+	const [modifyCart, { loading }] = useMutation(AddToCartDocument, {
+		onCompleted: (data) => {
+			setChangeNumber(0);
+		},
+		awaitRefetchQueries: true,
+		refetchQueries: [{ query: MyCartDocument }],
+	});
 
-	const decrement = () => {};
+	const [changeNumber, setChangeNumber] = useState(0);
+	const takelatest = createTakeLatest();
+	const quan = quantity ? quantity : 0;
+
+	// console.log(changeNumber);
+
+	const increment = () => {
+		setChangeNumber((prev) => {
+			const change = prev + 1;
+			const newNumber = quan + change;
+			takelatest(
+				modifyCart({
+					variables: {
+						productId: id as string,
+						quantity: newNumber,
+					},
+				})
+			);
+			return change;
+		});
+	};
+
+	const decrement = () => {
+		setChangeNumber((prev) => {
+			const change = prev - 1;
+			const newNumber = quan + change;
+			if (newNumber <= 0) {
+				return prev;
+			} else {
+				takelatest(
+					modifyCart({
+						variables: {
+							productId: id as string,
+							quantity: newNumber,
+						},
+					})
+				);
+				return change;
+			}
+		});
+	};
 
 	return (
 		<Container>
@@ -47,7 +98,7 @@ export const CartItem: FC<cartItemsProps> = ({
 			<ControllerContainer>
 				<NumberController
 					increment={increment}
-					number={quantity as number}
+					number={quan + changeNumber}
 					decrement={decrement}
 					small
 				/>
