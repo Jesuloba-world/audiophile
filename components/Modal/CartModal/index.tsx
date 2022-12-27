@@ -95,6 +95,7 @@ export const CartModal = () => {
 						{sortedUserCart?.map((item) => (
 							<CartItem
 								key={item?.id}
+								cartId={item?.id}
 								id={item?.product.id}
 								image={item?.product.image?.desktop}
 								altText={item?.product.image?.altText}

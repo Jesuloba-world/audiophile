@@ -11,7 +11,11 @@ import Image from "next/image";
 import numeral from "numeral";
 import { NumberController } from "components";
 import { useMutation } from "@apollo/client";
-import { AddToCartDocument, MyCartDocument } from "src/graphql/generated";
+import {
+	AddToCartDocument,
+	MyCartDocument,
+	DeleteFromCartDocument,
+} from "src/graphql/generated";
 import { createTakeLatest } from "utils";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -19,6 +23,7 @@ import {
 	removeCartItem,
 	setCartItem,
 } from "store/slice/cartSlice";
+import { Confirm } from "notiflix";
 
 interface cartItemsProps {
 	id?: string;
@@ -27,6 +32,7 @@ interface cartItemsProps {
 	name: string | null | undefined;
 	price: any;
 	quantity?: number;
+	cartId?: string;
 }
 
 export const CartItem: FC<cartItemsProps> = ({
@@ -36,6 +42,7 @@ export const CartItem: FC<cartItemsProps> = ({
 	name,
 	price,
 	quantity,
+	cartId,
 }) => {
 	const dispatch = useDispatch();
 
@@ -43,6 +50,11 @@ export const CartItem: FC<cartItemsProps> = ({
 		onCompleted: (data) => {
 			setChangeNumber(0);
 		},
+		awaitRefetchQueries: true,
+		refetchQueries: [{ query: MyCartDocument }],
+	});
+
+	const [deleteFromCart, deleteState] = useMutation(DeleteFromCartDocument, {
 		awaitRefetchQueries: true,
 		refetchQueries: [{ query: MyCartDocument }],
 	});
@@ -60,8 +72,13 @@ export const CartItem: FC<cartItemsProps> = ({
 	}, [dispatch, id]);
 
 	useEffect(() => {
-		dispatch(setCartItem({ id: id as string, isLoading: loading }));
-	}, [dispatch, id, loading]);
+		dispatch(
+			setCartItem({
+				id: id as string,
+				isLoading: loading || deleteState.loading,
+			})
+		);
+	}, [dispatch, id, loading, deleteState.loading]);
 
 	const increment = () => {
 		setChangeNumber((prev) => {
@@ -84,6 +101,20 @@ export const CartItem: FC<cartItemsProps> = ({
 			const change = prev - 1;
 			const newNumber = quan + change;
 			if (newNumber <= 0) {
+				Confirm.show(
+					"Delete Item",
+					"are you sure?",
+					"Proceed",
+					"Cancel",
+					() => {
+						deleteFromCart({
+							variables: {
+								id: cartId as string,
+							},
+						});
+					},
+					() => {}
+				);
 				return prev;
 			} else {
 				takelatest(

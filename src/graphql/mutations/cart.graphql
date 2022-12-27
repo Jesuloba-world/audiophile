@@ -11,3 +11,9 @@ mutation RemoveAllCart {
 		success
 	}
 }
+
+mutation DeleteFromCart($id: String!) {
+	deleteFromCart(id: $id) {
+		success
+	}
+}
