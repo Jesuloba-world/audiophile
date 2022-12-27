@@ -19,6 +19,7 @@ import { CartItem } from "components/Cards";
 import numeral from "numeral";
 import { useSelector } from "react-redux";
 import { ModalContext } from "../../Buttons/IconButton";
+import { Confirm } from "notiflix";
 
 export const CartModal = () => {
 	const { loading, loggedIn } = useMe();
@@ -29,7 +30,7 @@ export const CartModal = () => {
 		awaitRefetchQueries: true,
 		refetchQueries: [{ query: MyCartDocument }],
 	});
-	const { removeModal, setBackdrop } = useContext(ModalContext);
+	const { setBackdrop } = useContext(ModalContext);
 
 	useEffect(() => {
 		!loading && loggedIn && cart.refetch();
@@ -47,9 +48,16 @@ export const CartModal = () => {
 	const noItem = usercart?.length === 0;
 
 	const removeAllCartItems = async () => {
-		await removeAll();
-		removeModal();
-		setBackdrop(false);
+		Confirm.show(
+			"Remove all",
+			"are you sure?",
+			"Proceed",
+			"Cancel",
+			() => {
+				removeAll();
+			},
+			() => {}
+		);
 	};
 
 	const prices: number[] | undefined = usercart?.map((item) => {
