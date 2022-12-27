@@ -44,6 +44,7 @@ export const RemoveAll = styled.button`
 	color: ${({ theme }) => theme.black};
 	mix-blend-mode: normal;
 	opacity: 0.5;
+	cursor: pointer;
 `;
 
 export const UserCartContainer = styled.div`

@@ -9,21 +9,27 @@ import {
 	TotalPrice,
 } from "./styles";
 import { GenButton } from "components";
-import { useQuery } from "@apollo/client";
-import { MyCartDocument } from "src/graphql/generated";
+import { useQuery, useMutation } from "@apollo/client";
+import { MyCartDocument, RemoveAllCartDocument } from "src/graphql/generated";
 import { useMe } from "hooks";
 import { Puff, TailSpin } from "react-loading-icons";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useTheme } from "styled-components";
 import { CartItem } from "components/Cards";
 import numeral from "numeral";
 import { useSelector } from "react-redux";
+import { ModalContext } from "../../Buttons/IconButton";
 
 export const CartModal = () => {
 	const { loading, loggedIn } = useMe();
 	const theme: any = useTheme();
 
 	const cart = useQuery(MyCartDocument);
+	const [removeAll, removeAllState] = useMutation(RemoveAllCartDocument, {
+		awaitRefetchQueries: true,
+		refetchQueries: [{ query: MyCartDocument }],
+	});
+	const { removeModal, setBackdrop } = useContext(ModalContext);
 
 	useEffect(() => {
 		!loading && loggedIn && cart.refetch();
@@ -40,10 +46,10 @@ export const CartModal = () => {
 
 	const noItem = usercart?.length === 0;
 
-	// !loading && console.log(usercart);
-
-	const removeAllCartItems = () => {
-		console.log("remove all");
+	const removeAllCartItems = async () => {
+		await removeAll();
+		removeModal();
+		setBackdrop(false);
 	};
 
 	const prices: number[] | undefined = usercart?.map((item) => {
@@ -66,9 +72,11 @@ export const CartModal = () => {
 			<CartItemContainer>
 				<Top>
 					<h6>Cart ({usercart?.length})</h6>
-					<RemoveAll onClick={removeAllCartItems}>
-						Remove all
-					</RemoveAll>
+					{!noItem ? (
+						<RemoveAll onClick={removeAllCartItems}>
+							Remove all
+						</RemoveAll>
+					) : null}
 				</Top>
 				{cart.loading ? (
 					<LoaderContainer>
@@ -92,7 +100,9 @@ export const CartModal = () => {
 				<Bottom>
 					<p>TOTAL</p>
 					<TotalPrice>
-						{cart.loading || cartUpdating ? (
+						{cart.loading ||
+						cartUpdating ||
+						removeAllState.loading ? (
 							<TailSpin stroke={theme.sienna} height={25} />
 						) : (
 							numeral(totalPrice).format("$0,0")
@@ -101,7 +111,7 @@ export const CartModal = () => {
 				</Bottom>
 			</CartItemContainer>
 			<GenButton
-				disabled={noItem || cartUpdating}
+				disabled={noItem || cartUpdating || removeAllState.loading}
 				fullwidth
 				action={() => console.log("This is the cart")}
 			>

@@ -10,8 +10,12 @@ interface iconButtonProps {
 	setActive: (name: "cart" | "user" | undefined) => void;
 }
 
-export const ModalContext = createContext<{ removeModal: () => void }>({
+export const ModalContext = createContext<{
+	removeModal: () => void;
+	setBackdrop: (bool: boolean) => void;
+}>({
 	removeModal: () => {},
+	setBackdrop: () => {},
 });
 
 export const IconButton: FC<iconButtonProps> = ({
@@ -46,7 +50,7 @@ export const IconButton: FC<iconButtonProps> = ({
 			</Container>
 			{/* TODO: could use some animation */}
 			{isActive ? (
-				<ModalContext.Provider value={{ removeModal }}>
+				<ModalContext.Provider value={{ removeModal, setBackdrop }}>
 					<ModalContainer>
 						<Modal />
 					</ModalContainer>

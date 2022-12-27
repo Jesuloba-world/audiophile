@@ -13,6 +13,7 @@ import {
 	Maybe,
 	ProductImageType,
 	AddToCartDocument,
+	MyCartDocument,
 } from "src/graphql/generated";
 import numeral from "numeral";
 import { GenButton, NumberController } from "components";
@@ -38,7 +39,10 @@ export const ProductHero: FC<props> = ({
 	productId,
 }) => {
 	const [numForCart, setNumForCart] = useState(1);
-	const [AddToCart, { loading }] = useMutation(AddToCartDocument, {});
+	const [AddToCart, { loading }] = useMutation(AddToCartDocument, {
+		awaitRefetchQueries: true,
+		refetchQueries: [{ query: MyCartDocument }],
+	});
 	const theme: any = useTheme();
 
 	const addToCart = () => {

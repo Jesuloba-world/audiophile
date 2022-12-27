@@ -5,3 +5,9 @@ mutation AddToCart($productId: String!, $quantity: Int!) {
 		}
 	}
 }
+
+mutation RemoveAllCart {
+	removeAllCart {
+		success
+	}
+}
