@@ -56,7 +56,14 @@ export const CartModal = () => {
 			() => {
 				removeAll();
 			},
-			() => {}
+			() => {},
+			{
+				className: "confirm-modal",
+				borderRadius: "8px",
+				fontFamily: "Manrope",
+				titleColor: "#D87D4A",
+				okButtonBackground: "#D87D4A",
+			}
 		);
 	};
 

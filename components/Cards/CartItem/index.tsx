@@ -113,7 +113,14 @@ export const CartItem: FC<cartItemsProps> = ({
 							},
 						});
 					},
-					() => {}
+					() => {},
+					{
+						className: "confirm-modal",
+						borderRadius: "8px",
+						fontFamily: "Manrope",
+						titleColor: "#D87D4A",
+						okButtonBackground: "#D87D4A",
+					}
 				);
 				return prev;
 			} else {
