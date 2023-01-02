@@ -20,10 +20,12 @@ import numeral from "numeral";
 import { useSelector } from "react-redux";
 import { ModalContext } from "../../Buttons/IconButton";
 import { Confirm } from "notiflix";
+import { useRouter } from "next/router";
 
 export const CartModal = () => {
 	const { loading, loggedIn } = useMe();
 	const theme: any = useTheme();
+	const navigate = useRouter();
 
 	const cart = useQuery(MyCartDocument);
 	const [removeAll, removeAllState] = useMutation(RemoveAllCartDocument, {
@@ -129,7 +131,7 @@ export const CartModal = () => {
 			<GenButton
 				disabled={noItem || cartUpdating || removeAllState.loading}
 				fullwidth
-				action={() => console.log("This is the cart")}
+				action={() => navigate.push("/checkout")}
 			>
 				{noItem ? "No item to checkout" : "Checkout"}
 			</GenButton>

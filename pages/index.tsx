@@ -3,10 +3,6 @@ import { ReactElement } from "react";
 import { MainLayout, Hero, CategoryPick, Featured } from "containers";
 import { GetCategoriesDocument, CategoryType } from "src/graphql/generated";
 import { Client } from "src/apollo";
-// import urqlClient from "src/urql";
-// import { getCategories } from "src/urql/queries/categories";
-// import { useMe } from "hooks";
-// import { GetServerSidePropsContext } from "next";
 
 interface homeProps {
 	categories: CategoryType[];
@@ -23,12 +19,8 @@ const Home: NextPageWithLayout<homeProps> = ({ categories }) => {
 	);
 };
 
-Home.getLayout = (page: ReactElement, { categories }) => {
-	return (
-		<MainLayout home categories={categories}>
-			{page}
-		</MainLayout>
-	);
+Home.getLayout = (page: ReactElement) => {
+	return <MainLayout home>{page}</MainLayout>;
 };
 
 export default Home;

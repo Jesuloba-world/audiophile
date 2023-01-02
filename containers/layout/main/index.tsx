@@ -11,7 +11,8 @@ interface layoutProps {
 	children: ReactNode;
 	title?: string;
 	home?: boolean;
-	categories: CategoryType[];
+	checkout?: boolean;
+	categories?: CategoryType[];
 }
 
 export const MainLayout: FC<layoutProps> = ({
@@ -19,6 +20,7 @@ export const MainLayout: FC<layoutProps> = ({
 	title,
 	home,
 	categories,
+	checkout,
 }) => {
 	//TODO: use Redux to replace the Providers
 
@@ -31,10 +33,12 @@ export const MainLayout: FC<layoutProps> = ({
 				<BackdropProvider>
 					<Header home={home} />
 					{children}
-					{!home ? (
-						<CategoryPick home={home} categories={categories} />
+					{!home || !checkout ? (
+						categories ? (
+							<CategoryPick home={home} categories={categories} />
+						) : null
 					) : null}
-					<Copy home={home} />
+					{!checkout ? <Copy home={home} /> : null}
 					<Footer />
 				</BackdropProvider>
 			</LoginProvider>

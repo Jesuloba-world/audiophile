@@ -3316,18 +3316,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@urql/core@npm:^3.0.5":
-  version: 3.0.5
-  resolution: "@urql/core@npm:3.0.5"
-  dependencies:
-    "@graphql-typed-document-node/core": ^3.1.1
-    wonka: ^6.0.0
-  peerDependencies:
-    graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: e98f2dfb7535f3c5631a3f6d16ad877ba1a66f179f96345a5877301d864e5bffd6fa5dc541ed1ac2531b30d0efea6d85235a70de8ee82d5a2626c3b9a171c7ad
-  languageName: node
-  linkType: hard
-
 "@wry/context@npm:^0.7.0":
   version: 0.7.0
   resolution: "@wry/context@npm:0.7.0"
@@ -3695,7 +3683,6 @@ __metadata:
     "@types/react-dom": 18.0.5
     "@types/react-test-renderer": ^18.0.0
     "@types/styled-components": ^5.1.25
-    "@urql/core": ^3.0.5
     autoprefixer: ^10.4.7
     axios: ^1.1.2
     cookies-next: ^2.1.1
@@ -10491,13 +10478,6 @@ __metadata:
   dependencies:
     string-width: ^1.0.2 || 2 || 3 || 4
   checksum: d5fc37cd561f9daee3c80e03b92ed3e84d80dde3365a8767263d03dacfc8fa06b065ffe1df00d8c2a09f731482fcacae745abfbb478d4af36d0a891fad4834d3
-  languageName: node
-  linkType: hard
-
-"wonka@npm:^6.0.0":
-  version: 6.1.2
-  resolution: "wonka@npm:6.1.2"
-  checksum: 474dcffd3861faaf5df8f4ef1ea1e614eb0cf36f54003974ebd4ab43b8fd6aad26317ef75e55488e7a61d64922531ae3ca2890dac90922d46715e0dd795682ce
   languageName: node
   linkType: hard
 
