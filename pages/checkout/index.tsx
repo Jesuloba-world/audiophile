@@ -1,9 +1,9 @@
 import type { NextPageWithLayout } from "types/next";
 import { ReactElement } from "react";
-import { MainLayout } from "containers";
+import { MainLayout, CheckoutPageWrapper } from "containers";
 
 const Checkout: NextPageWithLayout = () => {
-	return <h1>This is the Checkout page</h1>;
+	return <CheckoutPageWrapper>This is the Checkout form</CheckoutPageWrapper>;
 };
 
 Checkout.getLayout = (page: ReactElement) => {
