@@ -9,7 +9,11 @@ import {
 import { formElements } from "./constants";
 import { InputWithLabel } from "components";
 
-export const Checkout: FC = () => {
+interface props {
+	register: any;
+}
+
+export const Checkout: FC<props> = ({ register }) => {
 	return (
 		<Container>
 			<Heading>Checkout</Heading>
@@ -24,6 +28,8 @@ export const Checkout: FC = () => {
 									label={el.title}
 									name={el.name}
 									span={el.span2}
+									placeholder={el.placeholder}
+									register={register}
 								/>
 							))}
 						</SectionInputs>

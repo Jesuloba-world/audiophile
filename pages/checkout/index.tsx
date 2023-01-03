@@ -6,9 +6,9 @@ import { useBackdrop } from "hooks";
 const Checkout: NextPageWithLayout = () => {
 	const { setBackdrop } = useBackdrop();
 
-	useEffect(() => {
-		setBackdrop(false);
-	}, [setBackdrop]);
+	// useEffect(() => {
+	// 	setBackdrop(false);
+	// });
 
 	return (
 		<CheckoutPageWrapper>

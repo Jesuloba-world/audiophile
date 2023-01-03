@@ -2131,12 +2131,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hookform/resolvers@npm:^2.9.8":
-  version: 2.9.8
-  resolution: "@hookform/resolvers@npm:2.9.8"
+"@hookform/resolvers@npm:^2.9.10":
+  version: 2.9.10
+  resolution: "@hookform/resolvers@npm:2.9.10"
   peerDependencies:
     react-hook-form: ^7.0.0
-  checksum: 3b8389a32baa784916d75565db3a13979cf776cc5552055f851c99283070f76e9b70d760a3222031b79610cde033d8417d63408a3e02577651f899b228d544ef
+  checksum: ae3395372d6ff11506a72bb6b3c57046bd14b457c2fe1f0485f60cf2dba0ef4484e3a2fb5a0f6a217f6d701393ebc3683a2ede7c81c6f13e71f965f520c7af16
   languageName: node
   linkType: hard
 
@@ -3668,7 +3668,7 @@ __metadata:
     "@graphql-codegen/typed-document-node": ^2.3.1
     "@graphql-codegen/typescript": ^2.7.1
     "@graphql-codegen/typescript-operations": ^2.5.1
-    "@hookform/resolvers": ^2.9.8
+    "@hookform/resolvers": ^2.9.10
     "@reduxjs/toolkit": ^1.8.5
     "@svgr/webpack": ^6.2.1
     "@testing-library/dom": ^8.19.1
@@ -3697,7 +3697,7 @@ __metadata:
     postcss: ^8.4.14
     react: 18.2.0
     react-dom: 18.2.0
-    react-hook-form: ^7.36.1
+    react-hook-form: ^7.41.3
     react-hot-toast: ^2.4.0
     react-icons: ^4.4.0
     react-loading-icons: ^1.1.0
@@ -8746,12 +8746,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.36.1":
-  version: 7.36.1
-  resolution: "react-hook-form@npm:7.36.1"
+"react-hook-form@npm:^7.41.3":
+  version: 7.41.3
+  resolution: "react-hook-form@npm:7.41.3"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18
-  checksum: d41951685fe7d345997c1ac489ccc1a44d11cfa6021b0a39a449029ba3cd8e5824afe5f6464e8ff6fb7c01d1915627b53ec1e1bfee63a6b722b6855794dc0df9
+  checksum: 25223f3001cbd1b4e04e20144b1f71b090925feaf2f1996f268c2beb17b190562c8d80ad2a786c7feafb45eae7e1284fc42f5f886eaf7034a9532457cc9adacd
   languageName: node
   linkType: hard
 

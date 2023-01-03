@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
 	background: ${({ theme }) => theme.white};
 	padding: 54px 48px 48px 48px;
+	border-radius: 8px;
 `;
 
 export const Heading = styled.h3`
