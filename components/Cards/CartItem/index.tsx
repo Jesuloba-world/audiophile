@@ -1,11 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import {
 	Container,
-	TextAndImage,
+	ImageContainer,
 	Name,
 	Price,
 	Text,
 	ControllerContainer,
+	Quantity,
+	TextContainer,
 } from "./styles";
 import Image from "next/image";
 import numeral from "numeral";
@@ -33,6 +35,7 @@ interface cartItemsProps {
 	price: any;
 	quantity?: number;
 	cartId?: string;
+	checkout?: boolean;
 }
 
 export const CartItem: FC<cartItemsProps> = ({
@@ -43,6 +46,7 @@ export const CartItem: FC<cartItemsProps> = ({
 	price,
 	quantity,
 	cartId,
+	checkout,
 }) => {
 	const dispatch = useDispatch();
 
@@ -139,26 +143,32 @@ export const CartItem: FC<cartItemsProps> = ({
 
 	return (
 		<Container>
-			<TextAndImage>
+			<ImageContainer>
 				<Image
 					src={image as string}
 					alt={altText as string}
 					height={64}
 					width={64}
 				/>
+			</ImageContainer>
+			<TextContainer>
 				<Text>
 					<Name>{name}</Name>
 					<Price>{numeral(price).format("$0,0")}</Price>
 				</Text>
-			</TextAndImage>
-			<ControllerContainer>
-				<NumberController
-					increment={increment}
-					number={quan + changeNumber}
-					decrement={decrement}
-					small
-				/>
-			</ControllerContainer>
+				{checkout ? (
+					<Quantity>x{quan}</Quantity>
+				) : (
+					<ControllerContainer>
+						<NumberController
+							increment={increment}
+							number={quan + changeNumber}
+							decrement={decrement}
+							small
+						/>
+					</ControllerContainer>
+				)}
+			</TextContainer>
 		</Container>
 	);
 };
