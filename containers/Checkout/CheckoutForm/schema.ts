@@ -19,4 +19,5 @@ export const checkoutSchema = yup.object().shape({
 		.required(),
 	city: yup.string().required(),
 	country: yup.string().required(),
+	payment: yup.string().required(),
 });

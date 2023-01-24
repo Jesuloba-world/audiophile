@@ -47,3 +47,16 @@ export const formElements: {
 		},
 	],
 };
+
+export const paymentMethods = [
+	{
+		value: "paystack",
+		label: "Paystack",
+		name: "payment",
+	},
+	{
+		value: "cashondelivery",
+		label: "Cash on Delivery",
+		name: "payment",
+	},
+];

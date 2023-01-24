@@ -8,17 +8,32 @@ export const Container = styled.div<{ span?: boolean }>`
 	${({ span }) => span && `grid-column: span 2`};
 `;
 
-export const Label = styled.label`
+export const Top = styled.div`
+	display: flex;
+	justify-content: space-between;
+`;
+
+export const Label = styled.label<{ isError: boolean }>`
 	font-weight: 700;
 	font-size: 12px;
 	line-height: 16px;
 	letter-spacing: -0.2px;
-	color: #000000;
+	color: ${({ theme, isError }) => (!isError ? theme.black : theme.error)};
 `;
 
-export const Input = styled.input`
-	background: ${({ theme }) => theme.white};
-	border: 1px solid #cfcfcf;
+export const Error = styled.p`
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 16px;
+	letter-spacing: -0.2px;
+	color: ${({ theme }) => theme.error};
+`;
+
+export const Input = styled.input<{ isError: boolean }>`
+	/* background: ${({ theme }) => theme.white}; */
+	border: solid
+		${({ theme, isError }) =>
+			!isError ? `1px ${theme.light_grey}` : `2px ${theme.error}`};
 	border-radius: 8px;
 	height: 56px;
 	padding-inline: 24px;
@@ -27,7 +42,7 @@ export const Input = styled.input`
 	font-size: 14px;
 	line-height: 19px;
 	letter-spacing: -0.25px;
-	color: #000000;
+	color: ${({ theme }) => theme.black};
 
 	&::placeholder {
 		mix-blend-mode: normal;

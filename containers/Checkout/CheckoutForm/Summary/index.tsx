@@ -103,6 +103,7 @@ export const Summary: FC = () => {
 					</Price>
 				) : null}
 			</Grand>
+			{/* TODO: change this dynamically based on payment option */}
 			<GenButton disabled={cart.loading} fullwidth>
 				Continue & Pay
 			</GenButton>

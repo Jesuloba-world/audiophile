@@ -27,7 +27,7 @@ export const SectionTitle = styled.h6`
 	letter-spacing: 1px;
 	text-transform: uppercase;
 
-	color: #d87d4a;
+	color: ${({ theme }) => theme.sienna};
 `;
 
 export const SectionInputs = styled.div`
@@ -35,4 +35,18 @@ export const SectionInputs = styled.div`
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	row-gap: 24px;
 	column-gap: 16px;
+`;
+
+export const PaymentTitle = styled.p<{ error: boolean }>`
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 16px;
+	letter-spacing: -0.2px;
+	color: ${({ theme, error }) => (!error ? theme.black : theme.error)};
+`;
+
+export const PaymentMethods = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
 `;

@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { Container, Label, Input } from "./styles";
+import { Container, Label, Input, Top, Error } from "./styles";
+import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
 
 interface inputProps {
 	name: string;
@@ -7,6 +8,7 @@ interface inputProps {
 	span?: boolean;
 	register: any;
 	placeholder: string;
+	error?: string;
 }
 
 export const InputWithLabel: FC<inputProps> = ({
@@ -15,15 +17,24 @@ export const InputWithLabel: FC<inputProps> = ({
 	span,
 	register,
 	placeholder,
+	error,
 }) => {
+	const isError = !!error;
+
 	return (
 		<Container span={span}>
-			<Label htmlFor={name}>{label}</Label>
+			<Top>
+				<Label htmlFor={name} isError={isError}>
+					{label}
+				</Label>
+				<Error>{error}</Error>
+			</Top>
 			<Input
 				name={name}
 				id={name}
 				{...register(name)}
 				placeholder={placeholder}
+				isError={isError}
 			/>
 		</Container>
 	);

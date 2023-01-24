@@ -7,6 +7,8 @@ interface Theme {
 	cultured: string;
 	grey_white: string;
 	white: string;
+	light_grey: string;
+	error: string;
 }
 
 export const theme: Theme = {
@@ -18,4 +20,6 @@ export const theme: Theme = {
 	cultured: "#F1F1F1",
 	grey_white: "#FAFAFA",
 	white: "#FFFFFF",
+	light_grey: "#CFCFCF",
+	error: "#CD2C2C",
 };
