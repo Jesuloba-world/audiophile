@@ -13,6 +13,7 @@ mutation Register(
 		success
 		refreshToken
 		errors
+		token
 	}
 }
 
@@ -21,6 +22,7 @@ mutation Login($email: String, $username: String, $password: String!) {
 		success
 		errors
 		refreshToken
+		token
 	}
 }
 

@@ -16,13 +16,14 @@ import { useActions } from "./actions";
 import { useTheme } from "styled-components";
 import { Puff } from "react-loading-icons";
 import toast from "react-hot-toast";
+import { checkIsEmail } from "utils";
 
 interface props {
 	setError: (err: string) => void;
 }
 
 export const LoginForm: FC<props> = ({ setError }) => {
-	const { removeForm, checkIsEmail } = useActions({});
+	const { removeForm } = useActions({});
 	const theme: any = useTheme();
 
 	const [Login, { loading }] = useMutation(LoginDocument, {
