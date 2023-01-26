@@ -30,6 +30,8 @@ mutation RefreshAndRevokeToken($refreshToken: String!) {
 	refreshToken(refreshToken: $refreshToken) {
 		success
 		errors
+		token
+		refreshToken
 	}
 	revokeToken(refreshToken: $refreshToken) {
 		success

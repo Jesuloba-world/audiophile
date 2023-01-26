@@ -11,7 +11,7 @@ import {
 import { GenButton } from "components";
 import { useQuery, useMutation } from "@apollo/client";
 import { MyCartDocument, RemoveAllCartDocument } from "src/graphql/generated";
-import { useMe } from "hooks";
+// import { useMe } from "hooks";
 import { Puff, TailSpin } from "react-loading-icons";
 import { useEffect, useContext } from "react";
 import { useTheme } from "styled-components";

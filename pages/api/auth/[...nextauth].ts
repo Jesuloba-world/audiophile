@@ -1,4 +1,4 @@
-import NextAuth, { AuthOptions, User, Awaitable } from "next-auth";
+import NextAuth, { AuthOptions, Awaitable, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { Client } from "src/apollo";
 import { checkIsEmail } from "utils";
@@ -45,7 +45,7 @@ export const authOptions: AuthOptions = {
 					variables: param,
 				});
 
-				const user = await res.data.login;
+				const user = res.data.login;
 
 				// If no error and we have user data, return it
 				if (res.data.login?.success && user) {
@@ -56,6 +56,19 @@ export const authOptions: AuthOptions = {
 			},
 		}),
 	],
+	callbacks: {
+		jwt: ({ token, user }) => {
+			if (user) {
+				token.accessToken = user.token;
+				token.refreshToken = user.refreshToken;
+			}
+			return token;
+		},
+		session: async ({ session, token }) => {
+			session.token = token.accessToken;
+			return session;
+		},
+	},
 };
 
 export default NextAuth(authOptions);
