@@ -7,20 +7,23 @@ import { theme } from "../styled.config";
 import { Provider } from "react-redux";
 import { store } from "store";
 import { Toaster } from "react-hot-toast";
+import { SessionProvider } from "next-auth/react";
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 	// Use the layout defined at the page level, if available
 	const getLayout = Component.getLayout || ((page) => page);
 
 	return (
-		<Provider store={store}>
-			<ApolloProvider client={Client}>
-				<ThemeProvider theme={theme}>
-					<Toaster />
-					{getLayout(<Component {...pageProps} />, pageProps)}
-				</ThemeProvider>
-			</ApolloProvider>
-		</Provider>
+		<SessionProvider session={pageProps.session}>
+			<Provider store={store}>
+				<ApolloProvider client={Client}>
+					<ThemeProvider theme={theme}>
+						<Toaster />
+						{getLayout(<Component {...pageProps} />, pageProps)}
+					</ThemeProvider>
+				</ApolloProvider>
+			</Provider>
+		</SessionProvider>
 	);
 }
 

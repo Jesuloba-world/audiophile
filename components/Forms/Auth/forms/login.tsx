@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Form, Bottom, ForgetText } from "../styles";
 import { loginFormElements } from "../constant";
 import { AuthInput, GenButton, Spinner } from "components";
@@ -17,56 +17,58 @@ import { useTheme } from "styled-components";
 import { Puff } from "react-loading-icons";
 import toast from "react-hot-toast";
 import { checkIsEmail } from "utils";
+import { useSession, signIn } from "next-auth/react";
 
 interface props {
 	setError: (err: string) => void;
 }
 
 export const LoginForm: FC<props> = ({ setError }) => {
+	const [loading, setLoading] = useState(false);
 	const { removeForm } = useActions({});
 	const theme: any = useTheme();
 
-	const [Login, { loading }] = useMutation(LoginDocument, {
-		onCompleted(data) {
-			if (data.login?.errors) {
-				// handle escaped errors
-				const errors = data.login?.errors;
-				console.log(errors);
-				setError(errors[Object.keys(errors)[0]][0].message);
-				return;
-			}
-			setError("");
-			console.log(data);
-			RefreshAndRevoke({
-				variables: { refreshToken: data.login?.refreshToken as string },
-			});
-		},
-		onError(error) {
-			if (error.networkError) {
-				setError("Network Error!!");
-			}
-			console.log(error.message);
-			console.log(error.graphQLErrors);
-		},
-	});
+	// const [Login, { loading }] = useMutation(LoginDocument, {
+	// 	onCompleted(data) {
+	// 		if (data.login?.errors) {
+	// 			// handle escaped errors
+	// 			const errors = data.login?.errors;
+	// 			console.log(errors);
+	// 			setError(errors[Object.keys(errors)[0]][0].message);
+	// 			return;
+	// 		}
+	// 		setError("");
+	// 		console.log(data);
+	// 		RefreshAndRevoke({
+	// 			variables: { refreshToken: data.login?.refreshToken as string },
+	// 		});
+	// 	},
+	// 	onError(error) {
+	// 		if (error.networkError) {
+	// 			setError("Network Error!!");
+	// 		}
+	// 		console.log(error.message);
+	// 		console.log(error.graphQLErrors);
+	// 	},
+	// });
 
-	const [RefreshAndRevoke, refreshState] = useMutation(
-		RefreshAndRevokeTokenDocument,
-		{
-			onCompleted(data) {
-				reset();
-				removeForm();
-				toast.success("Login successful");
-			},
-			onError(error) {
-				if (error.networkError) {
-					setError("Network Error!!");
-				}
-				console.log(error.message);
-				console.log(error.graphQLErrors);
-			},
-		}
-	);
+	// const [RefreshAndRevoke, refreshState] = useMutation(
+	// 	RefreshAndRevokeTokenDocument,
+	// 	{
+	// 		onCompleted(data) {
+	// 			reset();
+	// 			removeForm();
+	// 			toast.success("Login successful");
+	// 		},
+	// 		onError(error) {
+	// 			if (error.networkError) {
+	// 				setError("Network Error!!");
+	// 			}
+	// 			console.log(error.message);
+	// 			console.log(error.graphQLErrors);
+	// 		},
+	// 	}
+	// );
 
 	const {
 		handleSubmit,
@@ -77,29 +79,48 @@ export const LoginForm: FC<props> = ({ setError }) => {
 		resolver: yupResolver(loginSchema),
 	});
 
-	const handleLogin = (data: any) => {
+	const handleLogin = async (data: any) => {
 		console.log(data);
+		setLoading(true);
 
-		const id: string = data.id;
-		const isEmail = checkIsEmail(id);
+		// const id: string = data.id;
+		// const isEmail = checkIsEmail(id);
 
-		let param: MutationLoginArgs;
+		// let param: MutationLoginArgs;
 
-		if (isEmail) {
-			param = {
-				email: id,
-				password: data.password,
-			};
-		} else {
-			param = {
-				username: id,
-				password: data.password,
-			};
-		}
+		// if (isEmail) {
+		// 	param = {
+		// 		email: id,
+		// 		password: data.password,
+		// 	};
+		// } else {
+		// 	param = {
+		// 		username: id,
+		// 		password: data.password,
+		// 	};
+		// }
 
-		Login({
-			variables: param,
+		// Login({
+		// 	variables: param,
+		// });
+
+		const response = await signIn("Username", {
+			id: data.id,
+			password: data.password,
 		});
+
+		console.log(response);
+
+		if (response?.ok) {
+			setLoading(false);
+			reset();
+			removeForm();
+			toast.success("Login successful");
+		}
+		if (response?.error) {
+			setLoading(false);
+			setError(response.error);
+		}
 	};
 
 	return (
@@ -119,12 +140,8 @@ export const LoginForm: FC<props> = ({ setError }) => {
 				</Link>
 			</Bottom>
 
-			<GenButton fullwidth disabled={loading || refreshState.loading}>
-				{loading || refreshState.loading ? (
-					<Puff stroke={theme.white} />
-				) : (
-					"LOGIN"
-				)}
+			<GenButton fullwidth disabled={loading}>
+				{loading ? <Puff stroke={theme.white} /> : "LOGIN"}
 			</GenButton>
 		</Form>
 	);

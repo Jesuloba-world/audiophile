@@ -8,7 +8,7 @@ export const authOptions: AuthOptions = {
 	providers: [
 		CredentialsProvider({
 			id: "login",
-			name: "EmailOrUsername",
+			name: "Username",
 
 			credentials: {
 				id: {
@@ -28,7 +28,7 @@ export const authOptions: AuthOptions = {
 
 				let param: MutationLoginArgs;
 
-				if (isEmail) {
+				if (!isEmail) {
 					param = {
 						email: id,
 						password: credentials?.password || "",
@@ -40,15 +40,15 @@ export const authOptions: AuthOptions = {
 					};
 				}
 
-				const res = await Client.query({
-					query: LoginDocument,
+				const res = await Client.mutate({
+					mutation: LoginDocument,
 					variables: param,
 				});
 
-				const user = res.data.login;
+				const user = res.data?.login;
 
 				// If no error and we have user data, return it
-				if (res.data.login?.success && user) {
+				if (user?.success) {
 					return user as Awaitable<User>;
 				}
 				// Return null if user data could not be retrieved
@@ -68,6 +68,10 @@ export const authOptions: AuthOptions = {
 			session.token = token.accessToken;
 			return session;
 		},
+	},
+	pages: {
+		signIn: "/signin",
+		error: "/signin",
 	},
 };
 
