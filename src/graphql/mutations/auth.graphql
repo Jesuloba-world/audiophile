@@ -23,9 +23,6 @@ mutation Login($email: String, $username: String, $password: String!) {
 		errors
 		refreshToken
 		token
-		user {
-			username
-		}
 	}
 }
 
