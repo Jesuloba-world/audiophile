@@ -11,12 +11,13 @@ export const AuthForm: FC<props> = () => {
 	const [isLogin, setIsLogin] = useState(true);
 	const [errorMessage, setErrorMessage] = useState("");
 
-	const switchlogin = () => {
-		setIsLogin((prev) => !prev);
-	};
-
 	const setError = (err: string) => {
 		setErrorMessage(err);
+	};
+
+	const switchlogin = () => {
+		setIsLogin((prev) => !prev);
+		setError("");
 	};
 
 	const { setLogin } = useLogin();

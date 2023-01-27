@@ -97,7 +97,7 @@ export const RegisterForm: FC<props> = ({ setError }) => {
 			setLoading(false);
 			reset();
 			removeForm();
-			toast.success("Login successful");
+			toast.success("Account created successfully");
 		}
 		if (response?.error) {
 			setLoading(false);

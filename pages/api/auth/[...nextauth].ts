@@ -67,6 +67,15 @@ export const authOptions: AuthOptions = {
 						username: decoded.username,
 					} as Awaitable<User>;
 				}
+
+				if (user?.errors) {
+					const errorMessage =
+						user.errors[Object.keys(user.errors)[0]][0].message;
+					throw new Error(
+						`${Object.keys(user.errors)[0]}: ${errorMessage}`
+					);
+				}
+
 				// Return null if user data could not be retrieved
 				return null;
 			},
@@ -85,10 +94,10 @@ export const authOptions: AuthOptions = {
 					type: "email",
 					name: "email",
 				},
-				password: {
+				password1: {
 					label: "Password",
 					type: "password",
-					name: "password",
+					name: "password1",
 				},
 				password2: {
 					label: "Confirm password",
@@ -100,7 +109,7 @@ export const authOptions: AuthOptions = {
 				const param: MutationRegisterArgs = {
 					username: credentials?.username || "",
 					email: credentials?.email || "",
-					password1: credentials?.password || "",
+					password1: credentials?.password1 || "",
 					password2: credentials?.password2 || "",
 				};
 
@@ -122,6 +131,14 @@ export const authOptions: AuthOptions = {
 						tokenExpiresIn: decoded.exp,
 						username: decoded.username,
 					} as Awaitable<User>;
+				}
+
+				if (user?.errors) {
+					const errorMessage =
+						user.errors[Object.keys(user.errors)[0]][0].message;
+					throw new Error(
+						`${Object.keys(user.errors)[0]}: ${errorMessage}`
+					);
 				}
 				// Return null if user data could not be retrieved
 				return null;
