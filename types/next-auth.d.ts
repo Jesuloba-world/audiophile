@@ -1,23 +1,23 @@
 import NextAuth, { DefaultSession } from "next-auth";
 import { JWT } from "next-auth/jwt";
+import { ObtainJsonWebToken } from "src/graphql/generated";
 
 declare module "next-auth" {
-	interface User {
-		success: boolean;
-		errors: any;
-		refreshToken: string;
-		token: string;
+	interface User extends ObtainJsonWebToken {
+		isNewUser: boolean;
 	}
 
 	interface Session extends DefaultSession {
 		token: string;
+		username: string;
+		isNewUser: boolean;
 	}
 }
 
 declare module "next-auth/jwt" {
-	/** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
 	interface JWT {
 		accessToken: string;
 		refreshToken: string;
+		username: string;
 	}
 }

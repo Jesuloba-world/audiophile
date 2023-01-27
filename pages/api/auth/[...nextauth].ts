@@ -28,7 +28,7 @@ export const authOptions: AuthOptions = {
 
 				let param: MutationLoginArgs;
 
-				if (!isEmail) {
+				if (isEmail) {
 					param = {
 						email: id,
 						password: credentials?.password || "",
@@ -49,7 +49,10 @@ export const authOptions: AuthOptions = {
 
 				// If no error and we have user data, return it
 				if (user?.success) {
-					return user as Awaitable<User>;
+					return {
+						...user,
+						isNewUser: !user.user?.username,
+					} as Awaitable<User>;
 				}
 				// Return null if user data could not be retrieved
 				return null;
@@ -59,19 +62,18 @@ export const authOptions: AuthOptions = {
 	callbacks: {
 		jwt: ({ token, user }) => {
 			if (user) {
-				token.accessToken = user.token;
-				token.refreshToken = user.refreshToken;
+				token.accessToken = user.token || "";
+				token.refreshToken = user.refreshToken || "";
+				token.username = user.user?.username || "";
 			}
 			return token;
 		},
-		session: async ({ session, token }) => {
+		session: async ({ session, token, user }) => {
 			session.token = token.accessToken;
+			session.username = token.username;
+			session.isNewUser = user.isNewUser;
 			return session;
 		},
-	},
-	pages: {
-		signIn: "/signin",
-		error: "/signin",
 	},
 };
 

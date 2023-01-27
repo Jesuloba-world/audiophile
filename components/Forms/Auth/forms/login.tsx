@@ -80,36 +80,13 @@ export const LoginForm: FC<props> = ({ setError }) => {
 	});
 
 	const handleLogin = async (data: any) => {
-		console.log(data);
 		setLoading(true);
 
-		// const id: string = data.id;
-		// const isEmail = checkIsEmail(id);
-
-		// let param: MutationLoginArgs;
-
-		// if (isEmail) {
-		// 	param = {
-		// 		email: id,
-		// 		password: data.password,
-		// 	};
-		// } else {
-		// 	param = {
-		// 		username: id,
-		// 		password: data.password,
-		// 	};
-		// }
-
-		// Login({
-		// 	variables: param,
-		// });
-
-		const response = await signIn("Username", {
+		const response = await signIn("login", {
 			id: data.id,
 			password: data.password,
+			redirect: false,
 		});
-
-		console.log(response);
 
 		if (response?.ok) {
 			setLoading(false);
