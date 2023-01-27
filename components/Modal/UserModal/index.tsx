@@ -6,35 +6,38 @@ import { ModalContext } from "../../Buttons/IconButton";
 import { useMe, useBackdrop } from "hooks";
 import { Puff } from "react-loading-icons";
 import { useTheme } from "styled-components";
+import { useSession, signOut } from "next-auth/react";
 
 export const UserModal = () => {
 	const { setLogin } = useLogin();
 	const { removeModal } = useContext(ModalContext);
-	const { me, loading, loggedIn, logout } = useMe();
+	// const { me, loading, loggedIn, logout } = useMe();
 	const theme: any = useTheme();
 	const { setBackdrop } = useBackdrop();
+	const { data, status } = useSession();
 
 	return (
 		<Container>
-			{loading ? (
+			{status === "loading" ? (
 				<LoaderContainer>
 					<Puff stroke={theme.sienna} />
 				</LoaderContainer>
-			) : loggedIn ? (
+			) : status === "authenticated" ? (
 				<Text>
-					Hello, <Name>{me?.username}</Name>
+					Hello, <Name>{data.username}</Name>
 				</Text>
 			) : (
 				<Text>You&apos;re not logged in yet</Text>
 			)}
 			{/* TODO: write the logout function */}
-			{!loggedIn ? (
+			{!(status === "authenticated") ? (
 				<GenButton
 					fullwidth
 					action={() => {
 						setLogin(true);
 						removeModal();
 					}}
+					disabled={status === "loading"}
 				>
 					Login
 				</GenButton>
@@ -42,7 +45,7 @@ export const UserModal = () => {
 				<GenButton
 					fullwidth
 					action={() => {
-						logout();
+						signOut({ redirect: false });
 						removeModal();
 						setBackdrop(false);
 					}}

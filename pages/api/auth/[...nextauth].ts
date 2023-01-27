@@ -34,7 +34,7 @@ export const authOptions: AuthOptions = {
 
 				let param: MutationLoginArgs;
 
-				if (!isEmail) {
+				if (isEmail) {
 					param = {
 						email: id,
 						password: credentials?.password || "",
