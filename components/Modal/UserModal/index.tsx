@@ -29,7 +29,6 @@ export const UserModal = () => {
 			) : (
 				<Text>You&apos;re not logged in yet</Text>
 			)}
-			{/* TODO: write the logout function */}
 			{!(status === "authenticated") ? (
 				<GenButton
 					fullwidth

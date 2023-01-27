@@ -7,6 +7,8 @@ import {
 	LoginDocument,
 	MutationLoginArgs,
 	RefreshAndRevokeTokenDocument,
+	MutationRegisterArgs,
+	RegisterDocument,
 } from "src/graphql/generated";
 import jwtDecode from "jwt-decode";
 
@@ -14,7 +16,7 @@ export const authOptions: AuthOptions = {
 	providers: [
 		CredentialsProvider({
 			id: "login",
-			name: "Username",
+			name: "Email or Username",
 
 			credentials: {
 				id: {
@@ -69,9 +71,65 @@ export const authOptions: AuthOptions = {
 				return null;
 			},
 		}),
+		CredentialsProvider({
+			id: "register",
+			name: "New Account",
+			credentials: {
+				username: {
+					label: "Username",
+					type: "text",
+					name: "username",
+				},
+				email: {
+					label: "Email address",
+					type: "email",
+					name: "email",
+				},
+				password: {
+					label: "Password",
+					type: "password",
+					name: "password",
+				},
+				password2: {
+					label: "Confirm password",
+					type: "password",
+					name: "password2",
+				},
+			},
+			authorize: async (credentials, req) => {
+				const param: MutationRegisterArgs = {
+					username: credentials?.username || "",
+					email: credentials?.email || "",
+					password1: credentials?.password || "",
+					password2: credentials?.password2 || "",
+				};
+
+				const res = await Client.mutate({
+					mutation: RegisterDocument,
+					variables: param,
+				});
+
+				const user = res.data?.register;
+
+				// If no error and we have user data, return it
+				if (user?.success) {
+					const decoded: { exp: number; username: string } =
+						jwtDecode(user.token!);
+
+					return {
+						...user,
+						isNewUser: true,
+						tokenExpiresIn: decoded.exp,
+						username: decoded.username,
+					} as Awaitable<User>;
+				}
+				// Return null if user data could not be retrieved
+				return null;
+			},
+		}),
 	],
 	callbacks: {
-		jwt: async ({ token, user, account }) => {
+		jwt: async ({ token, user }) => {
 			if (user) {
 				return {
 					accessToken: user.token || "",

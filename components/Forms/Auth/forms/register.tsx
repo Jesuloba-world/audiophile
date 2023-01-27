@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useTheme } from "styled-components";
 import { Form, Bottom, ErrorText, CheckboxWrapper } from "../styles";
 import { signupFormElements } from "../constant";
@@ -15,6 +15,7 @@ import {
 import { useActions } from "./actions";
 import { Puff } from "react-loading-icons";
 import toast from "react-hot-toast";
+import { signIn } from "next-auth/react";
 
 interface props {
 	setError: (err: string) => void;
@@ -23,49 +24,50 @@ interface props {
 export const RegisterForm: FC<props> = ({ setError }) => {
 	const { removeForm } = useActions({});
 	const theme: any = useTheme();
+	const [loading, setLoading] = useState(false);
 
-	const [Register, { loading }] = useMutation(RegisterDocument, {
-		onCompleted(data) {
-			if (data.register?.errors) {
-				// handle escaped errors
-				const errors = data.register?.errors;
-				setError(errors[Object.keys(errors)[0]][0].message);
-				return;
-			}
-			setError("");
-			console.log(data);
-			RefreshAndRevoke({
-				variables: {
-					refreshToken: data.register?.refreshToken as string,
-				},
-			});
-		},
-		onError(error) {
-			if (error.networkError) {
-				setError("Network Error!!");
-			}
-			console.log(error.message);
-			console.log(error.graphQLErrors);
-		},
-	});
+	// const [Register, { loading }] = useMutation(RegisterDocument, {
+	// 	onCompleted(data) {
+	// 		if (data.register?.errors) {
+	// 			// handle escaped errors
+	// 			const errors = data.register?.errors;
+	// 			setError(errors[Object.keys(errors)[0]][0].message);
+	// 			return;
+	// 		}
+	// 		setError("");
+	// 		console.log(data);
+	// 		RefreshAndRevoke({
+	// 			variables: {
+	// 				refreshToken: data.register?.refreshToken as string,
+	// 			},
+	// 		});
+	// 	},
+	// 	onError(error) {
+	// 		if (error.networkError) {
+	// 			setError("Network Error!!");
+	// 		}
+	// 		console.log(error.message);
+	// 		console.log(error.graphQLErrors);
+	// 	},
+	// });
 
-	const [RefreshAndRevoke, refreshState] = useMutation(
-		RefreshAndRevokeTokenDocument,
-		{
-			onCompleted(data) {
-				reset();
-				removeForm();
-				toast.success("Account created Successfully");
-			},
-			onError(error) {
-				if (error.networkError) {
-					setError("Network Error!!");
-				}
-				console.log(error.message);
-				console.log(error.graphQLErrors);
-			},
-		}
-	);
+	// const [RefreshAndRevoke, refreshState] = useMutation(
+	// 	RefreshAndRevokeTokenDocument,
+	// 	{
+	// 		onCompleted(data) {
+	// 			reset();
+	// 			removeForm();
+	// 			toast.success("Account created Successfully");
+	// 		},
+	// 		onError(error) {
+	// 			if (error.networkError) {
+	// 				setError("Network Error!!");
+	// 			}
+	// 			console.log(error.message);
+	// 			console.log(error.graphQLErrors);
+	// 		},
+	// 	}
+	// );
 
 	const {
 		handleSubmit,
@@ -76,7 +78,9 @@ export const RegisterForm: FC<props> = ({ setError }) => {
 		resolver: yupResolver(signUpSchema),
 	});
 
-	const handleRegister = (data: any) => {
+	const handleRegister = async (data: any) => {
+		setLoading(true);
+
 		const param: MutationRegisterArgs = {
 			username: data.username,
 			email: data.email,
@@ -84,9 +88,21 @@ export const RegisterForm: FC<props> = ({ setError }) => {
 			password2: data.password2,
 		};
 
-		Register({
-			variables: param,
+		const response = await signIn("register", {
+			...param,
+			redirect: false,
 		});
+
+		if (response?.ok) {
+			setLoading(false);
+			reset();
+			removeForm();
+			toast.success("Login successful");
+		}
+		if (response?.error) {
+			setLoading(false);
+			setError(response.error);
+		}
 	};
 
 	return (
@@ -112,12 +128,8 @@ export const RegisterForm: FC<props> = ({ setError }) => {
 				)}
 			</Bottom>
 
-			<GenButton fullwidth disabled={loading || refreshState.loading}>
-				{loading || refreshState.loading ? (
-					<Puff stroke={theme.white} />
-				) : (
-					"Create account"
-				)}
+			<GenButton fullwidth disabled={loading}>
+				{loading ? <Puff stroke={theme.white} /> : "Create account"}
 			</GenButton>
 		</Form>
 	);
