@@ -34,7 +34,7 @@ export const authOptions: AuthOptions = {
 
 				let param: MutationLoginArgs;
 
-				if (isEmail) {
+				if (!isEmail) {
 					param = {
 						email: id,
 						password: credentials?.password || "",
@@ -58,8 +58,6 @@ export const authOptions: AuthOptions = {
 					const decoded: { exp: number; username: string } =
 						jwtDecode(user.token!);
 
-					console.log(decoded);
-
 					return {
 						...user,
 						isNewUser: false,
@@ -73,21 +71,12 @@ export const authOptions: AuthOptions = {
 		}),
 	],
 	callbacks: {
-		jwt: async ({ token, user }) => {
+		jwt: async ({ token, user, account }) => {
 			if (user) {
-				if (!user.success) {
-					const errorMessage: string =
-						user.errors[Object.keys(user.errors)[0]][0].message;
-					return {
-						...token,
-						error: errorMessage,
-					} as Awaitable<JWT>;
-				}
-
 				return {
 					accessToken: user.token || "",
 					refreshToken: user.refreshToken || "",
-					// username : user.user?.username || "",
+					username: user.username || "",
 					tokenExpiresIn: user.tokenExpiresIn,
 					isNewUser: user.isNewUser,
 				} as Awaitable<JWT>;
@@ -115,7 +104,7 @@ export const authOptions: AuthOptions = {
 						refresh_token: tokens.refreshToken,
 					};
 				} catch (error) {
-					console.error("Error refreshing access token", error);
+					// console.error("Error refreshing access token", error);
 					return {
 						...token,
 						error: "RefreshAccessTokenError",
@@ -125,10 +114,9 @@ export const authOptions: AuthOptions = {
 		},
 		session: async ({ session, token }) => {
 			session.token = token.accessToken;
-			// session.username = token.username;
+			session.username = token.username;
 			session.isNewUser = token.isNewUser;
 			session.expires = `${token.tokenExpiresIn}`;
-			session.error = token.error;
 			return session;
 		},
 	},
