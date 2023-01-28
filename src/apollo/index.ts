@@ -1,5 +1,13 @@
-import { ApolloClient, InMemoryCache, HttpLink, from } from "@apollo/client";
+import {
+	ApolloClient,
+	InMemoryCache,
+	from,
+	createHttpLink,
+	ApolloLink,
+} from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
+import { setContext } from "@apollo/client/link/context";
+import { getSession } from "next-auth/react";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
 	if (graphQLErrors) {
@@ -12,14 +20,25 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 	}
 });
 
+const authMiddleware = setContext(async (_, { headers }) => {
+	let token: string = "";
+	const session = await getSession();
+	token = session?.token as string;
+
+	return {
+		headers: {
+			...headers,
+			authorization: token ? `JWT ${token}` : "",
+		},
+	};
+});
+
+const httpLink = createHttpLink({
+	uri: process.env.NEXT_PUBLIC_API_URL,
+});
+
 // make your link
-const link = from([
-	errorLink,
-	new HttpLink({
-		uri: process.env.NEXT_PUBLIC_API_URL,
-		credentials: "include",
-	}),
-]);
+const link = from([authMiddleware, errorLink, httpLink]);
 
 export const Client = new ApolloClient({
 	link,

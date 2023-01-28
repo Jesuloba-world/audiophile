@@ -9,36 +9,33 @@ import {
 	TotalPrice,
 } from "./styles";
 import { GenButton } from "components";
-import { useQuery, useMutation } from "@apollo/client";
+import { useMutation, useLazyQuery } from "@apollo/client";
 import { MyCartDocument, RemoveAllCartDocument } from "src/graphql/generated";
-// import { useMe } from "hooks";
 import { Puff, TailSpin } from "react-loading-icons";
-import { useEffect, useContext } from "react";
 import { useTheme } from "styled-components";
 import { CartItem } from "components/Cards";
 import numeral from "numeral";
 import { useSelector } from "react-redux";
-import { ModalContext } from "../../Buttons/IconButton";
 import { Confirm } from "notiflix";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import { useEffect, useContext } from "react";
+import { ModalContext } from "../../Buttons/IconButton";
 
 export const CartModal = () => {
-	const { loading, loggedIn } = useMe();
+	const { status } = useSession();
 	const theme: any = useTheme();
 	const navigate = useRouter();
 
-	const cart = useQuery(MyCartDocument);
+	const [cart, { data, client, loading }] = useLazyQuery(MyCartDocument);
 	const [removeAll, removeAllState] = useMutation(RemoveAllCartDocument, {
 		awaitRefetchQueries: true,
 		refetchQueries: [{ query: MyCartDocument }],
 	});
-	const { setBackdrop } = useContext(ModalContext);
 
-	useEffect(() => {
-		!loading && loggedIn && cart.refetch();
-	}, [loading, loggedIn, cart]);
+	const { removeModal, setBackdrop } = useContext(ModalContext);
 
-	const usercart = cart.data?.userCart;
+	const usercart = data?.userCart;
 
 	const sortedUserCart = usercart
 		?.slice()
@@ -48,6 +45,15 @@ export const CartModal = () => {
 		);
 
 	const noItem = usercart?.length === 0;
+
+	useEffect(() => {
+		if (status === "authenticated") {
+			cart();
+		}
+		if (status === "unauthenticated") {
+			client.resetStore();
+		}
+	}, [client, status, cart]);
 
 	const removeAllCartItems = async () => {
 		Confirm.show(
@@ -89,49 +95,67 @@ export const CartModal = () => {
 			<CartItemContainer>
 				<Top>
 					<h6>Cart ({usercart?.length})</h6>
-					{!noItem ? (
+					{!noItem && status === "authenticated" ? (
 						<RemoveAll onClick={removeAllCartItems}>
 							Remove all
 						</RemoveAll>
 					) : null}
 				</Top>
-				{cart.loading ? (
-					<LoaderContainer>
-						<Puff stroke={theme.sienna} />
-					</LoaderContainer>
+				{status === "unauthenticated" ? (
+					<p>You are not logged in</p>
 				) : (
-					<UserCartContainer>
-						{sortedUserCart?.map((item) => (
-							<CartItem
-								key={item?.id}
-								cartId={item?.id}
-								id={item?.product.id}
-								image={item?.product.image?.desktop}
-								altText={item?.product.image?.altText}
-								name={item?.product.shortName}
-								price={item?.product.price}
-								quantity={item?.quantity}
-							/>
-						))}
-					</UserCartContainer>
-				)}
-				<Bottom>
-					<p>TOTAL</p>
-					<TotalPrice>
-						{cart.loading ||
-						cartUpdating ||
-						removeAllState.loading ? (
-							<TailSpin stroke={theme.sienna} height={25} />
+					<>
+						{loading ? (
+							<LoaderContainer>
+								<Puff stroke={theme.sienna} />
+							</LoaderContainer>
 						) : (
-							numeral(totalPrice).format("$0,0")
+							<UserCartContainer>
+								{sortedUserCart?.map((item) => (
+									<CartItem
+										key={item?.id}
+										cartId={item?.id}
+										id={item?.product.id}
+										image={item?.product.image?.desktop}
+										altText={item?.product.image?.altText}
+										name={item?.product.shortName}
+										price={item?.product.price}
+										quantity={item?.quantity}
+									/>
+								))}
+							</UserCartContainer>
 						)}
-					</TotalPrice>
-				</Bottom>
+						<Bottom>
+							<p>TOTAL</p>
+							<TotalPrice>
+								{loading ||
+								cartUpdating ||
+								removeAllState.loading ? (
+									<TailSpin
+										stroke={theme.sienna}
+										height={25}
+									/>
+								) : (
+									numeral(totalPrice).format("$0,0")
+								)}
+							</TotalPrice>
+						</Bottom>
+					</>
+				)}
 			</CartItemContainer>
 			<GenButton
-				disabled={noItem || cartUpdating || removeAllState.loading}
+				disabled={
+					noItem ||
+					cartUpdating ||
+					removeAllState.loading ||
+					status === "unauthenticated"
+				}
 				fullwidth
-				action={() => navigate.push("/checkout")}
+				action={() => {
+					removeModal();
+					setBackdrop(false);
+					navigate.push("/checkout");
+				}}
 			>
 				{noItem ? "No item to checkout" : "Checkout"}
 			</GenButton>

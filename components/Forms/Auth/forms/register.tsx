@@ -26,49 +26,6 @@ export const RegisterForm: FC<props> = ({ setError }) => {
 	const theme: any = useTheme();
 	const [loading, setLoading] = useState(false);
 
-	// const [Register, { loading }] = useMutation(RegisterDocument, {
-	// 	onCompleted(data) {
-	// 		if (data.register?.errors) {
-	// 			// handle escaped errors
-	// 			const errors = data.register?.errors;
-	// 			setError(errors[Object.keys(errors)[0]][0].message);
-	// 			return;
-	// 		}
-	// 		setError("");
-	// 		console.log(data);
-	// 		RefreshAndRevoke({
-	// 			variables: {
-	// 				refreshToken: data.register?.refreshToken as string,
-	// 			},
-	// 		});
-	// 	},
-	// 	onError(error) {
-	// 		if (error.networkError) {
-	// 			setError("Network Error!!");
-	// 		}
-	// 		console.log(error.message);
-	// 		console.log(error.graphQLErrors);
-	// 	},
-	// });
-
-	// const [RefreshAndRevoke, refreshState] = useMutation(
-	// 	RefreshAndRevokeTokenDocument,
-	// 	{
-	// 		onCompleted(data) {
-	// 			reset();
-	// 			removeForm();
-	// 			toast.success("Account created Successfully");
-	// 		},
-	// 		onError(error) {
-	// 			if (error.networkError) {
-	// 				setError("Network Error!!");
-	// 			}
-	// 			console.log(error.message);
-	// 			console.log(error.graphQLErrors);
-	// 		},
-	// 	}
-	// );
-
 	const {
 		handleSubmit,
 		register,
