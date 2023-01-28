@@ -7,7 +7,7 @@ interface inputProps {
 	label: string;
 	span?: boolean;
 	register: any;
-	placeholder: string;
+	placeholder?: string;
 	error?: string;
 }
 
@@ -18,6 +18,7 @@ export const InputWithLabel: FC<inputProps> = ({
 	register,
 	placeholder,
 	error,
+	...restprops
 }) => {
 	const isError = !!error;
 
@@ -32,6 +33,7 @@ export const InputWithLabel: FC<inputProps> = ({
 			<Input
 				name={name}
 				id={name}
+				{...restprops}
 				{...register(name)}
 				placeholder={placeholder}
 				isError={isError}

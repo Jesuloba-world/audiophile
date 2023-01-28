@@ -1,14 +1,19 @@
 import type { NextPageWithLayout } from "types/next";
-import { ReactElement, useEffect } from "react";
+import { ReactElement } from "react";
 import { MainLayout, CheckoutPageWrapper, CheckoutForm } from "containers";
-import { useBackdrop } from "hooks";
+import { useSession } from "next-auth/react";
+import { PreAuthLoader, PreAuthDenied } from "components";
 
 const Checkout: NextPageWithLayout = () => {
-	const { setBackdrop } = useBackdrop();
+	const { status } = useSession();
 
-	// useEffect(() => {
-	// 	setBackdrop(false);
-	// });
+	if (status === "loading") {
+		return <PreAuthLoader />;
+	}
+
+	if (status === "unauthenticated") {
+		return <PreAuthDenied />;
+	}
 
 	return (
 		<CheckoutPageWrapper>

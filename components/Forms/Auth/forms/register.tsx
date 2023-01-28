@@ -2,16 +2,11 @@ import { FC, useState } from "react";
 import { useTheme } from "styled-components";
 import { Form, Bottom, ErrorText, CheckboxWrapper } from "../styles";
 import { signupFormElements } from "../constant";
-import { AuthInput, GenButton, Spinner } from "components";
+import { InputWithLabel, GenButton } from "components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../schema";
-import { useMutation } from "@apollo/client";
-import {
-	RegisterDocument,
-	MutationRegisterArgs,
-	RefreshAndRevokeTokenDocument,
-} from "src/graphql/generated";
+import { MutationRegisterArgs } from "src/graphql/generated";
 import { useActions } from "./actions";
 import { Puff } from "react-loading-icons";
 import toast from "react-hot-toast";
@@ -65,11 +60,11 @@ export const RegisterForm: FC<props> = ({ setError }) => {
 	return (
 		<Form onSubmit={handleSubmit(handleRegister)}>
 			{signupFormElements.map((element, index) => (
-				<AuthInput
+				<InputWithLabel
 					{...element}
 					key={index}
 					register={register}
-					error={errors[element.name]}
+					error={errors[element.name]?.message as string}
 				/>
 			))}
 

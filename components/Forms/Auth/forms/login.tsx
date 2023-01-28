@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { Form, Bottom, ForgetText } from "../styles";
 import { loginFormElements } from "../constant";
-import { AuthInput, GenButton, Spinner } from "components";
+import { GenButton, InputWithLabel } from "components";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -54,11 +54,11 @@ export const LoginForm: FC<props> = ({ setError }) => {
 	return (
 		<Form onSubmit={handleSubmit(handleLogin)}>
 			{loginFormElements.map((element, index) => (
-				<AuthInput
+				<InputWithLabel
 					{...element}
 					key={index}
 					register={register}
-					error={errors[element.name]}
+					error={errors[element.name]?.message as string}
 				/>
 			))}
 
