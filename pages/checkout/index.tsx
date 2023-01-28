@@ -7,17 +7,15 @@ import { PreAuthLoader, PreAuthDenied } from "components";
 const Checkout: NextPageWithLayout = () => {
 	const { status } = useSession();
 
-	if (status === "loading") {
-		return <PreAuthLoader />;
-	}
-
-	if (status === "unauthenticated") {
-		return <PreAuthDenied />;
-	}
-
 	return (
 		<CheckoutPageWrapper>
-			<CheckoutForm />
+			{status === "loading" ? (
+				<PreAuthLoader />
+			) : status === "unauthenticated" ? (
+				<PreAuthDenied />
+			) : (
+				<CheckoutForm />
+			)}
 		</CheckoutPageWrapper>
 	);
 };
