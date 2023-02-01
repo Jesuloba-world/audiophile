@@ -12,6 +12,7 @@ export const CheckoutForm: FC = () => {
 		handleSubmit,
 		formState: { errors },
 		reset,
+		watch,
 	} = useForm({
 		resolver: yupResolver(checkoutSchema),
 		defaultValues: {
@@ -26,7 +27,11 @@ export const CheckoutForm: FC = () => {
 
 	return (
 		<Container onSubmit={handleSubmit(onSubmitHandler)}>
-			<Checkout register={register} errors={errors} />
+			<Checkout
+				register={register}
+				errors={errors}
+				selectedPayment={watch("payment")}
+			/>
 			<Summary />
 		</Container>
 	);

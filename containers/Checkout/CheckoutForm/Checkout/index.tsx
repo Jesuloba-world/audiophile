@@ -7,10 +7,15 @@ import {
 	SectionInputs,
 	PaymentTitle,
 	PaymentMethods,
+	PaymentInfo,
+	IconContainer,
+	Text,
 } from "./styles";
 import { formElements, paymentMethods } from "./constants";
 import { InputWithLabel, RadioInput } from "components";
 import { FieldErrorsImpl } from "react-hook-form";
+import CashOnDelivery from "assets/checkout/cashOnDelivery.svg";
+import CreditCardPay from "assets/checkout/credit-card-pay.svg";
 
 interface props {
 	register: any;
@@ -19,9 +24,12 @@ interface props {
 			[x: string]: any;
 		}>
 	>;
+	selectedPayment: string;
 }
 
-export const Checkout: FC<props> = ({ register, errors }) => {
+export const Checkout: FC<props> = ({ register, errors, selectedPayment }) => {
+	const isCashOnDelivery = selectedPayment === "cashondelivery";
+
 	return (
 		<Container>
 			<Heading>Checkout</Heading>
@@ -63,6 +71,20 @@ export const Checkout: FC<props> = ({ register, errors }) => {
 						))}
 					</PaymentMethods>
 					{/* TODO: add the description text under */}
+					<PaymentInfo>
+						<IconContainer>
+							{isCashOnDelivery ? (
+								<CashOnDelivery />
+							) : (
+								<CreditCardPay />
+							)}
+						</IconContainer>
+						<Text>
+							{isCashOnDelivery
+								? "The ‘Cash on Delivery’ option enables you to pay in cash when our delivery courier arrives at your residence. Just make sure your address is correct so that your order will not be cancelled. Not real 😉."
+								: "Don't worry your money will not be deducted. Not real 😉."}
+						</Text>
+					</PaymentInfo>
 				</SectionInputs>
 			</Section>
 		</Container>

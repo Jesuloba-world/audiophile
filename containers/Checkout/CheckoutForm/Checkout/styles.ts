@@ -50,3 +50,19 @@ export const PaymentMethods = styled.div`
 	flex-direction: column;
 	gap: 16px;
 `;
+
+export const PaymentInfo = styled.div`
+	grid-column: span 2;
+	display: flex;
+	gap: 32px;
+	align-items: center;
+`;
+
+export const IconContainer = styled.div`
+	svg {
+		height: 48px;
+		width: 48px;
+	}
+`;
+
+export const Text = styled.p``;
