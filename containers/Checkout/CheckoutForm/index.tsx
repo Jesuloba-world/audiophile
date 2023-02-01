@@ -25,14 +25,16 @@ export const CheckoutForm: FC = () => {
 		reset();
 	};
 
+	const currentPayment = watch("payment");
+
 	return (
 		<Container onSubmit={handleSubmit(onSubmitHandler)}>
 			<Checkout
 				register={register}
 				errors={errors}
-				selectedPayment={watch("payment")}
+				isCashOnDelivery={currentPayment === "cashondelivery"}
 			/>
-			<Summary />
+			<Summary isCashOnDelivery={currentPayment === "cashondelivery"} />
 		</Container>
 	);
 };

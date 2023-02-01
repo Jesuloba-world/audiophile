@@ -3719,6 +3719,7 @@ __metadata:
     react-hot-toast: ^2.4.0
     react-icons: ^4.4.0
     react-loading-icons: ^1.1.0
+    react-paystack: ^4.0.2
     react-redux: ^8.0.4
     react-test-renderer: ^18.2.0
     styled-components: ^5.3.5
@@ -8923,6 +8924,16 @@ __metadata:
   version: 1.1.0
   resolution: "react-loading-icons@npm:1.1.0"
   checksum: 41ee0f589c4cf04c9745bb3bc19febcf82deb8e4623072102f8ef861b3e06ecab449a5f74490075a4ecd6de215bebdb33e06b8e0b609158866e119c108e1312f
+  languageName: node
+  linkType: hard
+
+"react-paystack@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "react-paystack@npm:4.0.2"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: b6a384889d6dfb6ef5e340b449cf4634374a6d8f31a2e30815de5b809c6bc6b106f9b31e5c4df9df494d357da2884b8157965ef5948adbe7c30b9fb12589ec40
   languageName: node
   linkType: hard
 

@@ -20,7 +20,11 @@ import numeral from "numeral";
 
 const VATpercentage = 20 / 100;
 
-export const Summary: FC = () => {
+interface summaryProps {
+	isCashOnDelivery: boolean;
+}
+
+export const Summary: FC<summaryProps> = ({ isCashOnDelivery }) => {
 	const cart = useQuery(MyCartDocument);
 	const theme: any = useTheme();
 
@@ -103,9 +107,8 @@ export const Summary: FC = () => {
 					</Price>
 				) : null}
 			</Grand>
-			{/* TODO: change this dynamically based on payment option */}
 			<GenButton disabled={cart.loading} fullwidth>
-				Continue & Pay
+				Continue {!isCashOnDelivery ? `& Pay` : ""}
 			</GenButton>
 		</Container>
 	);

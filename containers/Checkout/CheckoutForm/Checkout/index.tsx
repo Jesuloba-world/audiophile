@@ -24,12 +24,10 @@ interface props {
 			[x: string]: any;
 		}>
 	>;
-	selectedPayment: string;
+	isCashOnDelivery: boolean;
 }
 
-export const Checkout: FC<props> = ({ register, errors, selectedPayment }) => {
-	const isCashOnDelivery = selectedPayment === "cashondelivery";
-
+export const Checkout: FC<props> = ({ register, errors, isCashOnDelivery }) => {
 	return (
 		<Container>
 			<Heading>Checkout</Heading>
