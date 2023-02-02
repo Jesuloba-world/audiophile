@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import {
 	Container,
 	Heading,
@@ -22,9 +22,10 @@ const VATpercentage = 20 / 100;
 
 interface summaryProps {
 	isCashOnDelivery: boolean;
+	getAmount: (a: number) => void;
 }
 
-export const Summary: FC<summaryProps> = ({ isCashOnDelivery }) => {
+export const Summary: FC<summaryProps> = ({ isCashOnDelivery, getAmount }) => {
 	const cart = useQuery(MyCartDocument);
 	const theme: any = useTheme();
 
@@ -37,12 +38,13 @@ export const Summary: FC<summaryProps> = ({ isCashOnDelivery }) => {
 				Number(new Date(A?.createdAt)) - Number(new Date(B?.createdAt))
 		);
 
-	const prices = [
+	const prices: { id: string; price: number }[] = [
 		{
 			id: "Total",
-			price: sortedUserCart
-				?.map((el) => el?.product.price * el?.quantity!)
-				.reduce((a, b) => a + b, 0),
+			price:
+				sortedUserCart
+					?.map((el) => el?.product.price * el?.quantity!)
+					.reduce((a, b) => a + b, 0) || 0,
 		},
 		{
 			id: "Shipping",
@@ -50,11 +52,20 @@ export const Summary: FC<summaryProps> = ({ isCashOnDelivery }) => {
 		},
 		{
 			id: "VAT (Included)",
-			price: sortedUserCart
-				?.map((el) => el?.product.price * el?.quantity!)
-				.reduce((a, b) => a + b * VATpercentage, 0),
+			price:
+				sortedUserCart
+					?.map((el) => el?.product.price * el?.quantity!)
+					.reduce((a, b) => a + b * VATpercentage, 0) || 0,
 		},
 	];
+
+	const grandTotal =
+		prices.find((el) => el.id === "Total")?.price! +
+		prices.find((el) => el.id === "Shipping")?.price!;
+
+	useEffect(() => {
+		getAmount(grandTotal);
+	}, [getAmount, grandTotal]);
 
 	return (
 		<Container>
@@ -97,12 +108,7 @@ export const Summary: FC<summaryProps> = ({ isCashOnDelivery }) => {
 					<Price>
 						<PriceId>Grand Total</PriceId>
 						<GrandNumber>
-							$
-							{numeral(
-								prices.find((el) => el.id === "Total")?.price! +
-									prices.find((el) => el.id === "Shipping")
-										?.price!
-							).format("0,0")}
+							${numeral(grandTotal).format("0,0")}
 						</GrandNumber>
 					</Price>
 				) : null}

@@ -5,7 +5,7 @@ export const Container = styled.div<{ span?: boolean }>`
 	flex-direction: column;
 	gap: 9px;
 
-	${({ span }) => span && `grid-column: span 2`};
+	${({ span }) => (span ? `grid-column: span 2` : null)};
 `;
 
 export const Top = styled.div`

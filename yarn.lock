@@ -3245,6 +3245,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/uuid@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "@types/uuid@npm:9.0.0"
+  checksum: 59ae56d9547c8758588659da2a2b4c97cce79c2aae1798c892bb29452ef08e87859dea2ec3a66bfa88d0d2153147520be2b1893be920f9f0bc9c53a3207ea6aa
+  languageName: node
+  linkType: hard
+
 "@types/ws@npm:^8.0.0":
   version: 8.5.3
   resolution: "@types/ws@npm:8.5.3"
@@ -3699,11 +3706,13 @@ __metadata:
     "@types/react-dom": 18.0.5
     "@types/react-test-renderer": ^18.0.0
     "@types/styled-components": ^5.1.25
+    "@types/uuid": ^9.0.0
     autoprefixer: ^10.4.7
     axios: ^1.1.2
     cookies-next: ^2.1.1
     eslint: 8.19.0
     eslint-config-next: 12.2.0
+    flutterwave-react-v3: ^1.3.0
     graphql: ^16.6.0
     jest: ^28.1.2
     jest-environment-jsdom: ^28.1.2
@@ -3719,13 +3728,13 @@ __metadata:
     react-hot-toast: ^2.4.0
     react-icons: ^4.4.0
     react-loading-icons: ^1.1.0
-    react-paystack: ^4.0.2
     react-redux: ^8.0.4
     react-test-renderer: ^18.2.0
     styled-components: ^5.3.5
     tailwindcss: ^3.1.4
     ts-jest: ^28.0.5
     typescript: 4.7.4
+    uuid: ^9.0.0
     yup: ^0.32.11
   languageName: unknown
   linkType: soft
@@ -3759,6 +3768,15 @@ __metadata:
   version: 4.4.2
   resolution: "axe-core@npm:4.4.2"
   checksum: 93fbb36c5ac8ab5e67e49678a6f7be0dc799a9f560edd95cca1f0a8183def8c50205972366b9941a3ea2b20224a1fe230e6d87ef38cb6db70472ed1b694febd1
+  languageName: node
+  linkType: hard
+
+"axios@npm:^0.21.1":
+  version: 0.21.4
+  resolution: "axios@npm:0.21.4"
+  dependencies:
+    follow-redirects: ^1.14.0
+  checksum: 44245f24ac971e7458f3120c92f9d66d1fc695e8b97019139de5b0cc65d9b8104647db01e5f46917728edfc0cfd88eb30fc4c55e6053eef4ace76768ce95ff3c
   languageName: node
   linkType: hard
 
@@ -5719,7 +5737,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.15.0":
+"flutterwave-react-v3@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "flutterwave-react-v3@npm:1.3.0"
+  dependencies:
+    axios: ^0.21.1
+  peerDependencies:
+    react: ^15.0.0 || ^18.0.0
+    react-dom: ^15.0.0 || ^18.0.0
+  checksum: cd2162e3d24f5c67c562b121dee2215f97caff42e7d0558078ffcef7523bbe0237966590c7ebdfb06f73abccabaa579f1e120a320072793e07e0f972ecd34af1
+  languageName: node
+  linkType: hard
+
+"follow-redirects@npm:^1.14.0, follow-redirects@npm:^1.15.0":
   version: 1.15.2
   resolution: "follow-redirects@npm:1.15.2"
   peerDependenciesMeta:
@@ -8927,16 +8957,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-paystack@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "react-paystack@npm:4.0.2"
-  peerDependencies:
-    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: b6a384889d6dfb6ef5e340b449cf4634374a6d8f31a2e30815de5b809c6bc6b106f9b31e5c4df9df494d357da2884b8157965ef5948adbe7c30b9fb12589ec40
-  languageName: node
-  linkType: hard
-
 "react-redux@npm:^8.0.4":
   version: 8.0.4
   resolution: "react-redux@npm:8.0.4"
@@ -10445,6 +10465,15 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "uuid@npm:9.0.0"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 8dd2c83c43ddc7e1c71e36b60aea40030a6505139af6bee0f382ebcd1a56f6cd3028f7f06ffb07f8cf6ced320b76aea275284b224b002b289f89fe89c389b028
   languageName: node
   linkType: hard
 

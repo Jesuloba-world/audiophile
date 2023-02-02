@@ -80,7 +80,7 @@ export const Checkout: FC<props> = ({ register, errors, isCashOnDelivery }) => {
 						<Text>
 							{isCashOnDelivery
 								? "The ‘Cash on Delivery’ option enables you to pay in cash when our delivery courier arrives at your residence. Just make sure your address is correct so that your order will not be cancelled. Not real 😉."
-								: "Don't worry your money will not be deducted. Not real 😉."}
+								: "Don't worry your money will not be deducted. Total price will be slashed by 100 to comply with flutterwave. Use Flutterwave test cards for safer testing. Have fun😉."}
 						</Text>
 					</PaymentInfo>
 				</SectionInputs>

@@ -50,8 +50,8 @@ export const formElements: {
 
 export const paymentMethods = [
 	{
-		value: "paystack",
-		label: "Paystack",
+		value: "flutterwave",
+		label: "Flutterwave",
 		name: "payment",
 	},
 	{
