@@ -5,7 +5,7 @@ import { Footer } from "./Footer";
 import { Copy } from "./Copy";
 import { CategoryPick } from "containers";
 import { CategoryType } from "src/graphql/generated";
-import { BackdropProvider, LoginProvider } from "providers";
+import { BackdropProvider, LoginProvider, OrderProvider } from "providers";
 
 interface layoutProps {
 	children: ReactNode;
@@ -31,15 +31,20 @@ export const MainLayout: FC<layoutProps> = ({
 			</Head>
 			<LoginProvider>
 				<BackdropProvider>
-					<Header home={home} />
-					{children}
-					{!home || !checkout ? (
-						categories ? (
-							<CategoryPick home={home} categories={categories} />
-						) : null
-					) : null}
-					{!checkout ? <Copy home={home} /> : null}
-					<Footer />
+					<OrderProvider>
+						<Header home={home} />
+						{children}
+						{!home || !checkout ? (
+							categories ? (
+								<CategoryPick
+									home={home}
+									categories={categories}
+								/>
+							) : null
+						) : null}
+						{!checkout ? <Copy home={home} /> : null}
+						<Footer />
+					</OrderProvider>
 				</BackdropProvider>
 			</LoginProvider>
 		</>

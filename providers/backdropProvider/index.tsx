@@ -1,9 +1,10 @@
 import { FC, ReactNode } from "react";
-import { useBackdrop, useLogin } from "hooks";
+import { useBackdrop, useLogin, useOrder } from "hooks";
 import { BackDrop } from "./styles";
 
 export const BackdropProvider: FC<{ children: ReactNode }> = ({ children }) => {
 	const { showLogin } = useLogin();
+	const { showOrder, setOrder } = useOrder();
 
 	const { setBackdrop, showBackdrop } = useBackdrop();
 
@@ -11,9 +12,9 @@ export const BackdropProvider: FC<{ children: ReactNode }> = ({ children }) => {
 		<>
 			{showBackdrop ? (
 				<BackDrop
-					isLogin={showLogin}
+					highz={showLogin || showOrder}
 					onClick={() => {
-						if (!showLogin) {
+						if (!(showLogin || showOrder)) {
 							setBackdrop(false);
 						}
 					}}
