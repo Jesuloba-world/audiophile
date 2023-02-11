@@ -4,7 +4,7 @@ import { BackDrop } from "./styles";
 
 export const BackdropProvider: FC<{ children: ReactNode }> = ({ children }) => {
 	const { showLogin } = useLogin();
-	const { showOrder, setOrder } = useOrder();
+	const { showOrder } = useOrder();
 
 	const { setBackdrop, showBackdrop } = useBackdrop();
 

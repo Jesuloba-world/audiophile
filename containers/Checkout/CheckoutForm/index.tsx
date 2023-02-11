@@ -33,11 +33,13 @@ export const CheckoutForm: FC = () => {
 	});
 
 	const onSubmitHandler = (data: any) => {
-		if (data.payment === "flutterwave") {
-			handleFlutterPayment();
-		} else {
-			// reset();
-			afterPayment();
+		switch (data.payment) {
+			case "flutterwave":
+				handleFlutterPayment();
+				afterPayment();
+				break;
+			default:
+				afterPayment();
 		}
 	};
 
