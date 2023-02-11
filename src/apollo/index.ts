@@ -7,7 +7,7 @@ import {
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { setContext } from "@apollo/client/link/context";
-import { getSession } from "next-auth/react";
+import { getSession, signOut } from "next-auth/react";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
 	if (graphQLErrors) {
@@ -22,8 +22,12 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const authMiddleware = setContext(async (_, { headers }) => {
 	let token: string = "";
-	const session = await getSession();
-	token = session?.token as string;
+	try {
+		const session = await getSession();
+		token = session?.token as string;
+	} catch (error) {
+		signOut();
+	}
 
 	return {
 		headers: {

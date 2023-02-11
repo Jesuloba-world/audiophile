@@ -13,7 +13,6 @@ declare module "next-auth" {
 		token: string;
 		username: string;
 		isNewUser: boolean;
-		error: string;
 	}
 }
 
@@ -24,6 +23,5 @@ declare module "next-auth/jwt" {
 		username: string;
 		isNewUser: boolean;
 		tokenExpiresIn: number;
-		error: string;
 	}
 }

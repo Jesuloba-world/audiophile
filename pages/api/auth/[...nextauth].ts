@@ -182,10 +182,12 @@ export const authOptions: AuthOptions = {
 					console.error(
 						error.errors[Object.keys(error.errors)[0]][0].message
 					);
-					return {
-						...token,
-						error: "RefreshAccessTokenError",
-					};
+					throw new Error(
+						`RefreshAccessTokenError: ${
+							error.errors[Object.keys(error.errors)[0]][0]
+								.message
+						}`
+					);
 				}
 			}
 		},

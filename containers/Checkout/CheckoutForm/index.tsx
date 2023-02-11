@@ -60,7 +60,6 @@ export const CheckoutForm: FC = () => {
 		if (data.payment === "flutterwave") {
 			handleFlutterPayment(fwConfig);
 		} else {
-			// cash on delivery
 		}
 		// reset();
 	};
