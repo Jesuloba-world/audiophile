@@ -36,7 +36,6 @@ export const CheckoutForm: FC = () => {
 		switch (data.payment) {
 			case "flutterwave":
 				handleFlutterPayment();
-				afterPayment();
 				break;
 			default:
 				afterPayment();
