@@ -12,12 +12,12 @@ import {
 	Price,
 	Quantity,
 } from "./style";
-import { CartItemType } from "src/graphql/generated";
+import { OrderProductType } from "src/graphql/generated";
 import numeral from "numeral";
 import Image from "next/image";
 
 interface orderItemsProps {
-	items: CartItemType[];
+	items: OrderProductType[];
 	grandTotal: number;
 }
 
@@ -34,31 +34,33 @@ export const OrderItems: FC<orderItemsProps> = ({ items, grandTotal }) => {
 		<Container>
 			<Items>
 				<ItemContainer>
-					{items.slice(0, showNumber).map((item) => (
+					{items?.slice(0, showNumber).map((item) => (
 						<Item key={item.id}>
 							<Image
-								src={item.product.image?.desktop as string}
-								alt={item.product.name as string}
+								src={item.product?.image?.desktop as string}
+								alt={item.product?.name as string}
 								height={50}
 								width={50}
 							/>
 							<NamePrice>
-								<Name>{item.product.shortName}</Name>
+								<Name>{item.product?.shortName}</Name>
 								<Price>
-									{numeral(item.product.price).format("$0,0")}
+									{numeral(item.product?.price).format(
+										"$0,0"
+									)}
 								</Price>
 							</NamePrice>
 							<Quantity>x{item.quantity}</Quantity>
 						</Item>
 					))}
 				</ItemContainer>
-				{!(items.length <= 1) ? (
+				{!(items?.length <= 1) && !(items === undefined) ? (
 					<>
 						<Divider />
 						<Others onClick={toggleShow}>
 							{showAll
 								? "View less"
-								: `and ${items.length - 1} other item(s)`}
+								: `and ${items?.length - 1} other item(s)`}
 						</Others>
 					</>
 				) : null}

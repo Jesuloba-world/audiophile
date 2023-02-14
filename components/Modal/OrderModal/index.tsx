@@ -4,15 +4,26 @@ import { ModalWrapper } from "../ModalWrapper";
 import { useOrder, useBackdrop } from "hooks";
 import { useRouter } from "next/router";
 import CheckMark from "assets/checkout/checkmark.svg";
-import { CartItemType, MyCartDocument } from "src/graphql/generated";
-import { useQuery } from "@apollo/client";
+import {
+	CartItemType,
+	MyCartDocument,
+	NewOrderDocument,
+	OrderProductType,
+} from "src/graphql/generated";
+import { useQuery, useMutation } from "@apollo/client";
+import { Puff } from "react-loading-icons";
+import { useTheme } from "styled-components";
+import { useEffect } from "react";
 
 export const OrderModal = () => {
 	const { setBackdrop } = useBackdrop();
 	const { setOrder } = useOrder();
 	const navigate = useRouter();
+	const theme: any = useTheme();
 
-	const { data } = useQuery(MyCartDocument);
+	const [newOrder, { loading, data }] = useMutation(NewOrderDocument);
+
+	console.log(data);
 
 	const backToHome = () => {
 		setOrder(false);
@@ -20,32 +31,45 @@ export const OrderModal = () => {
 		// navigate.push("/");
 	};
 
-	const usercart = data?.userCart;
+	// useEffect(() => {
+	// 	newOrder({
+	// 		variables: {
 
-	const sortedUserCart = usercart
-		?.slice()
-		.sort(
-			(A, B) =>
-				Number(new Date(A?.createdAt)) - Number(new Date(B?.createdAt))
-		);
+	// 		}
+	// 	})
+	// }, []);
 
 	return (
 		<ModalWrapper>
 			<Inner>
-				<MarkContainer>
-					<CheckMark />
-				</MarkContainer>
-				<Appreciation>
-					Thank you <br /> for your order
-				</Appreciation>
-				<Text>You will receive an email confirmation shortly</Text>
-				<OrderItems
-					items={sortedUserCart as CartItemType[]}
-					grandTotal={7148}
-				/>
-				<GenButton fullwidth action={backToHome}>
-					back to home
-				</GenButton>
+				{loading ? (
+					<div>
+						<Puff stroke={theme.sienna} />
+						<h3>Preparing your order</h3>
+					</div>
+				) : (
+					<>
+						<MarkContainer>
+							<CheckMark />
+						</MarkContainer>
+						<Appreciation>
+							Thank you <br /> for your order
+						</Appreciation>
+						<Text>
+							You will receive an email confirmation shortly
+						</Text>
+						<OrderItems
+							items={
+								data?.order
+									?.orderproductSet as OrderProductType[]
+							}
+							grandTotal={data?.order?.grandTotal}
+						/>
+						<GenButton fullwidth action={backToHome}>
+							back to home
+						</GenButton>
+					</>
+				)}
 			</Inner>
 		</ModalWrapper>
 	);

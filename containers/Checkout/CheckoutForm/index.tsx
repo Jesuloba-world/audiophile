@@ -16,6 +16,7 @@ export const CheckoutForm: FC = () => {
 		formState: { errors },
 		reset,
 		watch,
+		getValues,
 	} = useForm({
 		resolver: yupResolver(checkoutSchema),
 		defaultValues: {
@@ -23,6 +24,10 @@ export const CheckoutForm: FC = () => {
 			email: "",
 			phone: "",
 			name: "",
+			address: "",
+			zipcode: "",
+			city: "",
+			country: "",
 		},
 	});
 

@@ -1,0 +1,28 @@
+mutation NewOrder(
+	$address: OrderAddressInput!
+	$paymentMethod: String!
+	$totalPrice: Decimal!
+) {
+	newOrder(
+		address: $address
+		paymentMethod: $paymentMethod
+		total: $totalPrice
+	) {
+		order {
+			orderproductSet {
+				id
+				product {
+					image {
+						desktop
+						altText
+					}
+					shortName
+					price
+				}
+				quantity
+			}
+			grandTotal
+		}
+		success
+	}
+}

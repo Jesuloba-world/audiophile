@@ -17,6 +17,11 @@ export type Scalars = {
   GenericScalar: any;
 };
 
+/**
+ * This is field creates or updates a cart item, based on the quantity and product passed to it
+ *
+ * Each user can only have unique products in their cart, 2 same products are not allowed. So when you pass same product with different quantity, the product already in the cart gets updated
+ */
 export type AddCartMutation = {
   __typename?: 'AddCartMutation';
   cartItem?: Maybe<CartItemType>;
@@ -107,6 +112,11 @@ export type MiniProductType = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /**
+   * This is field creates or updates a cart item, based on the quantity and product passed to it
+   *
+   * Each user can only have unique products in their cart, 2 same products are not allowed. So when you pass same product with different quantity, the product already in the cart gets updated
+   */
   addToCart?: Maybe<AddCartMutation>;
   /**
    * Archive account and revoke refresh tokens.
@@ -138,6 +148,7 @@ export type Mutation = {
    * return `unarchiving=True` on output.
    */
   login?: Maybe<ObtainJsonWebToken>;
+  newOrder?: Maybe<NewOrderMutation>;
   /**
    * Change account password when user knows the old password.
    *
@@ -252,6 +263,13 @@ export type MutationLoginArgs = {
 };
 
 
+export type MutationNewOrderArgs = {
+  address: OrderAddressInput;
+  paymentMethod: Scalars['String'];
+  total: Scalars['Decimal'];
+};
+
+
 export type MutationPasswordChangeArgs = {
   newPassword1: Scalars['String'];
   newPassword2: Scalars['String'];
@@ -309,6 +327,12 @@ export type MutationVerifyTokenArgs = {
   token: Scalars['String'];
 };
 
+export type NewOrderMutation = {
+  __typename?: 'NewOrderMutation';
+  order?: Maybe<OrderType>;
+  success?: Maybe<Scalars['Boolean']>;
+};
+
 /** An object with an ID */
 export type Node = {
   /** The ID of the object. */
@@ -336,6 +360,74 @@ export type ObtainJsonWebToken = {
   token?: Maybe<Scalars['String']>;
   unarchiving?: Maybe<Scalars['Boolean']>;
   user?: Maybe<UserNode>;
+};
+
+/** Input type for the OrderAddress object. */
+export type OrderAddressInput = {
+  address: Scalars['String'];
+  city: Scalars['String'];
+  country: Scalars['String'];
+  emailAddress: Scalars['String'];
+  name: Scalars['String'];
+  phoneNumber: Scalars['String'];
+  zipcode: Scalars['String'];
+};
+
+export type OrderAddressType = {
+  __typename?: 'OrderAddressType';
+  address: Scalars['String'];
+  city: Scalars['String'];
+  country: Scalars['String'];
+  emailAddress: Scalars['String'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  order: OrderType;
+  phoneNumber: Scalars['String'];
+  zipcode: Scalars['String'];
+};
+
+/** An enumeration. */
+export enum OrderProductStatus {
+  /** Delivered */
+  Delivered = 'DELIVERED',
+  /** Shipped */
+  Shipped = 'SHIPPED',
+  /** Shipping */
+  Shipping = 'SHIPPING',
+  /** Verifying payment */
+  Verifying = 'VERIFYING'
+}
+
+export type OrderProductType = {
+  __typename?: 'OrderProductType';
+  id: Scalars['ID'];
+  product?: Maybe<ProductType>;
+  quantity: Scalars['Int'];
+  status: OrderProductStatus;
+};
+
+/** An enumeration. */
+export enum OrderStatus {
+  /** Delivered */
+  Delivered = 'DELIVERED',
+  /** Shipped */
+  Shipped = 'SHIPPED',
+  /** Shipping */
+  Shipping = 'SHIPPING',
+  /** Verifying payment */
+  Verifying = 'VERIFYING'
+}
+
+export type OrderType = {
+  __typename?: 'OrderType';
+  createdAt: Scalars['DateTime'];
+  grandTotal: Scalars['Decimal'];
+  id: Scalars['ID'];
+  orderaddress?: Maybe<OrderAddressType>;
+  orderproductSet: Array<OrderProductType>;
+  paymentMethod: Scalars['String'];
+  status: OrderStatus;
+  updatedAt: Scalars['DateTime'];
 };
 
 /**
@@ -395,6 +487,7 @@ export type ProductType = {
   /** Required and unique */
   name?: Maybe<Scalars['String']>;
   new: Scalars['Boolean'];
+  orderproductSet: Array<OrderProductType>;
   others: Array<MiniProductType>;
   price?: Maybe<Scalars['Decimal']>;
   shortName?: Maybe<Scalars['String']>;
@@ -410,6 +503,8 @@ export type Query = {
   /** Returns specific category */
   categoryBySlug?: Maybe<CategoryType>;
   me?: Maybe<UserNode>;
+  /** get all order related to a user */
+  myOrder?: Maybe<Array<Maybe<OrderType>>>;
   /** Get product by Slug */
   productBySlug?: Maybe<ProductType>;
   /** return user cart items */
@@ -536,6 +631,7 @@ export type UserNode = Node & {
   isStaff: Scalars['Boolean'];
   lastLogin?: Maybe<Scalars['DateTime']>;
   lastName: Scalars['String'];
+  orderSet: Array<OrderType>;
   pk?: Maybe<Scalars['Int']>;
   secondaryEmail?: Maybe<Scalars['String']>;
   /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
@@ -610,6 +706,15 @@ export type DeleteFromCartMutationVariables = Exact<{
 
 export type DeleteFromCartMutation = { __typename?: 'Mutation', deleteFromCart?: { __typename?: 'DeleteCartMutation', success?: boolean | null } | null };
 
+export type NewOrderMutationVariables = Exact<{
+  address: OrderAddressInput;
+  paymentMethod: Scalars['String'];
+  totalPrice: Scalars['Decimal'];
+}>;
+
+
+export type NewOrderMutation = { __typename?: 'Mutation', newOrder?: { __typename?: 'NewOrderMutation', success?: boolean | null, order?: { __typename?: 'OrderType', grandTotal: any, orderproductSet: Array<{ __typename?: 'OrderProductType', id: string, quantity: number, product?: { __typename?: 'ProductType', shortName?: string | null, price?: any | null, image?: { __typename?: 'ProductImageType', desktop: string, altText?: string | null } | null } | null }> } | null } | null };
+
 export type MyCartQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -656,6 +761,7 @@ export const RefreshAndRevokeTokenDocument = {"kind":"Document","definitions":[{
 export const AddToCartDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AddToCart"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"productId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"quantity"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"addToCart"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"productId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"productId"}}},{"kind":"Argument","name":{"kind":"Name","value":"quantity"},"value":{"kind":"Variable","name":{"kind":"Name","value":"quantity"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cartItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"quantity"}}]}}]}}]}}]} as unknown as DocumentNode<AddToCartMutation, AddToCartMutationVariables>;
 export const RemoveAllCartDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"RemoveAllCart"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"removeAllCart"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<RemoveAllCartMutation, RemoveAllCartMutationVariables>;
 export const DeleteFromCartDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteFromCart"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteFromCart"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<DeleteFromCartMutation, DeleteFromCartMutationVariables>;
+export const NewOrderDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"NewOrder"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"address"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"OrderAddressInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"paymentMethod"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"totalPrice"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Decimal"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"newOrder"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"address"},"value":{"kind":"Variable","name":{"kind":"Name","value":"address"}}},{"kind":"Argument","name":{"kind":"Name","value":"paymentMethod"},"value":{"kind":"Variable","name":{"kind":"Name","value":"paymentMethod"}}},{"kind":"Argument","name":{"kind":"Name","value":"total"},"value":{"kind":"Variable","name":{"kind":"Name","value":"totalPrice"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"order"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orderproductSet"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"product"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"desktop"}},{"kind":"Field","name":{"kind":"Name","value":"altText"}}]}},{"kind":"Field","name":{"kind":"Name","value":"shortName"}},{"kind":"Field","name":{"kind":"Name","value":"price"}}]}},{"kind":"Field","name":{"kind":"Name","value":"quantity"}}]}},{"kind":"Field","name":{"kind":"Name","value":"grandTotal"}}]}},{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<NewOrderMutation, NewOrderMutationVariables>;
 export const MyCartDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MyCart"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userCart"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"product"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"shortName"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"desktop"}},{"kind":"Field","name":{"kind":"Name","value":"altText"}}]}},{"kind":"Field","name":{"kind":"Name","value":"price"}}]}},{"kind":"Field","name":{"kind":"Name","value":"quantity"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]} as unknown as DocumentNode<MyCartQuery, MyCartQueryVariables>;
 export const GetAllCategorySlugsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllCategorySlugs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<GetAllCategorySlugsQuery, GetAllCategorySlugsQueryVariables>;
 export const GetCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"altText"}},{"kind":"Field","name":{"kind":"Name","value":"image"}}]}}]}}]}}]} as unknown as DocumentNode<GetCategoriesQuery, GetCategoriesQueryVariables>;
