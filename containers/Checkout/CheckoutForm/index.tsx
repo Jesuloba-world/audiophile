@@ -35,6 +35,7 @@ export const CheckoutForm: FC = () => {
 		amount,
 		reset,
 		watch,
+		getValues,
 	});
 
 	const onSubmitHandler = (data: any) => {

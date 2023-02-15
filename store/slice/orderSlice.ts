@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { NewOrderMutationVariables } from "src/graphql/generated";
 
-interface orderInfoType extends NewOrderMutationVariables {}
+export interface orderInfoType extends NewOrderMutationVariables {
+	cleared: boolean;
+}
 
 const initialState: orderInfoType = {
 	address: {
@@ -16,9 +18,10 @@ const initialState: orderInfoType = {
 	},
 	paymentMethod: "",
 	totalPrice: 0,
+	cleared: true,
 };
 
-export const orderInfoSlice = createSlice({
+const orderInfoSlice = createSlice({
 	name: "layout",
 	initialState,
 	reducers: {
@@ -26,11 +29,17 @@ export const orderInfoSlice = createSlice({
 			state,
 			action: PayloadAction<NewOrderMutationVariables>
 		) => {
-			state = action.payload;
+			state.address = action.payload.address;
+			state.paymentMethod = action.payload.paymentMethod;
+			state.totalPrice = action.payload.totalPrice;
+			state.cleared = false;
+		},
+		clearOrderInfo: (state) => {
+			state = initialState;
 		},
 	},
 });
 
-export const { setOrderInfo } = orderInfoSlice.actions;
+export const { setOrderInfo, clearOrderInfo } = orderInfoSlice.actions;
 
 export default orderInfoSlice.reducer;
