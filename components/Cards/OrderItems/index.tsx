@@ -38,7 +38,7 @@ export const OrderItems: FC<orderItemsProps> = ({ items, grandTotal }) => {
 						<Item key={item.id}>
 							<Image
 								src={item.product?.image?.desktop as string}
-								alt={item.product?.name as string}
+								alt={item.product?.image?.altText as string}
 								height={50}
 								width={50}
 							/>

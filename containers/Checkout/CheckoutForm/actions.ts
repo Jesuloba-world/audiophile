@@ -5,7 +5,10 @@ import {
 	NewOrderDocument,
 	OrderAddressInput,
 	NewOrderMutationVariables,
+	MyCartDocument,
+	OrderType,
 } from "src/graphql/generated";
+import { useMutation } from "@apollo/client";
 
 interface arguments {
 	amount: number;
@@ -28,7 +31,8 @@ export const usePaymentAction: usePaymentActionType = ({
 	getValues,
 }) => {
 	const { setBackdrop } = useBackdrop();
-	const { setOrder, setInfo } = useOrder();
+	const { setOrder, setInfo, loadOrder } = useOrder();
+	const [newOrder] = useMutation(NewOrderDocument);
 
 	const config = {
 		public_key: process.env.NEXT_PUBLIC_FLUTTER_PUBLIC_KEY!,
@@ -94,18 +98,29 @@ export const usePaymentAction: usePaymentActionType = ({
 
 	const handleFlutterPayment = useFlutterwave(config);
 
-	const afterPayment = () => {
+	const afterPayment = async () => {
 		const [address, payment] = getAddressAndPayment();
-		console.log(address, payment, amount);
-
-		setInfo({
-			address: address,
-			paymentMethod: payment,
-			totalPrice: amount,
-		});
-
 		setBackdrop(true);
 		setOrder(true);
+
+		loadOrder();
+		try {
+			const response: any = await newOrder({
+				variables: {
+					address: address,
+					paymentMethod: payment,
+					totalPrice: amount,
+				},
+				awaitRefetchQueries: true,
+				refetchQueries: [{ query: MyCartDocument }],
+			});
+
+			console.log(response);
+
+			setInfo(response.data?.newOrder.order as OrderType);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return {

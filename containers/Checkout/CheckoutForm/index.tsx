@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { Container } from "./styles";
 import { Checkout } from "./Checkout";
 import { Summary } from "./Summary";
@@ -59,7 +59,10 @@ export const CheckoutForm: FC = () => {
 			/>
 			<Summary
 				isCashOnDelivery={currentPayment === "cashondelivery"}
-				getAmount={(amount: number) => setAmount(amount)}
+				getAmount={useCallback(
+					(amount: number) => setAmount(amount),
+					[]
+				)}
 			/>
 		</Container>
 	);

@@ -23,3 +23,10 @@ export const Text = styled.p`
 	mix-blend-mode: normal;
 	opacity: 0.5;
 `;
+
+export const Loading = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
+`;
