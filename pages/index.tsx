@@ -1,19 +1,31 @@
 import type { NextPageWithLayout } from "types/next";
 import { ReactElement } from "react";
 import { MainLayout, Hero, CategoryPick, Featured } from "containers";
-import { GetCategoriesDocument, CategoryType } from "src/graphql/generated";
+import {
+	PopulateHomeDocument,
+	PopulateHomeQuery,
+	CategoryType,
+	ProductImageType,
+	ProductType,
+} from "src/graphql/generated";
 import { Client } from "src/apollo";
 
 interface homeProps {
-	categories: CategoryType[];
-	refresh: string;
+	data: NonNullable<PopulateHomeQuery>;
 }
 
-const Home: NextPageWithLayout<homeProps> = ({ categories }) => {
+const Home: NextPageWithLayout<homeProps> = ({ data }) => {
 	return (
 		<>
-			<Hero />
-			<CategoryPick home categories={categories} />
+			<Hero
+				image={data.hero?.image as ProductImageType}
+				product={data.hero?.product as ProductType}
+				copy={data.hero?.copy || ""}
+			/>
+			<CategoryPick
+				home
+				categories={data.allCategories as CategoryType[]}
+			/>
 			<Featured />
 		</>
 	);
@@ -27,12 +39,12 @@ export default Home;
 
 export async function getStaticProps() {
 	const { data } = await Client.query({
-		query: GetCategoriesDocument,
+		query: PopulateHomeDocument,
 	});
 
 	return {
 		props: {
-			categories: data.allCategories,
+			data,
 		},
 	};
 }

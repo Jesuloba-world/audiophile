@@ -1,0 +1,38 @@
+query PopulateHome {
+	hero {
+		product {
+			name
+			new
+			slug
+		}
+		copy
+		image {
+			desktop
+			tablet
+			mobile
+		}
+	}
+	allCategories {
+		id
+		name
+		slug
+		image {
+			altText
+			image
+		}
+	}
+	featuredProducts {
+		id
+		product {
+			name
+			slug
+		}
+		copy
+		image {
+			desktop
+			tablet
+			mobile
+			altText
+		}
+	}
+}
