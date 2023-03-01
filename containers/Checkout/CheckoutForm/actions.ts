@@ -2,9 +2,8 @@ import { v4 as UUID } from "uuid";
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import { useOrder, useBackdrop } from "hooks";
 import {
-	NewOrderDocument,
+	CreateNewOrderDocument,
 	OrderAddressInput,
-	NewOrderMutationVariables,
 	MyCartDocument,
 	OrderType,
 } from "src/graphql/generated";
@@ -32,7 +31,7 @@ export const usePaymentAction: usePaymentActionType = ({
 }) => {
 	const { setBackdrop } = useBackdrop();
 	const { setOrder, setInfo, loadOrder } = useOrder();
-	const [newOrder] = useMutation(NewOrderDocument);
+	const [newOrder] = useMutation(CreateNewOrderDocument);
 
 	const config = {
 		public_key: process.env.NEXT_PUBLIC_FLUTTER_PUBLIC_KEY!,

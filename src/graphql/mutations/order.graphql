@@ -1,4 +1,4 @@
-mutation NewOrder(
+mutation CreateNewOrder(
 	$address: OrderAddressInput!
 	$paymentMethod: String!
 	$totalPrice: Decimal!
