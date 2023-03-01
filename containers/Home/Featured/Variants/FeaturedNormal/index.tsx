@@ -12,7 +12,7 @@ interface props {
 export const FeaturedNormal: FC<props> = ({ image, name, slug }) => {
 	return (
 		<Container>
-			<Image src={image} alt={`${name.toLowerCase()} image`} />
+			<Image src={image} alt={`${name.toLowerCase()} image`} fill />
 			<Mask>
 				<TextContainer>
 					<h4>{name}</h4>

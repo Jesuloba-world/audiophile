@@ -7,6 +7,7 @@ import {
 	CategoryType,
 	ProductImageType,
 	ProductType,
+	FeaturedProductType,
 } from "src/graphql/generated";
 import { Client } from "src/apollo";
 
@@ -26,7 +27,9 @@ const Home: NextPageWithLayout<homeProps> = ({ data }) => {
 				home
 				categories={data.allCategories as CategoryType[]}
 			/>
-			<Featured />
+			<Featured
+				data={(data.featuredProducts as FeaturedProductType[]) || []}
+			/>
 		</>
 	);
 };

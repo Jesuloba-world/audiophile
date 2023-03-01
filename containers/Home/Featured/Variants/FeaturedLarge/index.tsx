@@ -13,7 +13,12 @@ interface props {
 export const FeaturedLarge: FC<props> = ({ image, name, content, slug }) => {
 	return (
 		<Container>
-			<Image src={image} alt={`${name.toLowerCase()} image`} />
+			<Image
+				src={image}
+				alt={`${name.toLowerCase()} image`}
+				width={795}
+				height={560}
+			/>
 			<Mask>
 				<TextContainer>
 					<Title>{name}</Title>

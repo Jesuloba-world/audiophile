@@ -8,6 +8,7 @@ export const Container = styled.div`
 `;
 
 export const ImageBox = styled.div`
+	position: relative;
 	border-radius: 8px;
 	overflow: hidden;
 `;

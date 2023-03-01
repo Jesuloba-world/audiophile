@@ -2,38 +2,43 @@ import { FC } from "react";
 import { Container } from "./featured.style";
 import { featuredProducts } from "./data";
 import { FeaturedLarge, FeaturedNormal, FeaturedBroken } from "./Variants";
+import { FeaturedProductType } from "src/graphql/generated";
 
-export const Featured: FC = () => {
+interface featuredProps {
+	data: FeaturedProductType[];
+}
+
+export const Featured: FC<featuredProps> = ({ data }) => {
 	return (
 		<Container>
-			{featuredProducts.map((el, index) => {
-				switch (el.type) {
-					case "large":
+			{data.map((el, index) => {
+				switch (el.boxType) {
+					case "BIG":
 						return (
 							<FeaturedLarge
-								image={el.image}
-								name={el.name}
-								content={el.content!}
-								slug={el.slug}
 								key={index}
+								image={el.image?.desktop}
+								name={el.product.name as string}
+								content={el.copy as string}
+								slug={el.product.slug as string}
 							/>
 						);
-					case "normal":
+					case "NORMAL":
 						return (
 							<FeaturedNormal
 								key={index}
-								image={el.image}
-								name={el.name}
-								slug={el.slug}
+								image={el.image?.desktop}
+								name={el.product.name as string}
+								slug={el.product.slug as string}
 							/>
 						);
-					case "broken":
+					case "BROKEN":
 						return (
 							<FeaturedBroken
 								key={index}
-								image={el.image}
-								name={el.name}
-								slug={el.slug}
+								image={el.image?.desktop}
+								name={el.product.name as string}
+								slug={el.product.slug as string}
 							/>
 						);
 				}

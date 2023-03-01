@@ -13,7 +13,7 @@ export const FeaturedBroken: FC<props> = ({ image, name, slug }) => {
 	return (
 		<Container>
 			<ImageBox>
-				<Image src={image} alt={`${name.toLowerCase()} image`} />
+				<Image src={image} alt={`${name.toLowerCase()} image`} fill />
 			</ImageBox>
 			<TextBox>
 				<TextContainer>
