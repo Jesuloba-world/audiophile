@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { Container } from "./featured.style";
-import { featuredProducts } from "./data";
 import { FeaturedLarge, FeaturedNormal, FeaturedBroken } from "./Variants";
 import { FeaturedProductType } from "src/graphql/generated";
 

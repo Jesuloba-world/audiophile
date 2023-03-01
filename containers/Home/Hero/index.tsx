@@ -10,9 +10,6 @@ import {
 import { SeeProductButton } from "components";
 import { ProductImageType, ProductType } from "src/graphql/generated";
 
-// should be changed later
-const slug = "xx99_mark_ii_headphones";
-
 interface heroProps {
 	image: ProductImageType;
 	product: ProductType;
