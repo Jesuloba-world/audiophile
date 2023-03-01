@@ -88,8 +88,7 @@ export const usePaymentAction: usePaymentActionType = ({
 
 	const fwConfig = {
 		callback: (response: any) => {
-			console.log(response);
-			reset();
+			// console.log(response);
 			closePaymentModal();
 			afterPayment();
 		},
@@ -102,6 +101,7 @@ export const usePaymentAction: usePaymentActionType = ({
 		const [address, payment] = getAddressAndPayment();
 		setBackdrop(true);
 		setOrder(true);
+		reset();
 
 		loadOrder();
 		try {
