@@ -6,7 +6,8 @@ import { checkIsEmail } from "utils";
 import {
 	LoginDocument,
 	MutationLoginArgs,
-	RefreshAndRevokeTokenDocument,
+	RefreshTokenDocument,
+	RevokeTokenDocument,
 	MutationRegisterArgs,
 	RegisterDocument,
 } from "src/graphql/generated";
@@ -160,7 +161,14 @@ export const authOptions: AuthOptions = {
 			} else {
 				try {
 					const res = await Client.mutate({
-						mutation: RefreshAndRevokeTokenDocument,
+						mutation: RefreshTokenDocument,
+						variables: {
+							refreshToken: token.refreshToken,
+						},
+					});
+
+					Client.mutate({
+						mutation: RevokeTokenDocument,
 						variables: {
 							refreshToken: token.refreshToken,
 						},

@@ -26,13 +26,16 @@ mutation Login($email: String, $username: String, $password: String!) {
 	}
 }
 
-mutation RefreshAndRevokeToken($refreshToken: String!) {
+mutation RefreshToken($refreshToken: String!) {
 	refreshToken(refreshToken: $refreshToken) {
 		success
 		errors
 		token
 		refreshToken
 	}
+}
+
+mutation RevokeToken($refreshToken: String!) {
 	revokeToken(refreshToken: $refreshToken) {
 		success
 		errors
