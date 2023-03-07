@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { Form, Bottom, ForgetText } from "../styles";
 import { loginFormElements } from "../constant";
 import { GenButton, InputWithLabel } from "components";
-import Link from "next/link";
+// import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../schema";

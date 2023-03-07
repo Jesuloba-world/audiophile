@@ -1,4 +1,4 @@
-import { Container, Heading, Loader, OrderContainer } from "./style";
+import { Container, Heading, Loader, OrderContainer, Message } from "./style";
 import { OrderItems } from "components";
 import { useQuery } from "@apollo/client";
 import { GetOrderDocument, OrderProductType } from "src/graphql/generated";
@@ -18,15 +18,25 @@ export const OrderDisplay = () => {
 				</Loader>
 			) : (
 				<OrderContainer>
-					{data?.myOrder?.map((el) => (
-						<OrderItems
-							key={el?.id}
-							items={el?.orderproductSet as OrderProductType[]}
-							grandTotal={el?.grandTotal}
-						/>
-					))}
+					{data?.myOrder?.length === undefined ||
+					data?.myOrder?.length < 1 ? (
+						<Message>You have no orders yet</Message>
+					) : (
+						data?.myOrder?.map((el) => (
+							<OrderItems
+								key={el?.id}
+								items={
+									el?.orderproductSet as OrderProductType[]
+								}
+								grandTotal={el?.grandTotal}
+							/>
+						))
+					)}
 				</OrderContainer>
 			)}
 		</Container>
 	);
 };
+
+{
+}

@@ -23,3 +23,7 @@ export const OrderContainer = styled.div`
 	flex-direction: column;
 	gap: 20px;
 `;
+
+export const Message = styled.h5`
+	color: ${({ theme }) => theme.error};
+`;
