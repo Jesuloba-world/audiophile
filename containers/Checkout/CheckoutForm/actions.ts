@@ -6,6 +6,7 @@ import {
 	OrderAddressInput,
 	MyCartDocument,
 	OrderType,
+	GetOrderDocument,
 } from "src/graphql/generated";
 import { useMutation } from "@apollo/client";
 
@@ -111,7 +112,10 @@ export const usePaymentAction: usePaymentActionType = ({
 					totalPrice: amount,
 				},
 				awaitRefetchQueries: true,
-				refetchQueries: [{ query: MyCartDocument }],
+				refetchQueries: [
+					{ query: MyCartDocument },
+					{ query: GetOrderDocument },
+				],
 			});
 
 			console.log(response);
