@@ -8,6 +8,7 @@ import { Puff } from "react-loading-icons";
 import { useTheme } from "styled-components";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
+import { Client } from "src/apollo";
 
 export const UserModal = () => {
 	const navigate = useRouter().push;
@@ -25,8 +26,10 @@ export const UserModal = () => {
 
 	const logOut = () => {
 		signOut({ redirect: false });
+		Client.cache.reset();
 		removeModal();
 		setBackdrop(false);
+		navigate("/");
 	};
 
 	const goToOrders = () => {

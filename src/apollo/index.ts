@@ -3,7 +3,6 @@ import {
 	InMemoryCache,
 	from,
 	createHttpLink,
-	ApolloLink,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { setContext } from "@apollo/client/link/context";
