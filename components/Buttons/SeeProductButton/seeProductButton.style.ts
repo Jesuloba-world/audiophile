@@ -1,42 +1,6 @@
 import styled from "styled-components";
-
-export type colorType = "black" | "sienna" | undefined;
-
-const interpretColor = (color: colorType, theme: any) => {
-	switch (color) {
-		case "black":
-			return `
-                    color: ${theme.white};
-                    background-color: ${theme.black};
-
-					&:hover {
-						background-color: ${theme.grey};
-					}
-                `;
-
-		case "sienna":
-			return `
-                    color: ${theme.white};
-                    background-color: ${theme.sienna};
-
-					&:hover {
-						background-color: ${theme.light_salmon};
-					}
-                `;
-
-		default:
-			return `
-				color: ${theme.black};
-				background-color: transparent;
-				border: 1px solid ${theme.black};
-
-				&:hover {
-					background-color: ${theme.black};
-					color: ${theme.white};
-				}
-        	`;
-	}
-};
+import { colorType } from "types";
+import { interpretColor } from "../colorutil";
 
 export const Container = styled.div<{ color: colorType }>`
 	button {

@@ -18,7 +18,7 @@ export const FeaturedBroken: FC<props> = ({ image, name, slug }) => {
 			<TextBox>
 				<TextContainer>
 					<h4>{name}</h4>
-					<SeeProductButton slug={slug} />
+					<SeeProductButton slug={slug} color={"transparent"} />
 				</TextContainer>
 			</TextBox>
 		</Container>

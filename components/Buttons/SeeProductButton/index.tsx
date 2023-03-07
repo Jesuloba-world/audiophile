@@ -1,11 +1,11 @@
 import { FC } from "react";
-import { Container, colorType } from "./seeProductButton.style";
+import { Container } from "./seeProductButton.style";
+import { colorType } from "types";
 import Link from "next/link";
-import { hrefType } from "types";
 
 interface seeProductButtonprops {
 	slug: string;
-	color?: colorType;
+	color: colorType;
 }
 
 export const SeeProductButton: FC<seeProductButtonprops> = ({
