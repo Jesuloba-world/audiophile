@@ -7,13 +7,33 @@ import { useBackdrop } from "hooks";
 import { Puff } from "react-loading-icons";
 import { useTheme } from "styled-components";
 import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export const UserModal = () => {
+	const navigate = useRouter().push;
+
 	const { setLogin } = useLogin();
 	const { removeModal } = useContext(ModalContext);
 	const theme: any = useTheme();
 	const { setBackdrop } = useBackdrop();
 	const { data, status } = useSession();
+
+	const startLogin = () => {
+		setLogin(true);
+		removeModal();
+	};
+
+	const logOut = () => {
+		signOut({ redirect: false });
+		removeModal();
+		setBackdrop(false);
+	};
+
+	const goToOrders = () => {
+		removeModal();
+		setBackdrop(false);
+		navigate("/orders");
+	};
 
 	return (
 		<Container>
@@ -31,25 +51,24 @@ export const UserModal = () => {
 			{!(status === "authenticated") ? (
 				<GenButton
 					fullwidth
-					action={() => {
-						setLogin(true);
-						removeModal();
-					}}
+					action={startLogin}
 					disabled={status === "loading"}
 				>
 					Login
 				</GenButton>
 			) : (
-				<GenButton
-					fullwidth
-					action={() => {
-						signOut({ redirect: false });
-						removeModal();
-						setBackdrop(false);
-					}}
-				>
-					Logout
-				</GenButton>
+				<>
+					<GenButton
+						fullwidth
+						color="transparent"
+						action={goToOrders}
+					>
+						Orders
+					</GenButton>
+					<GenButton fullwidth action={logOut}>
+						Logout
+					</GenButton>
+				</>
 			)}
 		</Container>
 	);

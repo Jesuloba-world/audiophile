@@ -1,0 +1,20 @@
+query GetOrder {
+	myOrder {
+		id
+		grandTotal
+		orderproductSet {
+			product {
+				id
+				shortName
+				price
+				image {
+					desktop
+					tablet
+					mobile
+					altText
+				}
+			}
+			quantity
+		}
+	}
+}

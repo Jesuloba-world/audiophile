@@ -20,6 +20,10 @@ export const interpretColor = (color: colorType, theme: any) => {
 					&:hover {
 						background-color: ${theme.light_salmon};
 					}
+
+                    &:disabled {
+                        background:  ${theme.light_salmon};
+                    }
                 `;
 
 		case "transparent":

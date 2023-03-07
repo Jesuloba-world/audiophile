@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { colorType } from "types";
+import { interpretColor } from "../colorutil";
 
-export const Container = styled.button<{ full?: boolean }>`
+export const Container = styled.button<{ full?: boolean; color: colorType }>`
 	height: 48px;
 	width: ${({ full }) => (full ? `100%` : `160px`)};
-	background: ${({ theme }) => theme.sienna};
 	text-transform: uppercase;
 
 	font-family: "Manrope";
@@ -12,18 +13,10 @@ export const Container = styled.button<{ full?: boolean }>`
 	line-height: 18px;
 	letter-spacing: 1px;
 
-	color: ${({ theme }) => theme.white};
-
-	&:hover {
-		background: ${({ theme }) => theme.light_salmon};
-	}
+	${({ color, theme }) => interpretColor(color, theme)};
 
 	&:focus {
 		outline: none;
-	}
-
-	&:disabled {
-		background: ${({ theme }) => theme.light_salmon};
 	}
 
 	display: flex;
