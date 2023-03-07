@@ -63,9 +63,9 @@ export const LoginForm: FC<props> = ({ setError }) => {
 			))}
 
 			<Bottom>
-				<Link href={"/forget-password"}>
+				{/* <Link href={"/forget-password"}>
 					<ForgetText>Forgot password?</ForgetText>
-				</Link>
+				</Link> */}
 			</Bottom>
 
 			<GenButton fullwidth disabled={loading}>
