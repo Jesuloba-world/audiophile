@@ -1,25 +1,53 @@
-import { FC, useState } from "react";
-import { Container, Inner, IconLinks } from "./header.style";
+import { FC, useState, useEffect } from "react";
+import {
+	Container,
+	Inner,
+	IconLinks,
+	HamButton,
+	SideNav,
+} from "./header.style";
 import { Logo, IconButton } from "components";
 import { iconButtons } from "./data";
 import { MidLinks } from "../MidLinks";
+import Hamburger from "assets/shared/tablet/icon-hamburger.svg";
+import { useBackdrop } from "hooks";
+import { CategoryPick } from "containers";
+import { CategoryType } from "src/graphql/generated";
 
 interface headerProps {
 	home?: boolean;
+	categories: CategoryType[];
 }
 
-export const Header: FC<headerProps> = ({ home }) => {
-	const [whichIsActive, setWhichIsActive] = useState<
-		"cart" | "user" | undefined
-	>();
+type whichIsActiveType = "cart" | "user" | undefined;
 
-	const setActive = (name: "cart" | "user" | undefined) => {
+export const Header: FC<headerProps> = ({ home, categories }) => {
+	const [showSideNav, setShowSideNav] = useState(false);
+	const [whichIsActive, setWhichIsActive] = useState<whichIsActiveType>();
+
+	const setActive = (name: whichIsActiveType) => {
 		setWhichIsActive(name);
+	};
+
+	const { toggleBackdrop, showBackdrop } = useBackdrop();
+
+	useEffect(() => {
+		if (!showBackdrop) {
+			setShowSideNav(false);
+		}
+	}, [showBackdrop]);
+
+	const onHamClick = () => {
+		setShowSideNav((prev) => !prev);
+		toggleBackdrop();
 	};
 
 	return (
 		<Container home={home}>
 			<Inner>
+				<HamButton onClick={onHamClick}>
+					<Hamburger />
+				</HamButton>
 				<Logo />
 				<MidLinks />
 				<IconLinks>
@@ -35,6 +63,11 @@ export const Header: FC<headerProps> = ({ home }) => {
 					))}
 				</IconLinks>
 			</Inner>
+			{showSideNav ? (
+				<SideNav>
+					<CategoryPick categories={categories} home={false} />
+				</SideNav>
+			) : null}
 		</Container>
 	);
 };

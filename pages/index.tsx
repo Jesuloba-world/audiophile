@@ -34,8 +34,12 @@ const Home: NextPageWithLayout<homeProps> = ({ data }) => {
 	);
 };
 
-Home.getLayout = (page: ReactElement) => {
-	return <MainLayout home>{page}</MainLayout>;
+Home.getLayout = (page: ReactElement, { data }) => {
+	return (
+		<MainLayout home categories={data.allCategories}>
+			{page}
+		</MainLayout>
+	);
 };
 
 export default Home;

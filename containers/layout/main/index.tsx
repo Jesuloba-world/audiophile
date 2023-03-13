@@ -22,8 +22,6 @@ export const MainLayout: FC<layoutProps> = ({
 	categories,
 	checkout,
 }) => {
-	//TODO: use Redux to replace the Providers
-
 	return (
 		<>
 			<Head>
@@ -32,7 +30,10 @@ export const MainLayout: FC<layoutProps> = ({
 			<LoginProvider>
 				<BackdropProvider>
 					<OrderProvider>
-						<Header home={home} />
+						<Header
+							home={home}
+							categories={categories as CategoryType[]}
+						/>
 						{children}
 						{!home || !checkout ? (
 							categories ? (

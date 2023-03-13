@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "styled.config";
 
 export const Container = styled.header<{
 	home?: boolean;
@@ -8,6 +9,10 @@ export const Container = styled.header<{
 	height: 96px;
 	position: relative;
 	z-index: 10;
+
+	@media ${devices.tablet} {
+		height: 90px;
+	}
 `;
 
 export const Inner = styled.div`
@@ -18,6 +23,15 @@ export const Inner = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	position: relative;
+
+	@media ${devices.desktop} {
+		margin-inline: 40px;
+	}
+
+	@media ${devices.tablet} {
+		justify-content: flex-start;
+		gap: 40px;
+	}
 
 	&::after {
 		display: block;
@@ -35,4 +49,36 @@ export const IconLinks = styled.div`
 	display: flex;
 	gap: 34px;
 	align-items: center;
+
+	@media ${devices.tablet} {
+		margin-left: auto;
+		gap: 28px;
+	}
+`;
+
+export const HamButton = styled.button`
+	display: none;
+
+	@media ${devices.tablet} {
+		display: block;
+	}
+`;
+
+export const SideNav = styled.div`
+	background-color: ${({ theme }) => theme.white};
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	padding-block: 56px 67px;
+	padding-inline: 40px;
+
+	& > section {
+		margin-block: 0;
+		height: 217px;
+	}
+
+	& > section > div > a {
+		height: 165px;
+	}
 `;
