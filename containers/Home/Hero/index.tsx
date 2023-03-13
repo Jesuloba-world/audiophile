@@ -18,7 +18,7 @@ interface heroProps {
 
 export const Hero: FC<heroProps> = ({ image, product, copy }) => {
 	return (
-		<Container image={image.desktop}>
+		<Container image={image.desktop} tabletImage={image.tablet}>
 			<Inner>
 				<TextContainer>
 					{product.new && <Overline>NEW PRODUCT</Overline>}

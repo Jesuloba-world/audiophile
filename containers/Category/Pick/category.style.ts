@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "styled.config";
 
 export const Container = styled.section<{ home: boolean | undefined }>`
 	max-width: 1110px;
@@ -8,9 +9,20 @@ export const Container = styled.section<{ home: boolean | undefined }>`
 	height: 284px;
 
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 
 	gap: 30px;
+
+	@media ${devices.desktop} {
+		padding-inline: 40px;
+	}
+
+	@media ${devices.tablet} {
+		height: auto;
+		margin-block: 96px;
+		column-gap: 10px;
+		row-gap: 50px;
+	}
 `;
 
 export const OneCategory = styled.div`
@@ -29,6 +41,10 @@ export const GreyInside = styled.a`
 	align-items: flex-end;
 	justify-content: center;
 	position: relative;
+
+	@media ${devices.tablet} {
+		height: 165px;
+	}
 `;
 
 export const Imager = styled.div`

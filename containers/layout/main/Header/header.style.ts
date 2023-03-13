@@ -71,14 +71,11 @@ export const SideNav = styled.div`
 	left: 0;
 	width: 100%;
 	padding-block: 56px 67px;
-	padding-inline: 40px;
+
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 
 	& > section {
 		margin-block: 0;
-		height: 217px;
-	}
-
-	& > section > div > a {
-		height: 165px;
 	}
 `;

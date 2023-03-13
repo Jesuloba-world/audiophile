@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { devices } from "styled.config";
 
-export const Container = styled.section<{ image: any }>`
+export const Container = styled.section<{ image: string; tabletImage: string }>`
 	height: calc(100vh - 96px);
 	background-color: ${({ theme }) => theme.smoky};
 	background-image: url(${({ image }) => image});
@@ -10,6 +11,11 @@ export const Container = styled.section<{ image: any }>`
 
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
+
+	@media ${devices.tablet} {
+		height: calc(100vh - 90px);
+		background-image: url(${({ tabletImage }) => tabletImage});
+	}
 `;
 
 export const Inner = styled.div`
@@ -19,12 +25,25 @@ export const Inner = styled.div`
 
 	display: flex;
 	align-items: center;
+
+	@media ${devices.desktop} {
+		padding-inline: 40px;
+	}
+
+	@media ${devices.tablet} {
+		justify-content: center;
+	}
 `;
 
 export const TextContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
+
+	@media ${devices.tablet} {
+		align-items: center;
+		text-align: center;
+	}
 
 	a {
 		margin-top: 16px;
