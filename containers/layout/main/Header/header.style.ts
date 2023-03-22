@@ -33,7 +33,7 @@ export const Inner = styled.div`
 		justify-content: flex-start;
 		gap: 40px;
 
-		${MiddleLinks} {
+		& ${MiddleLinks} {
 			display: none;
 		}
 	}

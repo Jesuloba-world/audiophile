@@ -16,6 +16,11 @@ export const Inner = styled.div`
 		padding-inline: 40px;
 		padding-block: 60px 46px;
 	}
+
+	@media ${devices.tablet500} {
+		padding-inline: 24px;
+		padding-block: 52px 38px;
+	}
 `;
 
 export const Top = styled.div`
@@ -25,6 +30,11 @@ export const Top = styled.div`
 	@media ${devices.tablet} {
 		flex-direction: column;
 		gap: 32px;
+	}
+
+	@media ${devices.tablet500} {
+		align-items: center;
+		gap: 48px;
 	}
 `;
 
@@ -37,11 +47,21 @@ export const Middle = styled.div`
 		grid-template-columns: 1fr;
 		margin-block: 32px 80px;
 	}
+
+	@media ${devices.tablet500} {
+		margin-block: 48px;
+	}
 `;
 
 export const Bottom = styled.div`
 	display: flex;
 	justify-content: space-between;
+
+	@media ${devices.tablet500} {
+		flex-direction: column;
+		align-items: center;
+		gap: 48px;
+	}
 `;
 
 export const Note = styled.p`
@@ -54,6 +74,10 @@ export const Note = styled.p`
 
 	@media ${devices.tablet} {
 		width: 100%;
+	}
+
+	@media ${devices.tablet500} {
+		text-align: center;
 	}
 `;
 
@@ -92,5 +116,10 @@ export const Yellow = styled.div`
 
 	@media ${devices.desktop} {
 		left: 40px;
+	}
+
+	@media ${devices.tablet500} {
+		left: 50%;
+		transform: translateX(-50%);
 	}
 `;
