@@ -1,10 +1,37 @@
 import styled from "styled-components";
+import { devices } from "styled.config";
 
 export const Container = styled.div`
 	height: 560px;
 	background-color: ${({ theme }) => theme.sienna};
 	border-radius: 8px;
 	position: relative;
+	overflow: hidden;
+	order: 1;
+
+	.tablet {
+		display: none;
+	}
+
+	@media ${devices.tablet} {
+		height: 720px;
+
+		display: flex;
+		justify-content: center;
+
+		img {
+			transform: translateY(-200px);
+			object-fit: contain;
+		}
+
+		.tablet {
+			display: block;
+		}
+
+		.desktop {
+			display: none;
+		}
+	}
 `;
 
 export const Mask = styled.div`
@@ -16,6 +43,12 @@ export const Mask = styled.div`
 	display: flex;
 	align-items: center;
 	padding-inline: 95px;
+
+	@media ${devices.tablet} {
+		justify-content: center;
+		text-align: center;
+		padding-bottom: 64px;
+	}
 `;
 
 export const TextContainer = styled.div`
@@ -27,6 +60,11 @@ export const TextContainer = styled.div`
 
 	a {
 		margin-top: 16px;
+	}
+
+	@media ${devices.tablet} {
+		margin-left: 0;
+		margin-top: auto;
 	}
 `;
 

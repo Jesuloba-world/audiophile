@@ -35,7 +35,7 @@ export const MainLayout: FC<layoutProps> = ({
 							categories={categories as CategoryType[]}
 						/>
 						{children}
-						{!home || !checkout ? (
+						{!(home || checkout) ? (
 							categories ? (
 								<CategoryPick
 									home={home}

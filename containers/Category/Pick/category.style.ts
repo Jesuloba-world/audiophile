@@ -21,7 +21,7 @@ export const Container = styled.section<{ home: boolean | undefined }>`
 		height: auto;
 		margin-block: 96px;
 		column-gap: 10px;
-		row-gap: 50px;
+		row-gap: 60px;
 	}
 `;
 

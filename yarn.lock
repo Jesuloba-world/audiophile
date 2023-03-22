@@ -3339,6 +3339,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@wixc3/board-core@npm:^2.1.3":
+  version: 2.1.3
+  resolution: "@wixc3/board-core@npm:2.1.3"
+  checksum: adb3a6d9e770c7159922337eb27669e2d255c2f13b2d690d62439c8f726e3a5d6998d27782e95f8d62ce2bfc875d21bbd1f914a2f71f546139d29d52cca05458
+  languageName: node
+  linkType: hard
+
+"@wixc3/react-board@npm:^2.1.3":
+  version: 2.1.3
+  resolution: "@wixc3/react-board@npm:2.1.3"
+  dependencies:
+    "@wixc3/board-core": ^2.1.3
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: d0aa380fd6590c125ffe1bc9ce42df8f69bc30475f4e6cbf4e90227dad2def5d15bfce8d039622c18481b8b44a08c2f20c412480474d45562b1ecb652e87a194
+  languageName: node
+  linkType: hard
+
 "@wry/context@npm:^0.7.0":
   version: 0.7.0
   resolution: "@wry/context@npm:0.7.0"
@@ -3707,6 +3726,7 @@ __metadata:
     "@types/react-test-renderer": ^18.0.0
     "@types/styled-components": ^5.1.25
     "@types/uuid": ^9.0.0
+    "@wixc3/react-board": ^2.1.3
     autoprefixer: ^10.4.7
     axios: ^1.1.2
     cookies-next: ^2.1.1

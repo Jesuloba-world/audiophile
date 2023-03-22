@@ -5,6 +5,7 @@ export const Container = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 30px;
+	order: 3;
 `;
 
 export const ImageBox = styled.div`

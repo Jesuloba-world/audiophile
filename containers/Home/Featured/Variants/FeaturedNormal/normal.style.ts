@@ -6,6 +6,7 @@ export const Container = styled.div`
 	overflow: hidden;
 	background-color: ${({ theme }) => theme.cultured};
 	position: relative;
+	order: 2;
 `;
 
 export const Mask = styled.div`
