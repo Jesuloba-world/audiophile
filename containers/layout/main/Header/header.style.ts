@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { devices } from "styled.config";
+import { MiddleLinks } from "../MidLinks/midlinks.style";
 
 export const Container = styled.header<{
 	home?: boolean;
@@ -31,6 +32,10 @@ export const Inner = styled.div`
 	@media ${devices.tablet} {
 		justify-content: flex-start;
 		gap: 40px;
+
+		${MiddleLinks} {
+			display: none;
+		}
 	}
 
 	&::after {

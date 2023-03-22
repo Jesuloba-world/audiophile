@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "styled.config";
 
 export const Container = styled.footer`
 	color: ${({ theme }) => theme.white};
@@ -10,17 +11,37 @@ export const Inner = styled.div`
 	max-width: 1110px;
 	margin: 0 auto;
 	position: relative;
+
+	@media ${devices.desktop} {
+		padding-inline: 40px;
+		padding-block: 60px 46px;
+	}
 `;
 
 export const Top = styled.div`
 	display: flex;
 	justify-content: space-between;
+
+	@media ${devices.tablet} {
+		flex-direction: column;
+		gap: 32px;
+	}
 `;
 
 export const Middle = styled.div`
 	margin-block: 36px 56px;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
+
+	@media ${devices.tablet} {
+		grid-template-columns: 1fr;
+		margin-block: 32px 80px;
+	}
+`;
+
+export const Bottom = styled.div`
+	display: flex;
+	justify-content: space-between;
 `;
 
 export const Note = styled.p`
@@ -30,6 +51,10 @@ export const Note = styled.p`
 	mix-blend-mode: normal;
 	opacity: 0.5;
 	width: 540px;
+
+	@media ${devices.tablet} {
+		width: 100%;
+	}
 `;
 
 export const Socials = styled.div`
@@ -37,6 +62,20 @@ export const Socials = styled.div`
 	justify-content: flex-end;
 	display: flex;
 	gap: 16px;
+
+	${Bottom} & {
+		display: none;
+	}
+
+	@media ${devices.tablet} {
+		${Bottom} & {
+			display: flex;
+		}
+
+		${Middle} & {
+			display: none;
+		}
+	}
 `;
 
 export const Copyright = styled(Note)`
@@ -50,4 +89,8 @@ export const Yellow = styled.div`
 	background-color: ${({ theme }) => theme.sienna};
 	height: 4px;
 	width: 101px;
+
+	@media ${devices.desktop} {
+		left: 40px;
+	}
 `;

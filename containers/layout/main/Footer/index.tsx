@@ -8,6 +8,7 @@ import {
 	Socials,
 	Copyright,
 	Yellow,
+	Bottom,
 } from "./footer.style";
 import { Logo, IconLink } from "components";
 import { MidLinks } from "../MidLinks";
@@ -36,7 +37,18 @@ export const Footer: FC<footerProps> = () => {
 						))}
 					</Socials>
 				</Middle>
-				<Copyright>{copyrightText}</Copyright>
+				<Bottom>
+					<Copyright>{copyrightText}</Copyright>
+					<Socials>
+						{socialIcons.map((el, index) => (
+							<IconLink
+								key={index}
+								Icon={el.Icon}
+								link={el.link}
+							/>
+						))}
+					</Socials>
+				</Bottom>
 			</Inner>
 		</Container>
 	);
