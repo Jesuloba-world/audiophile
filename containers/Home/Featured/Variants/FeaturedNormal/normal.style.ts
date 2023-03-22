@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "styled.config";
 
 export const Container = styled.div`
 	height: 320px;
@@ -7,6 +8,20 @@ export const Container = styled.div`
 	background-color: ${({ theme }) => theme.cultured};
 	position: relative;
 	order: 2;
+
+	.tablet {
+		display: none;
+	}
+
+	@media ${devices.tablet} {
+		.tablet {
+			display: block;
+		}
+
+		.desktop {
+			display: none;
+		}
+	}
 `;
 
 export const Mask = styled.div`
@@ -18,6 +33,10 @@ export const Mask = styled.div`
 	padding-inline: 95px;
 	display: flex;
 	align-items: center;
+
+	@media ${devices.tablet} {
+		padding-inline: 62px;
+	}
 `;
 
 export const TextContainer = styled.div`

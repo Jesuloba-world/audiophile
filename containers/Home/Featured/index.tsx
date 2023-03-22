@@ -28,6 +28,7 @@ export const Featured: FC<featuredProps> = ({ data }) => {
 							<FeaturedNormal
 								key={index}
 								image={el.image?.desktop}
+								tablet={el.image?.tablet as string}
 								name={el.product.name as string}
 								slug={el.product.slug as string}
 							/>
