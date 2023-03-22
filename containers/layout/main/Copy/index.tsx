@@ -7,6 +7,7 @@ import {
 	ImageContainer,
 } from "./copy.style";
 import BestGear from "assets/shared/desktop/image-best-gear.jpg";
+import BestGearTablet from "assets/shared/tablet/image-best-gear.jpg";
 import Image from "next/image";
 
 interface copyProps {
@@ -31,7 +32,18 @@ export const Copy: FC<copyProps> = ({ home }) => {
 				</SubTitle>
 			</TextContainer>
 			<ImageContainer>
-				<Image src={BestGear} alt={"We have the Best Gear"} priority />
+				<Image
+					className="desktop"
+					src={BestGear}
+					alt={"We have the Best Gear"}
+					priority
+				/>
+				<Image
+					className="tablet"
+					src={BestGearTablet}
+					alt={"We have the Best Gear"}
+					priority
+				/>
 			</ImageContainer>
 		</Container>
 	);
