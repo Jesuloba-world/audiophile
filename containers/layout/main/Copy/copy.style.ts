@@ -83,6 +83,11 @@ export const ImageContainer = styled.div`
 
 	img {
 		border-radius: 5px;
-		object-fit: contain;
+		object-fit: cover;
+		overflow: hidden;
+
+		@media ${devices.tablet} {
+			border-radius: 8px;
+		}
 	}
 `;
