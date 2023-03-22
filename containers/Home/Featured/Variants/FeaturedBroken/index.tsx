@@ -7,13 +7,25 @@ interface props {
 	image: any;
 	name: string;
 	slug: string;
+	tablet: string;
 }
 
-export const FeaturedBroken: FC<props> = ({ image, name, slug }) => {
+export const FeaturedBroken: FC<props> = ({ image, name, slug, tablet }) => {
 	return (
 		<Container>
 			<ImageBox>
-				<Image src={image} alt={`${name.toLowerCase()} image`} fill />
+				<Image
+					className="desktop"
+					src={image}
+					alt={`${name.toLowerCase()} image`}
+					fill
+				/>
+				<Image
+					className="tablet"
+					src={tablet}
+					alt={`${name.toLowerCase()} image`}
+					fill
+				/>
 			</ImageBox>
 			<TextBox>
 				<TextContainer>
