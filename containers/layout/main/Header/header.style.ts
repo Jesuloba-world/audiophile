@@ -38,15 +38,29 @@ export const Inner = styled.div`
 		}
 	}
 
+	@media ${devices.tablet500} {
+		padding-inline: 24px;
+		margin-inline: 0;
+	}
+
+	@media ${devices.mobile} {
+		gap: 12px;
+	}
+
 	&::after {
 		display: block;
 		content: "";
 		height: 1px;
-		width: 100%;
+		width: 100% + 24px;
 		background: ${({ theme }) => theme.white};
 		opacity: 0.2;
 		position: absolute;
 		bottom: 0;
+
+		@media ${devices.tablet500} {
+			width: calc(100% + 24px);
+			left: -24px;
+		}
 	}
 `;
 
@@ -58,6 +72,14 @@ export const IconLinks = styled.div`
 	@media ${devices.tablet} {
 		margin-left: auto;
 		gap: 28px;
+	}
+
+	@media ${devices.tablet500} {
+		margin-left: auto;
+	}
+
+	@media ${devices.mobile} {
+		gap: 12px;
 	}
 `;
 

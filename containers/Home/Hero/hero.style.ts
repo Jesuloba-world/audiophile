@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { devices } from "styled.config";
 
-export const Container = styled.section<{ image: string; tabletImage: string }>`
+export const Container = styled.section<{
+	image: string;
+	tabletImage: string;
+	mobileImage: string;
+}>`
 	height: calc(100vh - 96px);
 	background-color: ${({ theme }) => theme.smoky};
 	background-image: url(${({ image }) => image});
@@ -15,6 +19,11 @@ export const Container = styled.section<{ image: string; tabletImage: string }>`
 	@media ${devices.tablet} {
 		height: calc(100vh - 90px);
 		background-image: url(${({ tabletImage }) => tabletImage});
+	}
+
+	@media ${devices.tablet500} {
+		height: calc(100vh - 90px);
+		background-image: url(${({ mobileImage }) => mobileImage});
 	}
 `;
 
@@ -33,6 +42,10 @@ export const Inner = styled.div`
 	@media ${devices.tablet} {
 		justify-content: center;
 	}
+
+	@media ${devices.tablet500} {
+		padding-inline: 24px;
+	}
 `;
 
 export const TextContainer = styled.div`
@@ -47,6 +60,12 @@ export const TextContainer = styled.div`
 
 	a {
 		margin-top: 16px;
+	}
+
+	@media ${devices.tablet500} {
+		a {
+			margin-top: 4px;
+		}
 	}
 `;
 
@@ -64,6 +83,13 @@ export const Title = styled.h1`
 	color: ${({ theme }) => theme.white};
 	text-transform: uppercase;
 	width: 398px;
+
+	@media ${devices.tablet500} {
+		font-size: 36px;
+		line-height: 40px;
+		letter-spacing: 1.2px;
+		width: 100%;
+	}
 `;
 
 export const SubTitle = styled.p`
@@ -73,4 +99,8 @@ export const SubTitle = styled.p`
 	color: ${({ theme }) => theme.white};
 	opacity: 0.75;
 	width: 349px;
+
+	@media ${devices.tablet500} {
+		width: 100%;
+	}
 `;
