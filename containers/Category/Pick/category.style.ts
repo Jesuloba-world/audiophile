@@ -19,9 +19,13 @@ export const Container = styled.section<{ home: boolean | undefined }>`
 
 	@media ${devices.tablet} {
 		height: auto;
-		margin-block: 96px;
+		margin-block: 148px 96px;
 		column-gap: 10px;
-		row-gap: 60px;
+		row-gap: 70px;
+	}
+
+	@media ${devices.desktop} {
+		padding-inline: 24px;
 	}
 `;
 
