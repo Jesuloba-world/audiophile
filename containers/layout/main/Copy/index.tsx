@@ -8,6 +8,7 @@ import {
 } from "./copy.style";
 import BestGear from "assets/shared/desktop/image-best-gear.jpg";
 import BestGearTablet from "assets/shared/tablet/image-best-gear.jpg";
+import BestGearMobile from "assets/shared/mobile/image-best-gear.jpg";
 import Image from "next/image";
 
 interface copyProps {
@@ -41,6 +42,12 @@ export const Copy: FC<copyProps> = ({ home }) => {
 				<Image
 					className="tablet"
 					src={BestGearTablet}
+					alt={"We have the Best Gear"}
+					priority
+				/>
+				<Image
+					className="mobile"
+					src={BestGearMobile}
 					alt={"We have the Best Gear"}
 					priority
 				/>

@@ -17,8 +17,13 @@ export const Container = styled.div<{ home?: boolean }>`
 		margin-block: ${({ home }) => (home ? "96px" : "120px")};
 		grid-template-columns: 1fr;
 		grid-template-rows: 300px 1fr;
-		height: 633px;
+		height: fit-content;
 		gap: 63px;
+	}
+
+	@media ${devices.tablet500} {
+		padding-inline: 24px;
+		gap: 40px;
 	}
 `;
 
@@ -69,6 +74,10 @@ export const ImageContainer = styled.div`
 		display: none;
 	}
 
+	.mobile {
+		display: none;
+	}
+
 	@media ${devices.tablet} {
 		grid-row: 1;
 
@@ -78,6 +87,16 @@ export const ImageContainer = styled.div`
 
 		.desktop {
 			display: none;
+		}
+	}
+
+	@media ${devices.mobile} {
+		.tablet {
+			display: none;
+		}
+
+		.mobile {
+			display: block;
 		}
 	}
 
