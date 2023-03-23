@@ -16,8 +16,7 @@ export const Featured: FC<featuredProps> = ({ data }) => {
 						return (
 							<FeaturedLarge
 								key={index}
-								image={el.image?.desktop as string}
-								tablet={el.image?.tablet as string}
+								image={el.image as ProductImageType}
 								name={el.product.name as string}
 								content={el.copy as string}
 								slug={el.product.slug as string}

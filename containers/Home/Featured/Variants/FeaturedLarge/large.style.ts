@@ -13,6 +13,10 @@ export const Container = styled.div`
 		display: none;
 	}
 
+	.mobile {
+		display: none;
+	}
+
 	@media ${devices.tablet} {
 		height: 720px;
 
@@ -32,6 +36,25 @@ export const Container = styled.div`
 			display: none;
 		}
 	}
+
+	@media ${devices.tablet500} {
+		height: 600px;
+	}
+
+	@media ${devices.mobile} {
+		img {
+			transform: translateY(-110px);
+			object-fit: contain;
+		}
+
+		.tablet {
+			display: none;
+		}
+
+		.mobile {
+			display: block;
+		}
+	}
 `;
 
 export const Mask = styled.div`
@@ -49,6 +72,10 @@ export const Mask = styled.div`
 		text-align: center;
 		padding-bottom: 64px;
 	}
+
+	@media ${devices.tablet500} {
+		padding-inline: 24px;
+	}
 `;
 
 export const TextContainer = styled.div`
@@ -65,6 +92,12 @@ export const TextContainer = styled.div`
 	@media ${devices.tablet} {
 		margin-left: 0;
 		margin-top: auto;
+	}
+
+	@media ${devices.tablet500} {
+		a {
+			margin-top: 0;
+		}
 	}
 `;
 
