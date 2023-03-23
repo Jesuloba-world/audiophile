@@ -2,26 +2,32 @@ import Image from "next/image";
 import { FC } from "react";
 import { Container, Mask, TextContainer } from "./normal.style";
 import { SeeProductButton } from "components";
+import { ProductImageType } from "src/graphql/generated";
 
 interface props {
-	image: any;
+	image: ProductImageType;
 	slug: string;
 	name: string;
-	tablet: string;
 }
 
-export const FeaturedNormal: FC<props> = ({ image, name, slug, tablet }) => {
+export const FeaturedNormal: FC<props> = ({ image, name, slug }) => {
 	return (
 		<Container>
 			<Image
 				className="desktop"
-				src={image}
+				src={image.desktop}
 				alt={`${name.toLowerCase()} image`}
 				fill
 			/>
 			<Image
 				className="tablet"
-				src={tablet}
+				src={image.tablet}
+				alt={`${name.toLowerCase()} image`}
+				fill
+			/>
+			<Image
+				className="mobile"
+				src={image.mobile}
 				alt={`${name.toLowerCase()} image`}
 				fill
 			/>

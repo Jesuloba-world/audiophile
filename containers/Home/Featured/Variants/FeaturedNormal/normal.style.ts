@@ -13,6 +13,10 @@ export const Container = styled.div`
 		display: none;
 	}
 
+	.mobile {
+		display: none;
+	}
+
 	@media ${devices.tablet} {
 		.tablet {
 			display: block;
@@ -20,6 +24,16 @@ export const Container = styled.div`
 
 		.desktop {
 			display: none;
+		}
+	}
+
+	@media ${devices.tablet500} {
+		.tablet {
+			display: none;
+		}
+
+		.mobile {
+			display: block;
 		}
 	}
 `;
@@ -36,6 +50,10 @@ export const Mask = styled.div`
 
 	@media ${devices.tablet} {
 		padding-inline: 62px;
+	}
+
+	@media ${devices.tablet500} {
+		padding: 24px;
 	}
 `;
 
