@@ -44,7 +44,7 @@ export const Inner = styled.div`
 	}
 
 	@media ${devices.mobile} {
-		gap: 12px;
+		gap: 16px;
 	}
 
 	&::after {
@@ -79,7 +79,7 @@ export const IconLinks = styled.div`
 	}
 
 	@media ${devices.mobile} {
-		gap: 12px;
+		gap: 16px;
 	}
 `;
 
