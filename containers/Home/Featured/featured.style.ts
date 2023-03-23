@@ -15,4 +15,8 @@ export const Container = styled.section`
 	@media ${devices.tablet} {
 		gap: 32px;
 	}
+
+	@media ${devices.tablet500} {
+		padding-inline: 24px;
+	}
 `;

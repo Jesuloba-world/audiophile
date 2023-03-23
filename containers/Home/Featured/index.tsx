@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Container } from "./featured.style";
 import { FeaturedLarge, FeaturedNormal, FeaturedBroken } from "./Variants";
-import { FeaturedProductType } from "src/graphql/generated";
+import { FeaturedProductType, ProductImageType } from "src/graphql/generated";
 
 interface featuredProps {
 	data: FeaturedProductType[];
@@ -37,8 +37,7 @@ export const Featured: FC<featuredProps> = ({ data }) => {
 						return (
 							<FeaturedBroken
 								key={index}
-								image={el.image?.desktop}
-								tablet={el.image?.tablet as string}
+								image={el.image as ProductImageType}
 								name={el.product.name as string}
 								slug={el.product.slug as string}
 							/>

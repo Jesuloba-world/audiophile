@@ -11,6 +11,13 @@ export const Container = styled.div`
 	@media ${devices.tablet} {
 		gap: 10px;
 	}
+
+	@media ${devices.tablet500} {
+		height: fit-content;
+		grid-template-columns: 1fr;
+		grid-template-rows: 200px minmax(200px, 1fr);
+		gap: 24px;
+	}
 `;
 
 export const ImageBox = styled.div`
@@ -22,6 +29,10 @@ export const ImageBox = styled.div`
 		display: none;
 	}
 
+	.mobile {
+		display: none;
+	}
+
 	@media ${devices.tablet} {
 		.tablet {
 			display: block;
@@ -29,6 +40,16 @@ export const ImageBox = styled.div`
 
 		.desktop {
 			display: none;
+		}
+	}
+
+	@media ${devices.tablet500} {
+		.tablet {
+			display: none;
+		}
+
+		.mobile {
+			display: block;
 		}
 	}
 `;
@@ -42,6 +63,10 @@ export const TextBox = styled.div`
 
 	@media ${devices.tablet} {
 		padding-left: 41px;
+	}
+
+	@media ${devices.tablet500} {
+		padding: 24px;
 	}
 `;
 
