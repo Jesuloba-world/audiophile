@@ -97,12 +97,20 @@ export const SideNav = styled.div`
 	top: 100%;
 	left: 0;
 	width: 100%;
-	padding-block: 56px 67px;
+	padding-block: 40px 67px;
 
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 
 	& > section {
 		margin-block: 0;
+	}
+
+	@media ${devices.tablet} {
+		padding-block: 84px 67px;
+	}
+
+	@media ${devices.tablet500} {
+		padding-block: 84px 35px;
 	}
 `;

@@ -24,7 +24,7 @@ export const Container = styled.section<{ home: boolean | undefined }>`
 		row-gap: 70px;
 	}
 
-	@media ${devices.desktop} {
+	@media ${devices.tablet500} {
 		padding-inline: 24px;
 	}
 `;
