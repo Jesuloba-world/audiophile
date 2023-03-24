@@ -1,9 +1,15 @@
 import styled from "styled-components";
+import { devices } from "styled.config";
 
 export const Container = styled.section`
 	display: flex;
 	justify-content: space-between;
 	gap: 20px;
+
+	@media ${devices.tablet} {
+		flex-direction: column;
+		gap: 88px;
+	}
 `;
 
 export const Features = styled.div`
@@ -11,6 +17,19 @@ export const Features = styled.div`
 	flex-direction: column;
 	gap: 32px;
 	max-width: 635px;
+
+	@media ${devices.desktop} {
+		flex: 2;
+	}
+
+	@media ${devices.tablet} {
+		max-width: 100%;
+		flex: 1;
+	}
+
+	@media ${devices.tablet500} {
+		gap: 24px;
+	}
 `;
 
 export const InTheBox = styled.div`
@@ -18,6 +37,21 @@ export const InTheBox = styled.div`
 	flex-direction: column;
 	gap: 32px;
 	width: 350px;
+
+	@media ${devices.desktop} {
+		flex: 1;
+	}
+
+	@media ${devices.tablet} {
+		width: 100%;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
+
+	@media ${devices.tablet500} {
+		gap: 24px;
+		grid-template-columns: 1fr;
+	}
 `;
 
 export const Title = styled.h3``;

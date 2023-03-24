@@ -10,6 +10,7 @@ interface props {
 }
 
 export const ProductGallery: FC<props> = ({ first, second, third }) => {
+	console.log(third?.mobile);
 	return (
 		<Container>
 			<First>
@@ -20,6 +21,19 @@ export const ProductGallery: FC<props> = ({ first, second, third }) => {
 					sizes="(max-width: 768px) 100vw,
 								(max-width: 1200px) 50vw,
 								33vw"
+					className="desktop"
+				/>
+				<Image
+					src={first?.tablet as string}
+					alt={first?.altText as string}
+					fill
+					className="tablet"
+				/>
+				<Image
+					src={first?.mobile as string}
+					alt={first?.altText as string}
+					fill
+					className="mobile"
 				/>
 			</First>
 			<Second>
@@ -30,6 +44,19 @@ export const ProductGallery: FC<props> = ({ first, second, third }) => {
 					sizes="(max-width: 768px) 100vw,
 								(max-width: 1200px) 50vw,
 								33vw"
+					className="desktop"
+				/>
+				<Image
+					src={second?.tablet as string}
+					alt={second?.altText as string}
+					fill
+					className="tablet"
+				/>
+				<Image
+					src={second?.mobile as string}
+					alt={second?.altText as string}
+					fill
+					className="mobile"
 				/>
 			</Second>
 			<Third>
@@ -37,10 +64,26 @@ export const ProductGallery: FC<props> = ({ first, second, third }) => {
 					src={third?.desktop as string}
 					alt={third?.altText as string}
 					fill
-					// priority={true}
 					sizes="(max-width: 768px) 100vw,
 								(max-width: 1200px) 50vw,
 								33vw"
+					className="desktop"
+				/>
+				<Image
+					src={third?.tablet as string}
+					alt={third?.altText as string}
+					fill
+					className="tablet"
+				/>
+				<Image
+					src={third?.mobile as string}
+					alt={third?.altText as string}
+					fill
+					// priority
+					sizes="(max-width: 768px) 100vw,
+								(max-width: 1200px) 50vw,
+								33vw"
+					className="mobile"
 				/>
 			</Third>
 		</Container>
