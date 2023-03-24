@@ -2,6 +2,7 @@ import React, { FC, useState } from "react";
 import {
 	Container,
 	TextContainer,
+	ImageContainer,
 	Overline,
 	Description,
 	Name,
@@ -64,12 +65,26 @@ export const ProductHero: FC<props> = ({
 
 	return (
 		<Container>
-			<Image
-				src={image?.desktop as string}
-				alt={image?.altText as string}
-				height={560}
-				width={540}
-			/>
+			<ImageContainer>
+				<Image
+					src={image?.desktop as string}
+					alt={image?.altText as string}
+					fill
+					className="desktop"
+				/>
+				<Image
+					src={image?.tablet as string}
+					alt={image?.altText as string}
+					fill
+					className="tablet"
+				/>
+				<Image
+					src={image?.mobile as string}
+					alt={image?.altText as string}
+					fill
+					className="mobile"
+				/>
+			</ImageContainer>
 			<TextContainer>
 				{isNew ? <Overline>NEW PRODUCT</Overline> : null}
 				<Name>{name}</Name>

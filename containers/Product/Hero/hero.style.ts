@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "styled.config";
 
 export const Container = styled.section`
 	display: flex;
@@ -6,15 +7,70 @@ export const Container = styled.section`
 	justify-content: space-between;
 	align-items: center;
 
+	@media ${devices.tablet600} {
+		flex-direction: column;
+		gap: 32px;
+	}
+`;
+
+export const ImageContainer = styled.div`
+	height: 560px;
+	width: 540px;
+	position: relative;
+	border-radius: 8px;
+	overflow: hidden;
+
 	img {
-		width: 540px;
-		height: 560px;
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
+
+	.tablet {
+		display: none;
+	}
+
+	.mobile {
+		display: none;
+	}
+
+	@media ${devices.tablet} {
+		max-width: 280px;
+
+		.tablet {
+			display: block;
+		}
+
+		.desktop {
+			display: none;
+		}
+	}
+
+	@media ${devices.tablet600} {
+		max-width: 100%;
+		height: 480px;
+
+		.tablet {
+			display: none;
+		}
+
+		.mobile {
+			display: block;
+		}
 	}
 `;
 
 export const TextContainer = styled.div`
 	width: 100%;
 	max-width: 445.5px;
+
+	@media ${devices.tablet} {
+		max-width: 340px;
+	}
+
+	@media ${devices.tablet600} {
+		max-width: 100%;
+	}
 `;
 
 export const Name = styled.h2`
