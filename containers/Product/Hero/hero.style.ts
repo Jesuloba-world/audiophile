@@ -76,6 +76,10 @@ export const TextContainer = styled.div`
 export const Name = styled.h2`
 	color: ${({ theme }) => theme.black};
 	margin-bottom: 32px;
+
+	@media ${devices.tablet600} {
+		margin-bottom: 24px;
+	}
 `;
 
 export const Description = styled.p`
@@ -83,6 +87,10 @@ export const Description = styled.p`
 	mix-blend-mode: normal;
 	opacity: 0.5;
 	margin-bottom: 32px;
+
+	@media ${devices.tablet600} {
+		margin-bottom: 24px;
+	}
 `;
 
 export const Overline = styled.p`
@@ -95,12 +103,20 @@ export const Overline = styled.p`
 
 	color: ${({ theme }) => theme.sienna};
 	margin-bottom: 16px;
+
+	@media ${devices.tablet600} {
+		margin-bottom: 24px;
+	}
 `;
 
 export const Price = styled.h6``;
 
 export const ButtonContainer = styled.div`
-	margin-top: 47px;
+	margin-top: 48px;
 	display: flex;
 	gap: 16px;
+
+	@media ${devices.tablet600} {
+		margin-top: 32px;
+	}
 `;

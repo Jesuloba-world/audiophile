@@ -29,4 +29,8 @@ export const Layout = styled.div`
 		margin-top: 24px;
 		gap: 120px;
 	}
+
+	@media ${devices.tablet600} {
+		gap: 88px;
+	}
 `;
