@@ -18,6 +18,7 @@ interface props {
 
 export const LoginForm: FC<props> = ({ setError }) => {
 	const [loading, setLoading] = useState(false);
+	const [guesting, setGuesting] = useState(false);
 	const { removeForm } = useActions({});
 	const theme: any = useTheme();
 
@@ -51,6 +52,27 @@ export const LoginForm: FC<props> = ({ setError }) => {
 		}
 	};
 
+	const continueAsGuest = async () => {
+		setGuesting(true);
+
+		const response = await signIn("login", {
+			id: "johnDoe",
+			password: "3:NfcG:5CMXYN:L",
+			redirect: false,
+		});
+
+		if (response?.ok) {
+			setGuesting(false);
+			reset();
+			removeForm();
+			toast.success("Login successful");
+		}
+		if (response?.error) {
+			setGuesting(false);
+			setError(response.error);
+		}
+	};
+
 	return (
 		<Form onSubmit={handleSubmit(handleLogin)}>
 			{loginFormElements.map((element, index) => (
@@ -70,6 +92,15 @@ export const LoginForm: FC<props> = ({ setError }) => {
 
 			<GenButton fullwidth disabled={loading}>
 				{loading ? <Puff stroke={theme.white} /> : "LOGIN"}
+			</GenButton>
+			<GenButton
+				fullwidth
+				disabled={guesting}
+				color="transparent"
+				type="button"
+				action={continueAsGuest}
+			>
+				{guesting ? <Puff stroke={theme.white} /> : "Continue as guest"}
 			</GenButton>
 		</Form>
 	);

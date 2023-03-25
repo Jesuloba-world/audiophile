@@ -8,6 +8,7 @@ interface props {
 	fullwidth?: boolean;
 	disabled?: boolean;
 	color?: colorType;
+	type?: "submit" | "button" | "reset";
 }
 
 export const GenButton: FC<props> = ({
@@ -16,6 +17,7 @@ export const GenButton: FC<props> = ({
 	fullwidth,
 	disabled,
 	color = "sienna",
+	type,
 }) => {
 	return (
 		<Container
@@ -23,6 +25,7 @@ export const GenButton: FC<props> = ({
 			full={fullwidth}
 			color={color}
 			disabled={disabled}
+			type={type}
 		>
 			{children}
 		</Container>
