@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "styled.config";
 
 export const Inner = styled.div`
 	display: flex;
@@ -30,6 +31,10 @@ export const Heading = styled.h3`
 		width: 100%;
 		height: 1px;
 		background-color: ${({ theme }) => theme.sienna};
+	}
+
+	@media ${devices.tablet500} {
+		width: 100%;
 	}
 `;
 

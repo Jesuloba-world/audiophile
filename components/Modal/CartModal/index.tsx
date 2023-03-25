@@ -7,7 +7,7 @@ import {
 	RemoveAll,
 	UserCartContainer,
 	TotalPrice,
-} from "./styles";
+} from "./cart.style";
 import { GenButton } from "components";
 import { useMutation, useLazyQuery } from "@apollo/client";
 import { MyCartDocument, RemoveAllCartDocument } from "src/graphql/generated";

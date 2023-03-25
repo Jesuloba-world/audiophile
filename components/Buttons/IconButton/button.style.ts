@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "styled.config";
 
 export const OverLord = styled.div`
 	position: relative;
@@ -26,4 +27,13 @@ export const ModalContainer = styled.div`
 	right: 0;
 
 	z-index: 4;
+
+	@media ${devices.tablet500} {
+		position: fixed;
+		top: 114px;
+		padding: 30px 28px;
+		width: calc(100vw - 48px);
+		right: 50%;
+		transform: translateX(50%);
+	}
 `;

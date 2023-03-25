@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "styled.config";
 
 export const Container = styled.div`
 	background: ${({ theme }) => theme.white};
@@ -13,7 +14,15 @@ export const Container = styled.div`
 	border-radius: 8px;
 	box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
 		0 4px 6px -4px rgb(0 0 0 / 0.1);
-	overflow: hidden;
-
+	max-height: 100vh;
+	overflow-y: scroll;
 	padding: 48px;
+
+	@media ${devices.tablet600} {
+		width: calc(100vw - 48px);
+	}
+
+	@media ${devices.tablet500} {
+		padding: 32px;
+	}
 `;
