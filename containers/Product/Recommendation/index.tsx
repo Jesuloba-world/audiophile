@@ -31,6 +31,25 @@ export const ProductRecommendation: FC<props> = ({ others }) => {
 								sizes="(max-width: 768px) 100vw,
 								(max-width: 1200px) 50vw,
 								33vw"
+								className="desktop"
+							/>
+							<Image
+								src={el.image?.tablet as string}
+								alt={el.image?.altText as string}
+								fill
+								sizes="(max-width: 768px) 100vw,
+								(max-width: 1200px) 50vw,
+								33vw"
+								className="tablet"
+							/>
+							<Image
+								src={el.image?.mobile as string}
+								alt={el.image?.altText as string}
+								fill
+								sizes="(max-width: 768px) 100vw,
+							(max-width: 1200px) 50vw,
+							33vw"
+								className="mobile"
 							/>
 						</ImageContainer>
 						<TextAndButton>
