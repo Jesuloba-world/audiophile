@@ -24,6 +24,6 @@ export const OrderContainer = styled.div`
 	gap: 20px;
 `;
 
-export const Message = styled.h5`
+export const Message = styled.h6`
 	color: ${({ theme }) => theme.error};
 `;

@@ -20,7 +20,7 @@ export const OrderDisplay = () => {
 				<OrderContainer>
 					{data?.myOrder?.length === undefined ||
 					data?.myOrder?.length < 1 ? (
-						<Message>You have no orders yet</Message>
+						<Message>You have no order yet</Message>
 					) : (
 						data?.myOrder?.map((el) => (
 							<OrderItems
