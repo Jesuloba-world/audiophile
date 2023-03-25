@@ -21,6 +21,8 @@ import { GenButton, NumberController } from "components";
 import { useMutation } from "@apollo/client";
 import { Puff } from "react-loading-icons";
 import { useTheme } from "styled-components";
+import { useSession } from "next-auth/react";
+import toast from "react-hot-toast";
 
 interface props {
 	productId: string;
@@ -45,8 +47,13 @@ export const ProductHero: FC<props> = ({
 		refetchQueries: [{ query: MyCartDocument }],
 	});
 	const theme: any = useTheme();
+	const { status } = useSession();
 
 	const addToCart = () => {
+		if (status === "unauthenticated") {
+			toast.error("You are not authrnticated");
+			return;
+		}
 		AddToCart({
 			variables: {
 				productId: productId,
