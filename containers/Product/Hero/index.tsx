@@ -51,7 +51,7 @@ export const ProductHero: FC<props> = ({
 
 	const addToCart = () => {
 		if (status === "unauthenticated") {
-			toast.error("You are not authrnticated");
+			toast.error("You are not authenticated");
 			return;
 		}
 		AddToCart({
