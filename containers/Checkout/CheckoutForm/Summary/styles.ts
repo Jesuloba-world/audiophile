@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "styled.config";
 
 export const Container = styled.div`
 	background: ${({ theme }) => theme.white};
@@ -8,6 +9,10 @@ export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 32px;
+
+	@media ${devices.mobile} {
+		padding-inline: 24px;
+	}
 `;
 
 export const Heading = styled.h6``;

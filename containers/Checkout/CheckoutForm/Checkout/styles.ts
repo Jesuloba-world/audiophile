@@ -1,9 +1,18 @@
 import styled from "styled-components";
+import { devices } from "styled.config";
 
 export const Container = styled.div`
 	background: ${({ theme }) => theme.white};
 	padding: 54px 48px 48px 48px;
 	border-radius: 8px;
+
+	@media ${devices.tablet} {
+		padding: 30px 27px;
+	}
+
+	@media ${devices.mobile} {
+		padding: 24px 24px 30px 24px;
+	}
 `;
 
 export const Heading = styled.h3`
@@ -52,7 +61,7 @@ export const PaymentMethods = styled.div`
 `;
 
 export const PaymentInfo = styled.div`
-	grid-column: span 2;
+	grid-column: 1 / -1;
 	display: flex;
 	gap: 32px;
 	align-items: center;

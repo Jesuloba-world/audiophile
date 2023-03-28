@@ -120,7 +120,7 @@ export const CartItem: FC<cartItemsProps> = ({
 					() => {},
 					{
 						className: "confirm-modal",
-						borderRadius: "8px",
+						borderRadius: "4px",
 						fontFamily: "Manrope",
 						titleColor: "#D87D4A",
 						okButtonBackground: "#D87D4A",

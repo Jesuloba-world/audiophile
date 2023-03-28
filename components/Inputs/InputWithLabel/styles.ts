@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export const Container = styled.div<{ span?: boolean }>`
+export const Container = styled.div<{ span2?: boolean }>`
 	display: flex;
 	flex-direction: column;
 	gap: 9px;
 
-	${({ span }) => (span ? `grid-column: span 2` : null)};
+	${({ span2 }) => (span2 ? `grid-column: 1 / -1` : null)};
 `;
 
 export const Top = styled.div`

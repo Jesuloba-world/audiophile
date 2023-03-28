@@ -23,7 +23,7 @@ export const InputWithLabel: FC<inputProps> = ({
 	const isError = !!error;
 
 	return (
-		<Container span={span}>
+		<Container span2={span}>
 			<Top>
 				<Label htmlFor={name} isError={isError}>
 					{label}
