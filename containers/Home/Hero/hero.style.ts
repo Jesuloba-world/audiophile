@@ -16,6 +16,8 @@ export const Container = styled.section<{
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 
+	min-height: calc(500px - 96px);
+
 	@media ${devices.tablet} {
 		height: calc(100vh - 90px);
 		background-image: url(${({ tabletImage }) => tabletImage});
