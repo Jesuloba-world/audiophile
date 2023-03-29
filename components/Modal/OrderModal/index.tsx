@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Inner, MarkContainer, Appreciation, Text, Loading } from "./style";
+import {
+	Inner,
+	MarkContainer,
+	Appreciation,
+	Text,
+	Loading,
+} from "./orderModal.style";
 import { GenButton, OrderItems } from "components";
 import { ModalWrapper } from "../ModalWrapper";
 import { useOrder, useBackdrop } from "hooks";

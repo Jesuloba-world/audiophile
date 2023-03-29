@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "styled.config";
 
 export const Container = styled.div`
 	/* height: 140px; */
@@ -9,6 +10,10 @@ export const Container = styled.div`
 	overflow: hidden;
 
 	transition: all 0.2s;
+
+	@media ${devices.tablet500} {
+		grid-template-columns: 1fr;
+	}
 `;
 
 export const Items = styled.div`
@@ -38,6 +43,10 @@ export const Grand = styled.div`
 		mix-blend-mode: normal;
 		opacity: 0.5;
 		text-transform: uppercase;
+	}
+
+	@media ${devices.tablet500} {
+		padding: 15px 24px 19px;
 	}
 `;
 

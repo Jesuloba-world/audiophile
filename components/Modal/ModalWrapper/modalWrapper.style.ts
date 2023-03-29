@@ -15,7 +15,7 @@ export const Container = styled.div`
 	box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
 		0 4px 6px -4px rgb(0 0 0 / 0.1);
 	max-height: 100vh;
-	overflow-y: scroll;
+	overflow-y: auto;
 	padding: 48px;
 
 	@media ${devices.tablet600} {
