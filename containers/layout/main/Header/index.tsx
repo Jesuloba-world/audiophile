@@ -45,8 +45,10 @@ export const Header: FC<headerProps> = ({ home, categories }) => {
 	return (
 		<Container home={home}>
 			<Inner>
-				<HamButton onClick={onHamClick}>
-					<Hamburger />
+				<HamButton onClick={onHamClick} active={showSideNav}>
+					<div className="first" />
+					<div className="second" />
+					<div className="third" />
 				</HamButton>
 				<Logo />
 				<MidLinks />

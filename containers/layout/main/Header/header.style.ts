@@ -83,11 +83,39 @@ export const IconLinks = styled.div`
 	}
 `;
 
-export const HamButton = styled.button`
+export const HamButton = styled.button<{ active: boolean }>`
 	display: none;
+	height: ${({ active }) => (active ? `13.44px` : `15px`)};
+	transition: all 0.2s;
+
+	div {
+		width: 16px;
+		height: 3px;
+		background: ${({ theme }) => theme.white};
+
+		transition: all 0.2s;
+	}
+
+	.second {
+		${({ active }) => active && `display: none`};
+	}
+
+	${({ active }) =>
+		active &&
+		`.first {
+			transform-origin: left;
+			transform: rotate(45deg);
+		}
+
+		.third {
+			transform-origin: left;
+			transform: rotate(-45deg);
+		}`}
 
 	@media ${devices.tablet} {
-		display: block;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 `;
 
