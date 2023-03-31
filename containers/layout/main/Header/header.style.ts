@@ -2,13 +2,25 @@ import styled from "styled-components";
 import { devices } from "styled.config";
 import { MiddleLinks } from "../MidLinks/midlinks.style";
 
+export const PlaceHolder = styled.div`
+	width: 100%;
+	height: 96px;
+
+	@media ${devices.tablet} {
+		height: 90px;
+	}
+`;
+
 export const Container = styled.header<{
 	home?: boolean;
 }>`
 	background-color: ${({ theme, home }) =>
 		home ? theme.smoky : theme.black};
 	height: 96px;
-	position: relative;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
 	z-index: 10;
 
 	@media ${devices.tablet} {
@@ -130,12 +142,17 @@ export const SideNav = styled.div`
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 
+	max-height: calc(100vh - 96px);
+
+	overflow-y: auto;
+
 	& > section {
 		margin-block: 0;
 	}
 
 	@media ${devices.tablet} {
 		padding-block: 84px 67px;
+		max-height: calc(100vh - 90px);
 	}
 
 	@media ${devices.tablet500} {

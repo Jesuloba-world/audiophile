@@ -10,7 +10,6 @@ interface props {
 }
 
 export const ProductGallery: FC<props> = ({ first, second, third }) => {
-	console.log(third?.mobile);
 	return (
 		<Container>
 			<First>

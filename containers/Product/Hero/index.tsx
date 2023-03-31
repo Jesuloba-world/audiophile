@@ -45,6 +45,9 @@ export const ProductHero: FC<props> = ({
 	const [AddToCart, { loading }] = useMutation(AddToCartDocument, {
 		awaitRefetchQueries: true,
 		refetchQueries: [{ query: MyCartDocument }],
+		onCompleted: () => {
+			toast.success("Item added successfully");
+		},
 	});
 	const theme: any = useTheme();
 	const { status } = useSession();
